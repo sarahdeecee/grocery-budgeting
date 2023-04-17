@@ -1,7 +1,8 @@
-import { Checkbox, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { Checkbox, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
 function Item(props: any) {
-  const {handleToggle, value, labelId, checked} = props
+  const {value, labelId, handleToggle, checked} = props;
+
   return (
     <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
       <ListItemIcon>

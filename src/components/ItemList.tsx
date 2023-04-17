@@ -1,4 +1,4 @@
-import { Checkbox, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { IconButton, List, ListItem } from "@mui/material";
 import { Edit } from '@mui/icons-material';
 import { useState } from "react";
 import Item from "./Item";
