@@ -1,4 +1,5 @@
-import { Box, FormControl, FormHelperText, Grid, List, OutlinedInput, useFormControl } from "@mui/material";
+import { AddAPhotoRounded, AddCircle, Delete } from "@mui/icons-material";
+import { Box, Divider, FormControl, FormHelperText, Grid, IconButton, InputBase, List, ListItem, OutlinedInput, useFormControl } from "@mui/material";
 import { useMemo, useState } from "react";
 
 function MyFormHelperText() {
@@ -28,20 +29,23 @@ function NewItem() {
   })
 
   return (
-    <List sx={{ width: '100%', maxWidth: '500px', bgcolor: 'background.paper' }}>
+    <List sx={{ bgcolor: 'background.paper' }}>
+      <ListItem secondaryAction={
+        <IconButton edge="end" aria-label="add">
+          <AddCircle fontSize="large" />
+        </IconButton>
+      }
+      sx={{width: '100%'}}
+      >
       <Box component="form" noValidate autoComplete="off">
-        <FormControl sx={{ width: '100%' }}>
-          <Grid container spacing={2} sx={{m: 0, p: 0}}>
-            <Grid item xs={8}>
-              <OutlinedInput placeholder="Item name" sx={{ width: '100%' }} />
-            </Grid>
-            <Grid item xs={4}>
-              <OutlinedInput placeholder="Price" sx={{ width: '100%' }} />
-            </Grid>
-            {/* <MyFormHelperText /> */}
-          </Grid>
+        <FormControl sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%'}}>
+          <InputBase placeholder="Item name" sx={{ ml: 1, flex: 1, width: '50ch' }} />
+          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+          <InputBase placeholder="Price" sx={{ ml: 1}} />
+        {/* <MyFormHelperText /> */}
         </FormControl>
       </Box>
+      </ListItem>
     </List>
   );
 }

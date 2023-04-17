@@ -21,7 +21,7 @@ function ItemList(props: any) {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {items.map((value: any) => {
         const labelId = `checkbox-list-label-${value}`;
 

@@ -19,9 +19,11 @@ Users can input prices and quantities of items and see if they are within budget
 ### Stretch
 | :white_check_mark: | User Story |
 | --- | --- |
-| :black_square_button: | Items can be categoried |
+| :black_square_button: | Items can be categoried/tagged |
 | :black_square_button: | Items are automatically categoried |
+| :black_square_button: | Items can be colour-coded |
 | :black_square_button: | Items can be chosen from categories |
 | :black_square_button: | Item order can be changed |
 | :black_square_button: | Users can save templates with items |
 | :black_square_button: | Users can download `receipts` (list with items and total) |
+| :black_square_button: | Add priority to items |
