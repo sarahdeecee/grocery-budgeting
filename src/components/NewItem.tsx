@@ -1,6 +1,7 @@
 import { AddAPhotoRounded, AddCircle, Delete } from "@mui/icons-material";
 import { Box, Divider, FormControl, FormHelperText, Grid, IconButton, InputAdornment, List, ListItem, OutlinedInput, useFormControl, Input } from "@mui/material";
 import { useMemo, useState } from "react";
+import { ItemType } from "../Types";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -16,16 +17,12 @@ function MyFormHelperText() {
   return <FormHelperText>{helperText}</FormHelperText>;
 }
 
-type Item = {
-  name: string
-  priceCents: number
-  tax?: number
-}
-
 function NewItem() {
-  const [item, setItem] = useState<Item>({
+  const [item, setItem] = useState<ItemType>({
     name: '',
-    priceCents: 0
+    quantity: 1,
+    priceCents: 0,
+    hasTax: true
   })
 
   return (
