@@ -1,11 +1,15 @@
-import { Checkbox, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { Checkbox, ListItemButton, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography } from "@mui/material";
 
 function Item(props: any) {
   const {item, labelId, handleToggle, checked} = props;
   const {name, quantity, priceCents, hasTax} = item;
 
   return (
-    <ListItemButton role={undefined} onClick={handleToggle(name)} dense>
+    <ListItemButton
+      role={undefined}
+      onClick={handleToggle(name)} 
+      dense
+    >
       <ListItemIcon>
         <Checkbox
           edge="start"
@@ -15,7 +19,7 @@ function Item(props: any) {
           inputProps={{ 'aria-labelledby': labelId }}
         />
       </ListItemIcon>
-      <ListItemText id={labelId} primary={name} />
+      <ListItemText id={labelId} primary={<Typography>{name}</Typography>} />
     </ListItemButton>
   );
 }

@@ -1,5 +1,5 @@
-import { IconButton, List, ListItem } from "@mui/material";
-import { Edit } from '@mui/icons-material';
+import { Box, Grid, IconButton, List, ListItem, Typography } from "@mui/material";
+import { Add, Edit, Remove } from '@mui/icons-material';
 import { useState } from "react";
 import Item from "./Item";
 
@@ -30,16 +30,28 @@ function ItemList(props: any) {
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {items.map((item: any) => {
-        const {name} = item;
+        const {name, quantity} = item;
         const labelId = `checkbox-list-label-${name}`;
 
         return (
           <ListItem
             key={name}
             secondaryAction={
-              <IconButton edge="end" aria-label="edit">
-                <Edit />
-              </IconButton>
+              <Grid container spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <Grid container item xs={3}>
+                  <IconButton aria-label="edit">
+                    <Add />
+                  </IconButton>
+                </Grid>
+                <Grid container item xs={3}>
+                  <Typography mx={2}>{quantity}</Typography>
+                </Grid>
+                <Grid container item xs={3}>
+                  <IconButton aria-label="edit">
+                    <Remove />
+                  </IconButton>
+                </Grid>
+              </Grid>
             }
             disablePadding
           >
