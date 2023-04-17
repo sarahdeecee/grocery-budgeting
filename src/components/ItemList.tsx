@@ -3,8 +3,9 @@ import { Edit } from '@mui/icons-material';
 import { useState } from "react";
 import Item from "./Item";
 
-function ItemList() {
+function ItemList(props: any) {
   const [checked, setChecked] = useState([0]);
+  const {items} = props;
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -19,11 +20,9 @@ function ItemList() {
     setChecked(newChecked);
   };
 
-  const items = [0,1,2,3];
-
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {items.map((value) => {
+      {items.map((value: any) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
