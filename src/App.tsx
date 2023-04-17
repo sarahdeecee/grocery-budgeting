@@ -2,15 +2,9 @@ import { Stack } from '@mui/material';
 import './App.css';
 import ItemList from './components/ItemList';
 import NewItem from './components/NewItem';
+import { ItemType } from './Types';
 
-type Item = {
-  name: string,
-  quantity: number,
-  priceCents?: number,
-  hasTax?: boolean
-}
-
-const items: Item[] = [
+const items: ItemType[] = [
   {
     name: 'Apple',
     quantity: 5,

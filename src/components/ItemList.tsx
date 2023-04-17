@@ -2,6 +2,7 @@ import { Box, Grid, IconButton, List, ListItem, Typography } from "@mui/material
 import { Add, Edit, Remove } from '@mui/icons-material';
 import { useState } from "react";
 import Item from "./Item";
+import { ItemType } from './../Types';
 
 function ItemList(props: any) {
   const [checked, setChecked] = useState([0]);
@@ -29,7 +30,7 @@ function ItemList(props: any) {
 
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-      {items.map((item: any) => {
+      {items.map((item: ItemType) => {
         const {name, quantity} = item;
         const labelId = `checkbox-list-label-${name}`;
 
