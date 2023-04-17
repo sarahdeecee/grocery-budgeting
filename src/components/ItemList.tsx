@@ -20,14 +20,22 @@ function ItemList(props: any) {
     setChecked(newChecked);
   };
 
+  // {
+  //   name: 'Cookies',
+  //   quantity: 1,
+  //   priceCents: 500,
+  //   hasTax: true
+  // },
+
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-      {items.map((value: any) => {
-        const labelId = `checkbox-list-label-${value}`;
+      {items.map((item: any) => {
+        const {name} = item;
+        const labelId = `checkbox-list-label-${name}`;
 
         return (
           <ListItem
-            key={value}
+            key={name}
             secondaryAction={
               <IconButton edge="end" aria-label="edit">
                 <Edit />
@@ -35,7 +43,7 @@ function ItemList(props: any) {
             }
             disablePadding
           >
-            <Item handleToggle={handleToggle} value={value} labelId={labelId} checked={checked} />
+            <Item handleToggle={handleToggle} item={item} labelId={labelId} checked={checked} />
           </ListItem>
         );
       })}

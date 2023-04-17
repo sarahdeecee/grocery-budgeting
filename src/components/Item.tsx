@@ -1,20 +1,21 @@
 import { Checkbox, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
 function Item(props: any) {
-  const {value, labelId, handleToggle, checked} = props;
+  const {item, labelId, handleToggle, checked} = props;
+  const {name, quantity, priceCents, hasTax} = item;
 
   return (
-    <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+    <ListItemButton role={undefined} onClick={handleToggle(name)} dense>
       <ListItemIcon>
         <Checkbox
           edge="start"
-          checked={checked.indexOf(value) !== -1}
+          checked={checked.indexOf(name) !== -1}
           tabIndex={-1}
           disableRipple
           inputProps={{ 'aria-labelledby': labelId }}
         />
       </ListItemIcon>
-      <ListItemText id={labelId} primary={`Item ${value + 1}`} />
+      <ListItemText id={labelId} primary={name} />
     </ListItemButton>
   );
 }
