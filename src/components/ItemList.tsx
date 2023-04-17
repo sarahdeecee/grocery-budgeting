@@ -1,6 +1,7 @@
 import { Checkbox, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { Comment, Edit } from '@mui/icons-material';
+import { Edit } from '@mui/icons-material';
 import { useState } from "react";
+import Item from "./Item";
 
 function ItemList() {
   const [checked, setChecked] = useState([0]);
@@ -29,24 +30,13 @@ function ItemList() {
           <ListItem
             key={value}
             secondaryAction={
-              <IconButton edge="end" aria-label="comments">
+              <IconButton edge="end" aria-label="edit">
                 <Edit />
               </IconButton>
             }
             disablePadding
           >
-            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-              <ListItemText id={labelId} primary={`Item ${value + 1}`} />
-            </ListItemButton>
+            <Item handleToggle={handleToggle} value={value} labelId={labelId} checked={checked} />
           </ListItem>
         );
       })}
