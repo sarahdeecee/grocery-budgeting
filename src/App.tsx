@@ -5,6 +5,7 @@ import NewItem from './components/NewItem';
 import { ItemType } from './Types';
 import { useState } from 'react';
 import Footer from './components/Footer';
+import Header from './components/Header';
 
 const itemsDefault: ItemType[] = [
   {
@@ -117,6 +118,7 @@ function App() {
   const [currentItem, setCurrentItem] = useState<ItemType>(blankItem);
 
   return (<>
+      <Header />
       <Stack className="App">
         {/* <NewItem items={items} setItems={setItems} /> */}
         <ItemList items={items} setItems={setItems} currentItem={currentItem} setCurrentItem={setCurrentItem} />
