@@ -5,7 +5,7 @@ import { ItemType } from './../Types';
 
 function ItemList(props: any) {
   const [checked, setChecked] = useState([0]);
-  const {items, setItems, handleDialogOpen, setSelectedItem} = props;
+  const {items, setItems, handleDialogOpen, setSelectedItem, editItem, setEditItem} = props;
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -47,10 +47,15 @@ function ItemList(props: any) {
     handleDialogOpen('delete')
   };
 
+  const handleDialogEdit = (index: number): void => {
+    setEditItem(index);
+    handleDialogOpen('edit')
+  };
+
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column-reverse'}}>
       {Array.isArray(items) && items.map((listedItem: ItemType) => 
-        <Item listedItem={listedItem} setSelectedItem={setSelectedItem} handleToggle={handleToggle} checked={checked} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemDelete={handleDialogConfirmDelete} />
+        <Item listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} checked={checked} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemDelete={handleDialogConfirmDelete} handleItemEdit={handleDialogEdit} />
       )}
     </List>
   );

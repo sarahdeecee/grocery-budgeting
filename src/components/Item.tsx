@@ -1,10 +1,10 @@
 import { Checkbox, Grid, IconButton, ListItem, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
 import React from "react";
 import { blankItem } from "../Types";
-import { Add, Delete, Remove } from "@mui/icons-material";
+import { Add, Delete, Edit, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
-  const {listedItem, setSelectedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete} = props;
+  const {listedItem, items, setSelectedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete, handleItemEdit} = props;
   const {name, quantity, priceCents, hasTax, notes} = listedItem ?? blankItem;
 
   const formatPrice = (price: number): string => {
@@ -37,13 +37,21 @@ function Item(props: any) {
   return (
     <ListItem
       key={name}
-      secondaryAction={
+      secondaryAction={<>
         <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
+          e.preventDefault();
+          console.log(listedItem, ' ', items.indexOf(listedItem));
+          handleItemEdit(items.indexOf(listedItem));
+        }}>
+          <Edit />
+        </IconButton>
+        {/* <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
           e.preventDefault();
           handleItemDelete(listedItem)
         }}>
           <Delete />
-        </IconButton>
+        </IconButton> */}
+        </>
       }
       // disablePadding
       // disableGutters={true}

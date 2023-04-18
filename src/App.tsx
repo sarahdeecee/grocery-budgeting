@@ -8,10 +8,12 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { itemsDefault } from './data/DevData';
 import ConfirmDelete from './components/ConfirmDelete';
+import EditItem from './components/EditItem';
 
 function App() {
   const [items, setItems] = useState<ItemType[] | []>([]);
   const [selectedItem, setSelectedItem] = useState<ItemType>(blankItem);
+  const [editItem, setEditItem] = useState<Number | null>(null);
   const [dialog, setDialog] = useState<DialogType>({
     content: '',
     open: false
@@ -26,12 +28,13 @@ function App() {
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
       <Stack className="App">
-        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} />
+        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} editItem={editItem} setEditItem={setEditItem} />
       </Stack>}
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
       <Dialog fullWidth open={dialog.open}>
         {dialog.content === 'delete' && <ConfirmDelete selectedItem={selectedItem} items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}
-        {dialog.content === 'add' && <NewItem items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}
+        {dialog.content === 'add' && <NewItem items={items} setItems={setItems} handleDialogClose={handleDialogClose} editItem={editItem} setEditItem={setEditItem} />}
+        {dialog.content === 'edit' && <EditItem items={items} setItems={setItems} handleDialogClose={handleDialogClose} editItem={editItem} setEditItem={setEditItem} />}
       </Dialog>
     </>
   );
