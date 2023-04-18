@@ -3,8 +3,9 @@ import './App.css';
 import ItemList from './components/ItemList';
 import NewItem from './components/NewItem';
 import { ItemType } from './Types';
+import { useState } from 'react';
 
-const items: ItemType[] = [
+const itemsDefault: ItemType[] = [
   {
     name: 'Apple',
     quantity: 5,
@@ -38,11 +39,12 @@ const items: ItemType[] = [
 ];
 
 function App() {
+  const [items, setItems] = useState<ItemType[]>(itemsDefault)
 
   return (
     <Stack className="App">
       <NewItem />
-      <ItemList items={items} />
+      <ItemList items={items} setItems={setItems} />
     </Stack>
   );
 }

@@ -6,7 +6,7 @@ import { ItemType } from './../Types';
 
 function ItemList(props: any) {
   const [checked, setChecked] = useState([0]);
-  const {items} = props;
+  const {items, setItems} = props;
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -27,39 +27,27 @@ function ItemList(props: any) {
   //   priceCents: 500,
   //   hasTax: true
   // },
+  const handleQuantityUp = (e: React.MouseEvent<HTMLElement>): void => {
+    console.log('up');
+    // const newItems = items.map((item: ItemType) => {
+    //   if (item.name === itemCurrent.name) {
+    //     return {...itemCurrent, quantity: itemCurrent.quantity + 1};
+    //   } else {
+    //     return item;
+    //   }
+    // })
+    // setItems(newItems);
+  }
+  
+  const handleQuantityDown = (): void => {
+    console.log('down');
+  }
 
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-      {items.map((item: ItemType) => {
-        const {name, quantity} = item;
-        const labelId = `checkbox-list-label-${name}`;
-
-        return (
-          <ListItem
-            key={name}
-            secondaryAction={
-              <Grid container spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Grid container item xs={3}>
-                  <IconButton aria-label="edit">
-                    <Add />
-                  </IconButton>
-                </Grid>
-                <Grid container item xs={3}>
-                  <Typography mx={2}>{quantity}</Typography>
-                </Grid>
-                <Grid container item xs={3}>
-                  <IconButton aria-label="edit">
-                    <Remove />
-                  </IconButton>
-                </Grid>
-              </Grid>
-            }
-            disablePadding
-          >
-            <Item handleToggle={handleToggle} item={item} labelId={labelId} checked={checked} />
-          </ListItem>
-        );
-      })}
+      {items.map((listedItem: ItemType) => 
+        <Item listedItem={listedItem} handleToggle={handleToggle} checked={checked} />
+      )}
     </List>
   );
 }

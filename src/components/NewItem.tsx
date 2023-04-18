@@ -17,13 +17,18 @@ function MyFormHelperText() {
   return <FormHelperText>{helperText}</FormHelperText>;
 }
 
-function NewItem() {
-  const [item, setItem] = useState<ItemType>({
+function NewItem(props: any) {
+  const {items, setItems} = props;
+  const [newItem, setNewItem] = useState<ItemType>({
     name: '',
     quantity: 1,
     priceCents: 0,
     hasTax: true
   })
+
+  const handleAddItem = (item: ItemType) => {
+    setItems((prev: ItemType[]) => [...prev, item]);
+  }
 
   return (
     <List sx={{ bgcolor: 'background.paper' }}>
