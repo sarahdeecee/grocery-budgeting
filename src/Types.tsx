@@ -18,3 +18,9 @@ export type DialogType = {
   content: string,
   open: boolean
 }
+
+export type ItemForm = {
+  name: string,
+  price: string,
+  notes: string
+}

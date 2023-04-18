@@ -24,7 +24,7 @@ function Footer(props: any) {
           </IconButton>
           <Typography
             noWrap
-          >{`Total: $${total}.00`}</Typography>
+          >{`Total: $${total}`}</Typography>
           <StyledFab color="success" aria-label="add">
             <Add onClick={(e: React.MouseEvent) => {
               e.preventDefault();

@@ -1,6 +1,6 @@
 import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack } from "@mui/material";
 import { useMemo, useState } from "react";
-import { ItemType, blankItem } from "../Types";
+import { ItemForm, ItemType, blankItem } from "../Types";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -18,11 +18,22 @@ function MyFormHelperText() {
 
 function NewItem(props: any) {
   const {items, setItems, handleDialogClose} = props;
-  const [newItem, setNewItem] = useState<ItemType>(blankItem);
+  const [newItem, setNewItem] = useState<ItemForm>({
+    name: '',
+    price: '',
+    notes: ''
+  });
 
-  const handleAddItem = (item: ItemType) => {
+  const handleAddItem = (item: ItemForm) => {
     console.log('add');
-    setItems((prev: ItemType[]) => [...prev, item]);
+    const fullItem = {
+      name: item.name,
+      quantity: 1,
+      priceCents: Number.parseFloat(item.price) * 100,
+      hasTax: true,
+      notes: item.notes
+    }
+    setItems((prev: ItemType[]) => [...prev, fullItem]);
     handleDialogClose();
   }
 
@@ -40,9 +51,9 @@ function NewItem(props: any) {
           placeholder="Item name"
         />
         <Input
-          value={newItem.priceCents}
+          value={newItem.price}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, priceCents: Number.parseFloat(e.target.value)})
+            setNewItem({...newItem, price: e.target.value})
           }}
           placeholder="Price"
           startAdornment={<InputAdornment position="start">$</InputAdornment>}

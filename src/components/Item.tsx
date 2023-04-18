@@ -6,8 +6,8 @@ import { Add, Delete, Remove } from "@mui/icons-material";
 function Item(props: any) {
   const {listedItem, setSelectedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete} = props;
   const {name, quantity, priceCents, hasTax, notes} = listedItem ?? blankItem;
-  const price = `$${priceCents/100}.00`;
-  const quantityPrice = `($${priceCents/100*quantity}.00)`;
+  const price = `$${priceCents/100}`;
+  const quantityPrice = `($${priceCents/100*quantity})`;
   const labelId = `checkbox-list-label-${name}`;
 
   const itemFormatted = <Grid container>
