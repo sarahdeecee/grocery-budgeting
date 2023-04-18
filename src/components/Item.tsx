@@ -28,27 +28,20 @@ function Item(props: any) {
     <ListItem
       key={name}
       secondaryAction={<>
-        <IconButton key={`editbutton-${name}`}  aria-label="edit" onClick={(e: React.MouseEvent)=> {
+        <IconButton key={`editbutton-${name}`} aria-label="edit" onClick={(e: React.MouseEvent)=> {
           e.preventDefault();
-          console.log(listedItem, ' ', items.indexOf(listedItem));
           handleItemEdit(items.indexOf(listedItem));
         }}>
           <Edit key={`edit-${name}`} />
         </IconButton>
-        {/* <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
-          e.preventDefault();
-          handleItemDelete(listedItem)
-        }}>
-          <Delete />
-        </IconButton> */}
         </>
       }
-      // disablePadding
-      // disableGutters={true}
     >
-        <ListItemIcon key={`listicon-${name}`}>
-          {(checked.indexOf(name) === -1) ? <RadioButtonUnchecked key={`uncheck-${name}`} fontSize="large" onClick={handleToggle(name)} /> : <CheckCircleOutline key={`check-${name}`} fontSize="large" onClick={handleToggle(name)} />}
-        </ListItemIcon>
+      <ListItemIcon key={`listicon-${name}`}>
+        <IconButton onClick={handleToggle(name)}>
+          {(checked.indexOf(name) === -1) ? <RadioButtonUnchecked key={`uncheck-${name}`} fontSize="large" /> : <CheckCircleOutline key={`check-${name}`} fontSize="large" />}
+        </IconButton>
+      </ListItemIcon>
       <Grid key={`grid1-${name}`} container spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <Grid key={`grid2-${name}`} item xs>
           <ListItemText

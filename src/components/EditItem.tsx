@@ -10,8 +10,6 @@ function EditItem(props: any) {
     notes: items[editItem].notes ?? ''
   });
 
-  console.log(editItem);
-
   const handleItemEdit = (index: number): void => {
     const fullItem = {
       name: editItemForm.name,
