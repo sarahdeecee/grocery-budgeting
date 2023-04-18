@@ -21,10 +21,11 @@ function ConfirmDelete(props: any) {
     </DialogContent>
     <DialogActions>
       <Button onClick={handleDialogClose}>Cancel</Button>
-      <Button onClick={(e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        handleItemDelete(selectedItem)}}
+      <Button
         autoFocus
+        onClick={(e: React.MouseEvent<HTMLElement>) => {
+          e.preventDefault();
+          handleItemDelete(selectedItem)}}
       >
         Confirm
       </Button>
