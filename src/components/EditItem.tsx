@@ -1,6 +1,6 @@
 import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack } from "@mui/material";
 import { useMemo, useState } from "react";
-import { ItemForm, ItemType, blankItem } from "../Types";
+import { ItemForm, ItemType, blankItem, formatPrice } from "../Types";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -20,7 +20,7 @@ function EditItem(props: any) {
   const {handleDialogClose, items, setItems, editItem, setEditItem} = props;
   const [editItemForm, setEditItemForm] = useState<ItemForm>({
     name: items[editItem].name,
-    price: items[editItem].priceCents.toString(),
+    price: formatPrice(items[editItem].priceCents).replace('$',''),
     notes: items[editItem].notes
   });
 
@@ -31,7 +31,7 @@ function EditItem(props: any) {
     const fullItem = {
       name: editItemForm.name,
       quantity: 1,
-      priceCents: Number.parseFloat(editItemForm.price),
+      priceCents: Number.parseFloat(editItemForm.price) * 100,
       hasTax: true,
       notes: editItemForm.notes
     }

@@ -1,21 +1,11 @@
 import { Checkbox, Grid, IconButton, ListItem, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
 import React from "react";
-import { blankItem } from "../Types";
-import { Add, Delete, Edit, Remove } from "@mui/icons-material";
+import { blankItem, formatPrice } from "../Types";
+import { Add, CheckCircleOutline, Delete, Edit, RadioButtonUnchecked, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
   const {listedItem, items, setSelectedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete, handleItemEdit} = props;
   const {name, quantity, priceCents, hasTax, notes} = listedItem ?? blankItem;
-
-  const formatPrice = (price: number): string => {
-    if (price % 100 === 0) {
-      return `$${price/100}.00`;
-    } else if (price % 10 === 0) {
-      return `$${price/100}0`
-    } else {
-      return `$${price/100}`
-    }
-  }
 
   const price = formatPrice(priceCents);
   const quantityPrice = `(${formatPrice(priceCents*quantity)})`;
@@ -57,14 +47,7 @@ function Item(props: any) {
       // disableGutters={true}
     >
         <ListItemIcon>
-          <Checkbox
-            // edge="start"
-            checked={checked.indexOf(name) !== -1}
-            tabIndex={-1}
-            disableRipple
-            inputProps={{ 'aria-labelledby': labelId }}
-            onClick={handleToggle(name)} 
-          />
+          {(checked.indexOf(name) === -1) ? <RadioButtonUnchecked fontSize="large" onClick={handleToggle(name)} /> : <CheckCircleOutline fontSize="large" onClick={handleToggle(name)} />}
         </ListItemIcon>
       <Grid container spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <Grid item xs>
