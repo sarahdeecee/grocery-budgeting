@@ -1,33 +1,18 @@
-import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack } from "@mui/material";
+import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack, ButtonGroup } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType, blankItem, formatPrice } from "../Types";
 
-function MyFormHelperText() {
-  const { focused } = useFormControl() || {};
-
-  const helperText = useMemo(() => {
-    if (focused) {
-      return 'This field is being focused';
-    }
-
-    return '';
-  }, [focused]);
-
-  return <FormHelperText>{helperText}</FormHelperText>;
-}
-
 function EditItem(props: any) {
-  const {handleDialogClose, items, setItems, editItem, setEditItem} = props;
+  const {handleDialogClose, items, setItems, editItem, setSelectedItem, handleDialogOpen} = props;
   const [editItemForm, setEditItemForm] = useState<ItemForm>({
-    name: items[editItem].name,
-    price: formatPrice(items[editItem].priceCents).replace('$',''),
-    notes: items[editItem].notes
+    name: items[editItem].name ?? '',
+    price: formatPrice(items[editItem].priceCents).replace('$','') ?? '',
+    notes: items[editItem].notes ?? ''
   });
 
   console.log(editItem);
 
   const handleItemEdit = (index: number): void => {
-    console.log('edit item')
     const fullItem = {
       name: editItemForm.name,
       quantity: 1,
@@ -40,6 +25,11 @@ function EditItem(props: any) {
     setItems(newItems);
     handleDialogClose();
   }
+
+  const handleDialogConfirmDelete = (selectedItem: ItemType): void => {
+    setSelectedItem(selectedItem);
+    handleDialogOpen('delete')
+  };
 
   return (<>
     <DialogTitle id="alert-dialog-title">
@@ -57,11 +47,7 @@ function EditItem(props: any) {
         <Input
           value={editItemForm.price}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const priceRegex = /\d+.\d\d/
-            // const priceFormatted = e.target.value.replace(/(\d{2}$)(\.\d{2})/, "$1,");
-            // if (priceRegex.test(e.target.value)) {
-              setEditItemForm({...editItemForm, price: e.target.value})
-            // }
+            setEditItemForm({...editItemForm, price: e.target.value})
           }}
           inputProps={{ inputMode: 'decimal' }}
           placeholder="Price"
@@ -74,20 +60,27 @@ function EditItem(props: any) {
           }}
           placeholder="Notes"
         />
-        <MyFormHelperText />
       </Stack>
     </DialogContent>
-    <DialogActions>
-      <Button onClick={handleDialogClose}>Cancel</Button>
-      <Button
-        autoFocus
-        onClick={(e: React.MouseEvent<HTMLElement>) => {
+    <DialogActions sx={{justifyContent: 'space-between'}}>
+      <ButtonGroup>
+        <Button onClick={(e: React.MouseEvent<HTMLElement>) => {
           e.preventDefault();
-          handleItemEdit(editItem);
-        }}
-      >
-        Save
-      </Button>
+          handleDialogConfirmDelete(items[editItem])}
+        }>Delete</Button>
+      </ButtonGroup>
+      <ButtonGroup>
+        <Button onClick={handleDialogClose}>Cancel</Button>
+        <Button
+          autoFocus
+          onClick={(e: React.MouseEvent<HTMLElement>) => {
+            e.preventDefault();
+            handleItemEdit(editItem);
+          }}
+        >
+          Save
+        </Button>
+      </ButtonGroup>
     </DialogActions>
     </>
   );
