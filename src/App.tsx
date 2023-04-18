@@ -38,13 +38,21 @@ const itemsDefault: ItemType[] = [
   },
 ];
 
+const blankItem = {
+  name: '',
+  quantity: 0,
+  priceCents: 0,
+  hasTax: true
+}
+
 function App() {
-  const [items, setItems] = useState<ItemType[]>(itemsDefault)
+  const [items, setItems] = useState<ItemType[]>(itemsDefault);
+  const [currentItem, setCurrentItem] = useState<ItemType>(blankItem);
 
   return (
     <Stack className="App">
-      <NewItem />
-      <ItemList items={items} setItems={setItems} />
+      <NewItem items={items} setItems={setItems} />
+      <ItemList items={items} setItems={setItems} currentItem={currentItem} setCurrentItem={setCurrentItem} />
     </Stack>
   );
 }

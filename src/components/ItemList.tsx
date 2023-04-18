@@ -6,7 +6,7 @@ import { ItemType } from './../Types';
 
 function ItemList(props: any) {
   const [checked, setChecked] = useState([0]);
-  const {items, setItems} = props;
+  const {items, setItems, currentItem, setCurrentItem} = props;
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -27,16 +27,17 @@ function ItemList(props: any) {
   //   priceCents: 500,
   //   hasTax: true
   // },
-  const handleQuantityUp = (e: React.MouseEvent<HTMLElement>): void => {
-    console.log('up');
-    // const newItems = items.map((item: ItemType) => {
-    //   if (item.name === itemCurrent.name) {
-    //     return {...itemCurrent, quantity: itemCurrent.quantity + 1};
-    //   } else {
-    //     return item;
-    //   }
-    // })
-    // setItems(newItems);
+  const handleQuantityUp = (selectedItem: ItemType): void => {
+    console.log('quantity up');
+    const newItems = items.map((item: ItemType) => {
+      if (item.name === selectedItem.name) {
+        return {...selectedItem, quantity: selectedItem.quantity + 1};
+      } else {
+        return item;
+      }
+    })
+    setItems(newItems);
+    // setCurrentItem({selectedItem, quantity: selectedItem.quantity + 1});
   }
   
   const handleQuantityDown = (): void => {
@@ -46,7 +47,7 @@ function ItemList(props: any) {
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {items.map((listedItem: ItemType) => 
-        <Item listedItem={listedItem} handleToggle={handleToggle} checked={checked} />
+        <Item listedItem={listedItem} handleToggle={handleToggle} checked={checked} currentItem={currentItem} setCurrentItem={setCurrentItem} handleQuantityUp={handleQuantityUp} />
       )}
     </List>
   );

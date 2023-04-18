@@ -4,8 +4,7 @@ import { ItemType } from "../Types";
 import { Add, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
-  const {listedItem, handleToggle, checked} = props;
-  const [item, setItem] = useState<ItemType>(listedItem);
+  const {listedItem, handleToggle, checked, currentItem, setCurrentItem, handleQuantityUp} = props;
   const {name, quantity, priceCents, hasTax} = listedItem;
   const price = `$${priceCents/100}.00`;
   const quantityPrice = `($${priceCents/100*quantity}.00)`;
@@ -23,22 +22,16 @@ function Item(props: any) {
     </Grid>
   </Grid>
 
-  const handleQuantityUp = (e: React.MouseEvent<HTMLElement>): void => {
-    console.log('up');
-    setItem({...item, quantity: item.quantity + 1});
-  }
-
-  const handleQuantityDown = (e: React.MouseEvent<HTMLElement>): void => {
-    console.log('down');
-  }
-
   return (
     <ListItem
       key={name}
       secondaryAction={
         <Grid container spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
           <Grid container item xs={3}>
-            <IconButton aria-label="edit" onClick={handleQuantityUp}>
+            <IconButton aria-label="edit" onClick={(e: any)=> {
+              e.preventDefault();
+              handleQuantityUp(listedItem);
+            }}>
               <Add />
             </IconButton>
           </Grid>
@@ -46,7 +39,10 @@ function Item(props: any) {
             <Typography mx={2}>{quantity}</Typography>
           </Grid>
           <Grid container item xs={3}>
-            <IconButton aria-label="edit" onClick={handleQuantityDown}>
+            <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
+              e.preventDefault();
+              // handleQuantityDown(item)
+            }}>
               <Remove />
             </IconButton>
           </Grid>
