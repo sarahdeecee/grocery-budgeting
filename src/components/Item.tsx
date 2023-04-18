@@ -26,7 +26,7 @@ function Item(props: any) {
       <Typography>{name}</Typography>
       <Typography variant="caption">{notes}</Typography>
     </Grid>
-    <Grid item container xs={4}>
+    <Grid item container xs>
       <Stack>
         <Typography>{price}</Typography>
         <Typography variant="caption">{quantityPrice}</Typography>
@@ -37,18 +37,20 @@ function Item(props: any) {
   return (
     <ListItem
       key={name}
-      // secondaryAction={
-        
-      // }
+      secondaryAction={
+        <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
+          e.preventDefault();
+          handleItemDelete(listedItem)
+        }}>
+          <Delete />
+        </IconButton>
+      }
       // disablePadding
+      // disableGutters={true}
     >
-      {/* <ListItemButton
-        role={undefined}
-        dense
-        > */}
         <ListItemIcon>
           <Checkbox
-            edge="start"
+            // edge="start"
             checked={checked.indexOf(name) !== -1}
             tabIndex={-1}
             disableRipple
@@ -56,40 +58,31 @@ function Item(props: any) {
             onClick={handleToggle(name)} 
           />
         </ListItemIcon>
-      {/* // </ListItemButton> */}
-      <Grid container item spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-        <Grid item xs={9}>
+      <Grid container spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+        <Grid item xs>
           <ListItemText
             id={labelId}
             primary={itemFormatted}
           />
         </Grid>
-        <Grid container item xs={3} sx={{alignItems: 'center', justifyContent: 'center'}}>
-          <Grid item xs={3}>
-            <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
+        <Grid container item xs='auto' sx={{alignItems: 'center', justifyContent: 'center'}}>
+          <Grid item xs sx={{justifyContent: 'center'}}>
+            <IconButton aria-label="decrease" onClick={(e: React.MouseEvent)=> {
               e.preventDefault();
               handleQuantityDown(listedItem)
             }}>
               <Remove />
             </IconButton>
           </Grid>
-          <Grid container item xs={3}>
-            <Typography mx={2}>{quantity}</Typography>
+          <Grid container item xs sx={{justifyContent: 'center'}}>
+            <Typography>{quantity}</Typography>
           </Grid>
-          <Grid container item xs={3}>
-            <IconButton aria-label="edit" onClick={(e: any)=> {
+          <Grid container item xs sx={{justifyContent: 'center'}}>
+            <IconButton aria-label="increase" onClick={(e: React.MouseEvent)=> {
               e.preventDefault();
               handleQuantityUp(listedItem);
             }}>
               <Add />
-            </IconButton>
-          </Grid>
-          <Grid container item xs={3}>
-            <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
-              e.preventDefault();
-              handleItemDelete(listedItem)
-            }}>
-              <Delete />
             </IconButton>
           </Grid>
         </Grid>

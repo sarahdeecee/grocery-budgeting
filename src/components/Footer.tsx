@@ -15,7 +15,7 @@ const StyledFab = styled(Fab)({
 function Footer(props: any) {
   const {items, handleDialogOpen} = props;
   const subtotal = Array.isArray(items) ? items.reduce((sum: number, item: ItemType) => sum + (item.priceCents * item.quantity), 0) : 0;
-  const taxtotal = 0;
+  const taxtotal = Math.round(subtotal * 0.13);
   const total = subtotal + taxtotal;
 
   const formatPrice = (price: number): string => {
@@ -34,7 +34,7 @@ function Footer(props: any) {
           <Typography
             width="fit-content"
             variant="h6"
-            >{`Total: ${formatPrice(total)}`} <Typography component="span" variant="body1">{`(${formatPrice(subtotal)} + ${formatPrice(taxtotal)})`}</Typography>
+            >{`Total: ${formatPrice(total)}`} <Typography component="span" variant="body2">{`(${formatPrice(subtotal)} + ${formatPrice(taxtotal)})`}</Typography>
           </Typography>
           <IconButton color="inherit" aria-label="open drawer">
             <Menu />
