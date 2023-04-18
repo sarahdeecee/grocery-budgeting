@@ -2,11 +2,11 @@ import { Box, Grid, IconButton, List, ListItem, Typography } from "@mui/material
 import { Add, Edit, Remove } from '@mui/icons-material';
 import { useState } from "react";
 import Item from "./Item";
-import { ItemType } from './../Types';
+import { ItemType, blankItem } from './../Types';
 
 function ItemList(props: any) {
   const [checked, setChecked] = useState([0]);
-  const {items, setItems, currentItem, setCurrentItem} = props;
+  const {items, setItems} = props;
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -41,7 +41,7 @@ function ItemList(props: any) {
   const handleQuantityDown = (selectedItem: ItemType): void => {
     const newItems = items.map((item: ItemType) => {
       if (item.name === selectedItem.name) {
-        return (selectedItem.quantity > 0) ? {...selectedItem, quantity: selectedItem.quantity - 1} : {...selectedItem};
+        return (selectedItem.quantity > 0) ? {...selectedItem, quantity: selectedItem.quantity - 1} : selectedItem;
       } else {
         return item;
       }
@@ -49,10 +49,14 @@ function ItemList(props: any) {
     setItems(newItems);
   }
 
+  const handleItemDelete = (selectedItem: ItemType): void => {
+    setItems((items: ItemType[]) => items.filter((item: ItemType) => item.name !== selectedItem.name));
+  }
+
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {items.map((listedItem: ItemType) => 
-        <Item listedItem={listedItem} handleToggle={handleToggle} checked={checked} currentItem={currentItem} setCurrentItem={setCurrentItem} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} />
+        <Item listedItem={listedItem} handleToggle={handleToggle} checked={checked} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemDelete={handleItemDelete} />
       )}
     </List>
   );

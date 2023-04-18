@@ -4,3 +4,10 @@ export type ItemType = {
   priceCents: number,
   hasTax?: boolean
 }
+
+export const blankItem = {
+  name: '',
+  quantity: 1,
+  priceCents: 100,
+  hasTax: true
+}

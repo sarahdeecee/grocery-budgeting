@@ -1,11 +1,11 @@
 import { Checkbox, Grid, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { ItemType } from "../Types";
-import { Add, Remove } from "@mui/icons-material";
+import { ItemType, blankItem } from "../Types";
+import { Add, Delete, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
-  const {listedItem, handleToggle, checked, currentItem, setCurrentItem, handleQuantityUp, handleQuantityDown} = props;
-  const {name, quantity, priceCents, hasTax} = listedItem;
+  const {listedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete} = props;
+  const {name, quantity, priceCents, hasTax} = listedItem ?? blankItem;
   const price = `$${priceCents/100}.00`;
   const quantityPrice = `($${priceCents/100*quantity}.00)`;
   const labelId = `checkbox-list-label-${name}`;
@@ -25,9 +25,35 @@ function Item(props: any) {
   return (
     <ListItem
       key={name}
-      secondaryAction={
-        <Grid container spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-          <Grid container item xs={3}>
+      // secondaryAction={
+        
+      // }
+      // disablePadding
+    >
+      {/* <ListItemButton
+        role={undefined}
+        dense
+        > */}
+        <ListItemIcon>
+          <Checkbox
+            edge="start"
+            checked={checked.indexOf(name) !== -1}
+            tabIndex={-1}
+            disableRipple
+            inputProps={{ 'aria-labelledby': labelId }}
+            onClick={handleToggle(name)} 
+          />
+        </ListItemIcon>
+      {/* // </ListItemButton> */}
+      <Grid container item spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+        <Grid item xs={9}>
+          <ListItemText
+            id={labelId}
+            primary={itemFormatted}
+          />
+        </Grid>
+        <Grid container item xs={3} sx={{alignItems: 'center', justifyContent: 'center'}}>
+          <Grid item xs={3}>
             <IconButton aria-label="edit" onClick={(e: any)=> {
               e.preventDefault();
               handleQuantityUp(listedItem);
@@ -46,29 +72,16 @@ function Item(props: any) {
               <Remove />
             </IconButton>
           </Grid>
+          <Grid container item xs={3}>
+            <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
+              e.preventDefault();
+              handleItemDelete(listedItem)
+            }}>
+              <Delete />
+            </IconButton>
+          </Grid>
         </Grid>
-      }
-      disablePadding
-    >
-      <ListItemButton
-        role={undefined}
-        onClick={handleToggle(name)} 
-        dense
-      >
-        <ListItemIcon>
-          <Checkbox
-            edge="start"
-            checked={checked.indexOf(name) !== -1}
-            tabIndex={-1}
-            disableRipple
-            inputProps={{ 'aria-labelledby': labelId }}
-          />
-        </ListItemIcon>
-        <ListItemText
-          id={labelId}
-          primary={itemFormatted}
-        />
-      </ListItemButton>
+      </Grid>
     </ListItem>
   );
 }

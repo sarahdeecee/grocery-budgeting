@@ -2,8 +2,8 @@ import { Stack } from '@mui/material';
 import './App.css';
 import ItemList from './components/ItemList';
 import NewItem from './components/NewItem';
-import { ItemType } from './Types';
-import { useState } from 'react';
+import { ItemType, blankItem } from './Types';
+import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
@@ -106,22 +106,18 @@ const itemsDefault: ItemType[] = [
   },
 ];
 
-const blankItem = {
-  name: '',
-  quantity: 0,
-  priceCents: 0,
-  hasTax: true
-}
-
 function App() {
   const [items, setItems] = useState<ItemType[]>(itemsDefault);
-  const [currentItem, setCurrentItem] = useState<ItemType>(blankItem);
+
+  useEffect(() => {
+
+  }, items)
 
   return (<>
       <Header />
       <Stack className="App">
         {/* <NewItem items={items} setItems={setItems} /> */}
-        <ItemList items={items} setItems={setItems} currentItem={currentItem} setCurrentItem={setCurrentItem} />
+        <ItemList items={items} setItems={setItems} />
       </Stack>
       <Footer items={items} />
     </>
