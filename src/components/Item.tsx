@@ -5,14 +5,15 @@ import { Add, Delete, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
   const {listedItem, setSelectedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete} = props;
-  const {name, quantity, priceCents, hasTax} = listedItem ?? blankItem;
+  const {name, quantity, priceCents, hasTax, notes} = listedItem ?? blankItem;
   const price = `$${priceCents/100}.00`;
   const quantityPrice = `($${priceCents/100*quantity}.00)`;
   const labelId = `checkbox-list-label-${name}`;
 
   const itemFormatted = <Grid container>
-    <Grid item xs={8} sx={{display: 'flex', alignItems: 'center'}}>
+    <Grid item container xs={8} sx={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'center'}}>
       <Typography>{name}</Typography>
+      <Typography variant="caption">{notes}</Typography>
     </Grid>
     <Grid item container xs={4}>
       <Stack>

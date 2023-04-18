@@ -5,7 +5,8 @@ export const itemsDefault: ItemType[] = [
     name: 'Apple',
     quantity: 5,
     priceCents: 100,
-    hasTax: true
+    hasTax: true,
+    notes: "It's super tasty"
   },
   {
     name: 'Orange',

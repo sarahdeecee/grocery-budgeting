@@ -2,14 +2,16 @@ export type ItemType = {
   name: string,
   quantity: number,
   priceCents: number,
-  hasTax?: boolean
+  hasTax?: boolean,
+  notes?: string
 }
 
 export const blankItem = {
   name: '',
   quantity: 1,
   priceCents: 100,
-  hasTax: true
+  hasTax: true,
+  notes: ''
 }
 
 export type DialogType = {
