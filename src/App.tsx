@@ -26,7 +26,7 @@ function App() {
         <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} />
       </Stack>
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
-      <Dialog open={dialog.open}>
+      <Dialog fullWidth open={dialog.open}>
         {dialog.content === 'delete' && <ConfirmDelete selectedItem={selectedItem} items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}
         {dialog.content === 'add' && <NewItem items={items} setItems={setItems} />}
       </Dialog>

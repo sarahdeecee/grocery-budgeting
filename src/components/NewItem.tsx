@@ -1,4 +1,4 @@
-import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button } from "@mui/material";
+import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemType, blankItem } from "../Types";
 
@@ -17,34 +17,46 @@ function MyFormHelperText() {
 }
 
 function NewItem(props: any) {
-  const {items, setItems} = props;
+  const {items, setItems, handleDialogClose} = props;
   const [newItem, setNewItem] = useState<ItemType>(blankItem);
 
   const handleAddItem = (item: ItemType) => {
     setItems((prev: ItemType[]) => [...prev, item]);
   }
 
-  return (
-    <List sx={{ bgcolor: 'background.paper' }}>
-      <ListItem secondaryAction={
-        <Button>Add</Button>
-      }
-      sx={{width: '100%'}}
-      >
-      <Box component="form" noValidate autoComplete="off" sx={{width: '100%'}}>
-        <FormControl sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%'}}>
-          <Input placeholder="Item name" sx={{ml: 1, width: '75%'}} />
-          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+  return (<>
+    <DialogTitle id="alert-dialog-title">
+      {"Add an item"}
+    </DialogTitle>
+    <DialogContent>
+      <DialogContentText id="alert-dialog-description">
+        <Stack component="form" noValidate autoComplete="off" spacing={3}>
+          <Input placeholder="Item name"/>
+          {/* <Divider sx={{ m: 0.5 }} orientation="horizontal" /> */}
           <Input
             placeholder="Price"
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            sx={{ml: 1, width: '20%', flexGrow: 1}}
-          />
-        {/* <MyFormHelperText /> */}
-        </FormControl>
-      </Box>
-      </ListItem>
-    </List>
+            />
+          <Input
+            placeholder="Notes"
+            />
+          {/* <MyFormHelperText /> */}
+        </Stack>
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={handleDialogClose}>Cancel</Button>
+      <Button
+        autoFocus
+        onClick={(e: React.MouseEvent<HTMLElement>) => {
+          e.preventDefault();
+          // handleItemDelete(selectedItem)
+        }}
+      >
+        Add
+      </Button>
+    </DialogActions>
+    </>
   );
 }
 
