@@ -28,7 +28,6 @@ function ItemList(props: any) {
   //   hasTax: true
   // },
   const handleQuantityUp = (selectedItem: ItemType): void => {
-    console.log('quantity up');
     const newItems = items.map((item: ItemType) => {
       if (item.name === selectedItem.name) {
         return {...selectedItem, quantity: selectedItem.quantity + 1};
@@ -37,17 +36,23 @@ function ItemList(props: any) {
       }
     })
     setItems(newItems);
-    // setCurrentItem({selectedItem, quantity: selectedItem.quantity + 1});
   }
   
-  const handleQuantityDown = (): void => {
-    console.log('down');
+  const handleQuantityDown = (selectedItem: ItemType): void => {
+    const newItems = items.map((item: ItemType) => {
+      if (item.name === selectedItem.name) {
+        return (selectedItem.quantity > 0) ? {...selectedItem, quantity: selectedItem.quantity - 1} : {...selectedItem};
+      } else {
+        return item;
+      }
+    })
+    setItems(newItems);
   }
 
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {items.map((listedItem: ItemType) => 
-        <Item listedItem={listedItem} handleToggle={handleToggle} checked={checked} currentItem={currentItem} setCurrentItem={setCurrentItem} handleQuantityUp={handleQuantityUp} />
+        <Item listedItem={listedItem} handleToggle={handleToggle} checked={checked} currentItem={currentItem} setCurrentItem={setCurrentItem} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} />
       )}
     </List>
   );

@@ -4,7 +4,7 @@ import { ItemType } from "../Types";
 import { Add, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
-  const {listedItem, handleToggle, checked, currentItem, setCurrentItem, handleQuantityUp} = props;
+  const {listedItem, handleToggle, checked, currentItem, setCurrentItem, handleQuantityUp, handleQuantityDown} = props;
   const {name, quantity, priceCents, hasTax} = listedItem;
   const price = `$${priceCents/100}.00`;
   const quantityPrice = `($${priceCents/100*quantity}.00)`;
@@ -41,7 +41,7 @@ function Item(props: any) {
           <Grid container item xs={3}>
             <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
               e.preventDefault();
-              // handleQuantityDown(item)
+              handleQuantityDown(listedItem)
             }}>
               <Remove />
             </IconButton>
