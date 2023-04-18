@@ -1,8 +1,7 @@
-import { Box, Grid, IconButton, List, ListItem, Typography } from "@mui/material";
-import { Add, Edit, Remove } from '@mui/icons-material';
+import { List } from "@mui/material";
 import { useState } from "react";
 import Item from "./Item";
-import { ItemType, blankItem } from './../Types';
+import { ItemType } from './../Types';
 
 function ItemList(props: any) {
   const [checked, setChecked] = useState([0]);
@@ -21,12 +20,6 @@ function ItemList(props: any) {
     setChecked(newChecked);
   };
 
-  // {
-  //   name: 'Cookies',
-  //   quantity: 1,
-  //   priceCents: 500,
-  //   hasTax: true
-  // },
   const handleQuantityUp = (selectedItem: ItemType): void => {
     const newItems = items.map((item: ItemType) => {
       if (item.name === selectedItem.name) {

@@ -1,6 +1,6 @@
-import { Checkbox, Grid, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { ItemType, blankItem } from "../Types";
+import { Checkbox, Grid, IconButton, ListItem, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
+import React from "react";
+import { blankItem } from "../Types";
 import { Add, Delete, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
