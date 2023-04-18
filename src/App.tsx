@@ -22,12 +22,12 @@ function App() {
 
   return (<>
       <Header />
-      {items.length === 0 && <Box sx={{height: 'calc(100vh - 56px - 56px)', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 56px - 56px)', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Typography variant="h5">No items added.</Typography>
-      </Box>}
+      </Box> : 
       <Stack className="App">
         <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} />
-      </Stack>
+      </Stack>}
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
       <Dialog fullWidth open={dialog.open}>
         {dialog.content === 'delete' && <ConfirmDelete selectedItem={selectedItem} items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}

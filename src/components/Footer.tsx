@@ -14,7 +14,9 @@ const StyledFab = styled(Fab)({
 
 function Footer(props: any) {
   const {items, handleDialogOpen} = props;
-  const total = Array.isArray(items) ? items.reduce((sum: number, item: ItemType) => sum + (item.priceCents * item.quantity), 0) : 0;
+  const subtotal = Array.isArray(items) ? items.reduce((sum: number, item: ItemType) => sum + (item.priceCents * item.quantity), 0) : 0;
+  const taxtotal = 0;
+  const total = subtotal + taxtotal;
 
   const formatPrice = (price: number): string => {
     if (price % 100 === 0) {
@@ -28,11 +30,12 @@ function Footer(props: any) {
 
   return (
     <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0}}>
-        <Toolbar sx={{justifyContent: 'space-between' }}>
+        <Toolbar sx={{justifyContent: 'space-between'}}>
           <Typography
-            noWrap
+            width="fit-content"
             variant="h6"
-          >{`Total: ${formatPrice(total)}`}</Typography>
+            >{`Total: ${formatPrice(total)}`} <Typography component="span" variant="body1">{`(${formatPrice(subtotal)} + ${formatPrice(taxtotal)})`}</Typography>
+          </Typography>
           <IconButton color="inherit" aria-label="open drawer">
             <Menu />
           </IconButton>
