@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
-import { Add, Menu } from "@mui/icons-material";
+import { Add, AddBox, AddCircle, Menu } from "@mui/icons-material";
 import { AppBar, Fab, IconButton, Toolbar, Typography } from "@mui/material";
 import { ItemType } from "../Types";
 
 const StyledFab = styled(Fab)({
-  position: 'absolute',
+  // position: 'absolute',
   zIndex: 1,
-  top: -30,
-  left: 0,
-  right: 0,
-  margin: '0 auto',
+  color: '#FFFFFF',
+  // top: -30,
+  // left: 0,
+  // right: 0,
+  // margin: '0 auto',
 });
 
 function Footer(props: any) {
@@ -36,15 +37,15 @@ function Footer(props: any) {
             variant="h6"
             >{`Total: ${formatPrice(total)}`} <Typography component="span" variant="body2">{`(${formatPrice(subtotal)} + ${formatPrice(taxtotal)})`}</Typography>
           </Typography>
-          <IconButton color="inherit" aria-label="open drawer">
+          {/* <IconButton color="inherit" aria-label="open drawer">
             <Menu />
-          </IconButton>
-          <StyledFab color="success" aria-label="add">
-            <Add onClick={(e: React.MouseEvent) => {
+          </IconButton> */}
+          {/* <StyledFab aria-label="add"> */}
+            <AddBox fontSize="large" onClick={(e: React.MouseEvent) => {
               e.preventDefault();
               handleDialogOpen('add');
             }} />
-          </StyledFab>
+          {/* </StyledFab> */}
           {/* <Box sx={{ flexGrow: 1 }} />
           <IconButton color="inherit">
             <Search />

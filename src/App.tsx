@@ -22,7 +22,7 @@ function App() {
 
   return (<>
       <Header />
-      {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 56px - 56px)', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 56px)', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
       <Stack className="App">
