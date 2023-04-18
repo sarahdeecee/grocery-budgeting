@@ -28,6 +28,10 @@ function Item(props: any) {
     setItem({...item, quantity: item.quantity + 1});
   }
 
+  const handleQuantityDown = (e: React.MouseEvent<HTMLElement>): void => {
+    console.log('down');
+  }
+
   return (
     <ListItem
       key={name}
@@ -42,7 +46,7 @@ function Item(props: any) {
             <Typography mx={2}>{quantity}</Typography>
           </Grid>
           <Grid container item xs={3}>
-            <IconButton aria-label="edit">
+            <IconButton aria-label="edit" onClick={handleQuantityDown}>
               <Remove />
             </IconButton>
           </Grid>
