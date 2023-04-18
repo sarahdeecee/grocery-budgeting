@@ -1,4 +1,4 @@
-import { Dialog, Stack, Typography } from '@mui/material';
+import { Box, Dialog, Stack, Typography } from '@mui/material';
 import './App.css';
 import ItemList from './components/ItemList';
 import NewItem from './components/NewItem';
@@ -22,8 +22,10 @@ function App() {
 
   return (<>
       <Header />
+      {items.length === 0 && <Box sx={{height: 'calc(100vh - 56px - 56px)', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <Typography variant="h5">No items added.</Typography>
+      </Box>}
       <Stack className="App">
-        {items.length === 0 && <Typography variant="h5">No items added.</Typography>}
         <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} />
       </Stack>
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
