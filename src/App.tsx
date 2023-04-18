@@ -1,9 +1,9 @@
-import { Box, Dialog, Stack, Typography } from '@mui/material';
 import './App.css';
+import { Box, Dialog, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
+import { DialogType, ItemType, blankItem } from './Types';
 import ItemList from './components/ItemList';
 import NewItem from './components/NewItem';
-import { DialogType, ItemType, blankItem } from './Types';
-import { useState } from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import ConfirmDelete from './components/ConfirmDelete';
@@ -11,7 +11,7 @@ import EditItem from './components/EditItem';
 import { itemsDefault } from './data/DevData';
 
 function App() {
-  const [items, setItems] = useState<ItemType[] | []>(itemsDefault);
+  const [items, setItems] = useState<ItemType[] | []>([]);
   const [selectedItem, setSelectedItem] = useState<ItemType>(blankItem);
   const [editItem, setEditItem] = useState<Number | null>(null);
   const [dialog, setDialog] = useState<DialogType>({
