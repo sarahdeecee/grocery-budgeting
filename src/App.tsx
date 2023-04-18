@@ -1,4 +1,4 @@
-import { Dialog, Stack } from '@mui/material';
+import { Dialog, Stack, Typography } from '@mui/material';
 import './App.css';
 import ItemList from './components/ItemList';
 import NewItem from './components/NewItem';
@@ -10,7 +10,7 @@ import { itemsDefault } from './data/DevData';
 import ConfirmDelete from './components/ConfirmDelete';
 
 function App() {
-  const [items, setItems] = useState<ItemType[]>(itemsDefault);
+  const [items, setItems] = useState<ItemType[] | []>([]);
   const [selectedItem, setSelectedItem] = useState<ItemType>(blankItem);
   const [dialog, setDialog] = useState<DialogType>({
     content: '',
@@ -23,6 +23,7 @@ function App() {
   return (<>
       <Header />
       <Stack className="App">
+        {items.length === 0 && <Typography variant="h5">No items added.</Typography>}
         <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} />
       </Stack>
       <Footer items={items} handleDialogOpen={handleDialogOpen} />

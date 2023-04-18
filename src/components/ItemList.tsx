@@ -48,8 +48,8 @@ function ItemList(props: any) {
   };
 
   return (
-    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-      {items.map((listedItem: ItemType) => 
+    <List sx={{ width: '100%', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column-reverse'}}>
+      {Array.isArray(items) && items.map((listedItem: ItemType) => 
         <Item listedItem={listedItem} setSelectedItem={setSelectedItem} handleToggle={handleToggle} checked={checked} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemDelete={handleDialogConfirmDelete} />
       )}
     </List>

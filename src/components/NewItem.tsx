@@ -33,7 +33,7 @@ function NewItem(props: any) {
       hasTax: true,
       notes: item.notes
     }
-    setItems((prev: ItemType[]) => [...prev, fullItem]);
+    setItems((prev: ItemType[] = []) => [...prev, fullItem]);
     handleDialogClose();
   }
 
