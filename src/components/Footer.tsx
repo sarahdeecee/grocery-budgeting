@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { Add, Menu, More, Search, Settings } from "@mui/icons-material";
-import { AppBar, Box, Fab, IconButton, Toolbar, Typography } from "@mui/material";
+import { Add, Menu } from "@mui/icons-material";
+import { AppBar, Fab, IconButton, Toolbar, Typography } from "@mui/material";
 import { ItemType } from "../Types";
 
 const StyledFab = styled(Fab)({
