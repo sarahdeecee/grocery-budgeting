@@ -6,8 +6,17 @@ import { Add, Delete, Remove } from "@mui/icons-material";
 function Item(props: any) {
   const {listedItem, setSelectedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete} = props;
   const {name, quantity, priceCents, hasTax, notes} = listedItem ?? blankItem;
-  const price = `$${priceCents/100}`;
-  const quantityPrice = `($${priceCents/100*quantity})`;
+
+  const formatPrice = (price: number): string => {
+    if (price % 100 === 0) {
+      return `$${price/100}.00`;
+    } else {
+      return `$${price/100}`
+    }
+  }
+
+  const price = formatPrice(priceCents);
+  const quantityPrice = `(${formatPrice(priceCents*quantity)})`;
   const labelId = `checkbox-list-label-${name}`;
 
   const itemFormatted = <Grid container>
@@ -55,22 +64,22 @@ function Item(props: any) {
         </Grid>
         <Grid container item xs={3} sx={{alignItems: 'center', justifyContent: 'center'}}>
           <Grid item xs={3}>
-            <IconButton aria-label="edit" onClick={(e: any)=> {
+            <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
               e.preventDefault();
-              handleQuantityUp(listedItem);
+              handleQuantityDown(listedItem)
             }}>
-              <Add />
+              <Remove />
             </IconButton>
           </Grid>
           <Grid container item xs={3}>
             <Typography mx={2}>{quantity}</Typography>
           </Grid>
           <Grid container item xs={3}>
-            <IconButton aria-label="edit" onClick={(e: React.MouseEvent)=> {
+            <IconButton aria-label="edit" onClick={(e: any)=> {
               e.preventDefault();
-              handleQuantityDown(listedItem)
+              handleQuantityUp(listedItem);
             }}>
-              <Remove />
+              <Add />
             </IconButton>
           </Grid>
           <Grid container item xs={3}>

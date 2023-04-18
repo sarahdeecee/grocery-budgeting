@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Add, Menu, More, Search } from "@mui/icons-material";
+import { Add, Menu, More, Search, Settings } from "@mui/icons-material";
 import { AppBar, Box, Fab, IconButton, Toolbar, Typography } from "@mui/material";
 import { ItemType } from "../Types";
 
@@ -36,7 +36,7 @@ function Footer(props: any) {
             <Search />
           </IconButton>
           <IconButton color="inherit">
-            <More />
+            <Settings />
           </IconButton>
         </Toolbar>
       </AppBar>
