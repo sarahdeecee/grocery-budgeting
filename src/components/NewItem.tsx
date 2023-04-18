@@ -1,5 +1,5 @@
 import { AddAPhotoRounded, AddCircle, Delete } from "@mui/icons-material";
-import { Box, Divider, FormControl, FormHelperText, Grid, IconButton, InputAdornment, List, ListItem, OutlinedInput, useFormControl, Input } from "@mui/material";
+import { Box, Divider, FormControl, FormHelperText, Grid, IconButton, InputAdornment, List, ListItem, OutlinedInput, useFormControl, Input, Button } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemType } from "../Types";
 
@@ -28,9 +28,7 @@ function NewItem() {
   return (
     <List sx={{ bgcolor: 'background.paper' }}>
       <ListItem secondaryAction={
-        <IconButton edge="end" aria-label="add">
-          <AddCircle fontSize="large" />
-        </IconButton>
+        <Button>Add</Button>
       }
       sx={{width: '100%'}}
       >
