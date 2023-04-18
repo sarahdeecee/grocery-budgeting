@@ -10,7 +10,7 @@ function MyFormHelperText() {
       return 'This field is being focused';
     }
 
-    return 'Helper text';
+    return '';
   }, [focused]);
 
   return <FormHelperText>{helperText}</FormHelperText>;
@@ -21,7 +21,9 @@ function NewItem(props: any) {
   const [newItem, setNewItem] = useState<ItemType>(blankItem);
 
   const handleAddItem = (item: ItemType) => {
+    console.log('add');
     setItems((prev: ItemType[]) => [...prev, item]);
+    handleDialogClose();
   }
 
   return (<>
@@ -30,15 +32,29 @@ function NewItem(props: any) {
     </DialogTitle>
     <DialogContent>
       <Stack component="form" noValidate autoComplete="off" spacing={3}>
-        <Input placeholder="Item name"/>
         <Input
+          value={newItem.name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setNewItem({...newItem, name: e.target.value})
+          }}
+          placeholder="Item name"
+        />
+        <Input
+          value={newItem.priceCents}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setNewItem({...newItem, priceCents: Number.parseFloat(e.target.value)})
+          }}
           placeholder="Price"
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
-          />
+        />
         <Input
+          value={newItem.notes}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setNewItem({...newItem, notes: e.target.value})
+          }}
           placeholder="Notes"
-          />
-        {/* <MyFormHelperText /> */}
+        />
+        <MyFormHelperText />
       </Stack>
     </DialogContent>
     <DialogActions>
@@ -47,7 +63,7 @@ function NewItem(props: any) {
         autoFocus
         onClick={(e: React.MouseEvent<HTMLElement>) => {
           e.preventDefault();
-          // handleItemDelete(selectedItem)
+          handleAddItem(newItem);
         }}
       >
         Add

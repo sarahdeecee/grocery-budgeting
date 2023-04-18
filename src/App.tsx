@@ -28,7 +28,7 @@ function App() {
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
       <Dialog fullWidth open={dialog.open}>
         {dialog.content === 'delete' && <ConfirmDelete selectedItem={selectedItem} items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}
-        {dialog.content === 'add' && <NewItem items={items} setItems={setItems} />}
+        {dialog.content === 'add' && <NewItem items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}
       </Dialog>
     </>
   );

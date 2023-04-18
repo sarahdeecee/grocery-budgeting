@@ -9,7 +9,7 @@ export type ItemType = {
 export const blankItem = {
   name: '',
   quantity: 1,
-  priceCents: 100,
+  priceCents: 0,
   hasTax: true,
   notes: ''
 }
