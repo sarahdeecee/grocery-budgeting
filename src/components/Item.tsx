@@ -7,7 +7,7 @@ function Item(props: any) {
   const quantityPrice = `($${priceCents/100*quantity}.00)`;
 
   const itemFormatted = <Grid container>
-    <Grid item xs={8}>
+    <Grid item xs={8} sx={{display: 'flex', alignItems: 'center'}}>
       <Typography>{name}</Typography>
     </Grid>
     <Grid item container xs={4}>
