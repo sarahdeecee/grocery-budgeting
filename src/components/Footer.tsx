@@ -16,13 +16,23 @@ function Footer(props: any) {
   const {items, handleDialogOpen} = props;
   const total = Array.isArray(items) ? items.reduce((sum: number, item: ItemType) => sum + (item.priceCents * item.quantity) / 100, 0) : 0;
 
+  const formatPrice = (price: number): string => {
+    if (price % 100 === 0) {
+      return `$${price/100}.00`;
+    } else if (price % 10 === 0) {
+      return `$${price/100}0`
+    } else {
+      return `$${price/100}`
+    }
+  }
+
   return (
     <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0}}>
         <Toolbar sx={{justifyContent: 'space-between' }}>
           <Typography
             noWrap
             variant="h6"
-          >{`Total: $${total}`}</Typography>
+          >{`Total: ${formatPrice(total)}`}</Typography>
           <IconButton color="inherit" aria-label="open drawer">
             <Menu />
           </IconButton>
