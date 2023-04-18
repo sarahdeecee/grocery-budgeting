@@ -53,11 +53,23 @@ function NewItem(props: any) {
         <Input
           value={newItem.price}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, price: e.target.value})
+            // const priceRegex = /\d+.\d\d/
+            // if (priceRegex.test(e.target.value)) {
+              setNewItem({...newItem, price: e.target.value})
+            // }
           }}
+          // type="number"
+          inputProps={{ inputMode: 'decimal' }}
           placeholder="Price"
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
         />
+        {/* <Input
+          value={newItem.quantity}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setNewItem({...newItem, quantity: e.target.value})
+          }}
+          placeholder="How many"
+        /> */}
         <Input
           value={newItem.notes}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
