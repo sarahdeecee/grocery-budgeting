@@ -11,3 +11,8 @@ export const blankItem = {
   priceCents: 100,
   hasTax: true
 }
+
+export type DialogType = {
+  content: string,
+  open: boolean
+}

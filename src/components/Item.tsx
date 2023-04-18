@@ -4,7 +4,7 @@ import { blankItem } from "../Types";
 import { Add, Delete, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
-  const {listedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete} = props;
+  const {listedItem, setSelectedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete} = props;
   const {name, quantity, priceCents, hasTax} = listedItem ?? blankItem;
   const price = `$${priceCents/100}.00`;
   const quantityPrice = `($${priceCents/100*quantity}.00)`;
