@@ -13,7 +13,7 @@ const StyledFab = styled(Fab)({
 });
 
 function Footer(props: any) {
-  const {items} = props;
+  const {items, handleDialogOpen} = props;
   const total = items.reduce((sum: number, item: ItemType) => sum + (item.priceCents * item.quantity) / 100, 0);
 
   return (
@@ -26,7 +26,10 @@ function Footer(props: any) {
             noWrap
           >{`Total: $${total}.00`}</Typography>
           <StyledFab color="success" aria-label="add">
-            <Add />
+            <Add onClick={(e: React.MouseEvent) => {
+              e.preventDefault();
+              handleDialogOpen('add');
+            }} />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
           <IconButton color="inherit">

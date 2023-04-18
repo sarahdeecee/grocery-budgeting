@@ -23,12 +23,12 @@ function App() {
   return (<>
       <Header />
       <Stack className="App">
-        {/* <NewItem items={items} setItems={setItems} /> */}
         <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} />
       </Stack>
-      <Footer items={items} />
+      <Footer items={items} handleDialogOpen={handleDialogOpen} />
       <Dialog open={dialog.open}>
-        <ConfirmDelete selectedItem={selectedItem} items={items} setItems={setItems} handleDialogClose={handleDialogClose} />
+        {dialog.content === 'delete' && <ConfirmDelete selectedItem={selectedItem} items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}
+        {dialog.content === 'add' && <NewItem items={items} setItems={setItems} />}
       </Dialog>
     </>
   );
