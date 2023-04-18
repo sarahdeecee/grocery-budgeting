@@ -14,7 +14,7 @@ const StyledFab = styled(Fab)({
 
 function Footer(props: any) {
   const {items, handleDialogOpen} = props;
-  const total = Array.isArray(items) ? items.reduce((sum: number, item: ItemType) => sum + (item.priceCents * item.quantity) / 100, 0) : 0;
+  const total = Array.isArray(items) ? items.reduce((sum: number, item: ItemType) => sum + (item.priceCents * item.quantity), 0) : 0;
 
   const formatPrice = (price: number): string => {
     if (price % 100 === 0) {
