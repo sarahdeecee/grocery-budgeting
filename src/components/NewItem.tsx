@@ -29,20 +29,17 @@ function NewItem(props: any) {
       {"Add an item"}
     </DialogTitle>
     <DialogContent>
-      <DialogContentText id="alert-dialog-description">
-        <Stack component="form" noValidate autoComplete="off" spacing={3}>
-          <Input placeholder="Item name"/>
-          {/* <Divider sx={{ m: 0.5 }} orientation="horizontal" /> */}
-          <Input
-            placeholder="Price"
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            />
-          <Input
-            placeholder="Notes"
-            />
-          {/* <MyFormHelperText /> */}
-        </Stack>
-      </DialogContentText>
+      <Stack component="form" noValidate autoComplete="off" spacing={3}>
+        <Input placeholder="Item name"/>
+        <Input
+          placeholder="Price"
+          startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          />
+        <Input
+          placeholder="Notes"
+          />
+        {/* <MyFormHelperText /> */}
+      </Stack>
     </DialogContent>
     <DialogActions>
       <Button onClick={handleDialogClose}>Cancel</Button>
