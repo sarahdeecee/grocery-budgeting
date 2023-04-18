@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Add, Menu, More, Search } from "@mui/icons-material";
 import { AppBar, Box, Fab, IconButton, Toolbar, Typography } from "@mui/material";
+import { ItemType } from "../Types";
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -11,7 +12,9 @@ const StyledFab = styled(Fab)({
   margin: '0 auto',
 });
 
-function Footer() {
+function Footer(props: any) {
+  const {items} = props;
+  const total = items.reduce((sum: number, item: ItemType) => sum + (item.priceCents * item.quantity) / 100, 0);
 
   return (
     <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
@@ -21,8 +24,7 @@ function Footer() {
           </IconButton>
           <Typography
             noWrap
-            sx={{left: 0, right: 0}}
-          >Total: $0.00</Typography>
+          >{`Total: $${total}.00`}</Typography>
           <StyledFab color="success" aria-label="add">
             <Add />
           </StyledFab>

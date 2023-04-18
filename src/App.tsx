@@ -121,7 +121,7 @@ function App() {
         {/* <NewItem items={items} setItems={setItems} /> */}
         <ItemList items={items} setItems={setItems} currentItem={currentItem} setCurrentItem={setCurrentItem} />
       </Stack>
-      <Footer />
+      <Footer items={items} />
     </>
   );
 }
