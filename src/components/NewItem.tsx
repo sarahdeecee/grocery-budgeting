@@ -23,7 +23,7 @@ function NewItem(props: any) {
     price: '',
     notes: ''
   });
-  // const [addType, setAddType] = useState<String>('single');
+  const [addType, setAddType] = useState<String>('single');
 
   const handleAddItem = (item: ItemForm) => {
     const fullItem = {
@@ -37,25 +37,25 @@ function NewItem(props: any) {
     handleDialogClose();
   }
 
-  // const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
-  //   setAddType(type);
-  // }
+  const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
+    setAddType(type);
+  }
 
-  // const addTypeToggle = <ToggleButtonGroup
-  //   color="primary"
-  //   value={addType}
-  //   exclusive
-  //   onChange={handleToggleChange}
-  //   aria-label="Platform"
-  //   size="small"
-  // >
-  //   <ToggleButton value="multi">Multiple</ToggleButton>
-  //   <ToggleButton value="single">Single</ToggleButton>
-  // </ToggleButtonGroup>
+  const addTypeToggle = <ToggleButtonGroup
+    color="primary"
+    value={addType}
+    exclusive
+    onChange={handleToggleChange}
+    aria-label="Platform"
+    size="small"
+  >
+    <ToggleButton value="multi">Multiple</ToggleButton>
+    <ToggleButton value="single">Single</ToggleButton>
+  </ToggleButtonGroup>
 
   return (<>
     <DialogTitle id="alert-dialog-title" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-      {"Add an item"} {/* addTypeToggle} */}
+      {"Add an item"}{addTypeToggle}
     </DialogTitle>
     <DialogContent>
       <Stack component="form" noValidate autoComplete="off" spacing={3}>
