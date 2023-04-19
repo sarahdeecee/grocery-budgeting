@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { ItemForm, ItemType, blankItem, formatPrice } from "../Types";
 
 function EditItem(props: any) {
-  const {handleDialogClose, items, setItems, editItem, setSelectedItem, handleDialogOpen} = props;
+  const {handleDialogClose, items, setItems, editItem, setSelectedItem, handleDialogOpen, handleDelete} = props;
   const [editItemForm, setEditItemForm] = useState<ItemForm>({
     name: items[editItem].name ?? '',
     price: formatPrice(items[editItem].priceCents).replace('$','') ?? '',
@@ -23,11 +23,6 @@ function EditItem(props: any) {
     setItems(newItems);
     handleDialogClose();
   }
-
-  const handleDialogConfirmDelete = (selectedItem: ItemType): void => {
-    setSelectedItem(selectedItem);
-    handleDialogOpen('delete')
-  };
 
   return (<>
     <DialogTitle id="alert-dialog-title">
@@ -64,7 +59,7 @@ function EditItem(props: any) {
       <ButtonGroup>
         <Button onClick={(e: React.MouseEvent<HTMLElement>) => {
           e.preventDefault();
-          handleDialogConfirmDelete(items[editItem])}
+          handleDelete(items[editItem])}
         }>Delete</Button>
       </ButtonGroup>
       <ButtonGroup>

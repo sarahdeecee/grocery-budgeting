@@ -9,6 +9,7 @@ import Header from './components/Header';
 import ConfirmDelete from './components/ConfirmDelete';
 import EditItem from './components/EditItem';
 import { itemsDefault } from './data/DevData';
+import ConfirmDeleteAll from './components/ConfirmDeleteAll';
 
 function App() {
   const [items, setItems] = useState<ItemType[] | []>([]);
@@ -22,19 +23,28 @@ function App() {
   const handleDialogClose = (): void => setDialog({...dialog, open: false});
   const handleDialogOpen = (content: string): void => setDialog({...dialog, content, open: true});
 
+  const handleDialogConfirmDelete = (selectedItem: ItemType): void => {
+    setSelectedItem(selectedItem);
+    handleDialogOpen('delete')
+  };
+  const handleDialogConfirmDeleteAll = (): void => {
+    handleDialogOpen('deleteall')
+  };
+
   return (<Stack className="App" sx={{top: 0}}>
-    <Header />
+    <Header setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} />
       {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 60px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
       <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1, height: 'calc(100vh - 56px - 60px)'}}>
-        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} editItem={editItem} setEditItem={setEditItem} />
+        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} handleDialogConfirmDelete={handleDialogConfirmDelete} editItem={editItem} setEditItem={setEditItem} />
       </Stack>}
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
       <Dialog fullWidth open={dialog.open}>
         {dialog.content === 'delete' && <ConfirmDelete selectedItem={selectedItem} items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}
+        {dialog.content === 'deleteall' && <ConfirmDeleteAll items={items} setItems={setItems} handleDialogClose={handleDialogClose} />}
         {dialog.content === 'add' && <NewItem items={items} setItems={setItems} handleDialogClose={handleDialogClose} editItem={editItem} setEditItem={setEditItem} />}
-        {dialog.content === 'edit' && <EditItem items={items} setItems={setItems} handleDialogClose={handleDialogClose} setSelectedItem={setSelectedItem} handleDialogOpen={handleDialogOpen} editItem={editItem} setEditItem={setEditItem} />}
+        {dialog.content === 'edit' && <EditItem items={items} setItems={setItems} handleDialogClose={handleDialogClose} setSelectedItem={setSelectedItem} handleDialogOpen={handleDialogOpen} handleDelete={handleDialogConfirmDelete} editItem={editItem} setEditItem={setEditItem} />}
       </Dialog>
     </Stack>
   );
