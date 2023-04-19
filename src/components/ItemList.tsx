@@ -16,7 +16,6 @@ function ItemList(props: any) {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
     setChecked(newChecked);
   };
 

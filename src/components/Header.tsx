@@ -1,15 +1,12 @@
 import { Settings } from "@mui/icons-material";
 import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
+import { ItemType } from "../Types";
 
 function Header(props: any) {
   const {items, setItems, handleDeleteAll, checked, setChecked} = props;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const handleEdit = () => {
-    console.log('edit');
-  };
 
   const handleMenu = (e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget);
@@ -20,6 +17,9 @@ function Header(props: any) {
   };
 
   const handleSelectAll = () => {
+    const blankArr = (new Array(items.length)).fill(0);
+    const itemNamesArr = items.map((item: ItemType) => item.name);
+    setChecked([...blankArr, ...itemNamesArr]);
     setAnchorEl(null);
   }
   const handleDeselectAll = () => {
