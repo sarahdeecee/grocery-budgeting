@@ -10,7 +10,7 @@ function Header(props: any) {
     <AppBar position="relative" color="primary" sx={{ bottom: 'auto', top: 0, height: '60px', width: '100vw', maxWidth: '800px'}}>
       <Toolbar sx={{justifyContent: 'space-between'}}>
         <Typography variant="h5">My Shopping List</Typography>
-        <Settings onClick={handleEdit} />
+        {/* <Settings onClick={handleEdit} /> */}
       </Toolbar>
     </AppBar>
   );
