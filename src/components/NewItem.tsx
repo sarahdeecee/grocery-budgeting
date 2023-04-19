@@ -1,4 +1,4 @@
-import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack } from "@mui/material";
+import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack, ToggleButtonGroup, ToggleButton } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType, blankItem } from "../Types";
 
@@ -23,6 +23,7 @@ function NewItem(props: any) {
     price: '',
     notes: ''
   });
+  const [addType, setAddType] = useState<String>('single');
 
   const handleAddItem = (item: ItemForm) => {
     console.log('add');
@@ -37,9 +38,24 @@ function NewItem(props: any) {
     handleDialogClose();
   }
 
+  const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
+    setAddType(type);
+  }
+
+  const addTypeToggle = <ToggleButtonGroup
+    color="primary"
+    value={addType}
+    exclusive
+    onChange={handleToggleChange}
+    aria-label="Platform"
+  >
+    <ToggleButton value="multi">Multi</ToggleButton>
+    <ToggleButton value="single">Single</ToggleButton>
+  </ToggleButtonGroup>
+
   return (<>
     <DialogTitle id="alert-dialog-title">
-      {"Add an item"}
+      {"Add an item"}{addTypeToggle}
     </DialogTitle>
     <DialogContent>
       <Stack component="form" noValidate autoComplete="off" spacing={3}>
