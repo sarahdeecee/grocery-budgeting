@@ -30,31 +30,31 @@ function Footer(props: any) {
   }
 
   return (
-    <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0}}>
-        <Toolbar sx={{justifyContent: 'space-between'}}>
-          <Typography
-            width="fit-content"
-            variant="h6"
-            >{`Total: ${formatPrice(total)}`} <Typography component="span" variant="body2">{`(${formatPrice(subtotal)} + ${formatPrice(taxtotal)})`}</Typography>
-          </Typography>
-          {/* <IconButton color="inherit" aria-label="open drawer">
-            <Menu />
-          </IconButton> */}
-          {/* <StyledFab aria-label="add"> */}
-            <AddBox fontSize="large" onClick={(e: React.MouseEvent) => {
-              e.preventDefault();
-              handleDialogOpen('add');
-            }} />
-          {/* </StyledFab> */}
-          {/* <Box sx={{ flexGrow: 1 }} />
-          <IconButton color="inherit">
-            <Search />
-          </IconButton>
-          <IconButton color="inherit">
-            <Settings />
-          </IconButton> */}
-        </Toolbar>
-      </AppBar>
+    <AppBar id="footer" position="sticky" color="primary" sx={{ top: 'auto', bottom: 0, width: '100vw', maxWidth: '800px'}}>
+      <Toolbar sx={{justifyContent: 'space-between'}}>
+        <Typography
+          width="fit-content"
+          variant="h6"
+          >{`Total: ${formatPrice(total)}`} <Typography component="span" variant="body2">{`(${formatPrice(subtotal)} + ${formatPrice(taxtotal)})`}</Typography>
+        </Typography>
+        {/* <IconButton color="inherit" aria-label="open drawer">
+          <Menu />
+        </IconButton> */}
+        {/* <StyledFab aria-label="add"> */}
+          <AddBox fontSize="large" onClick={(e: React.MouseEvent) => {
+            e.preventDefault();
+            handleDialogOpen('add');
+          }} />
+        {/* </StyledFab> */}
+        {/* <Box sx={{ flexGrow: 1 }} />
+        <IconButton color="inherit">
+          <Search />
+        </IconButton>
+        <IconButton color="inherit">
+          <Settings />
+        </IconButton> */}
+      </Toolbar>
+    </AppBar>
   );
 }
 

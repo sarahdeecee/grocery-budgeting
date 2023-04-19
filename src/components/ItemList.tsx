@@ -53,7 +53,7 @@ function ItemList(props: any) {
   };
 
   return (
-    <List sx={{ width: '100%', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column-reverse'}}>
+    <List sx={{ width: '100%', maxWidth: '600px', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column-reverse'}}>
       {Array.isArray(items) && items.map((listedItem: ItemType) => 
         <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} checked={checked} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
       )}
