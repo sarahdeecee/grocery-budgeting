@@ -3,7 +3,7 @@ import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/ma
 import { useState } from "react";
 
 function Header(props: any) {
-  const {setItems, handleDeleteAll} = props;
+  const {items, setItems, handleDeleteAll} = props;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -34,7 +34,7 @@ function Header(props: any) {
     <AppBar position="relative" color="primary" sx={{ bottom: 'auto', top: 0, minHeight: '60px', height: '60px', width: '100vw', maxWidth: '800px'}}>
       <Toolbar sx={{justifyContent: 'space-between'}}>
         <Typography variant="h5">My Shopping List</Typography>
-        <IconButton
+        {items.length !== 0 && <><IconButton
           size="large"
           edge="end"
           aria-label="account of current user"
@@ -63,7 +63,7 @@ function Header(props: any) {
           <MenuItem onClick={handleSelectAll}>Select All</MenuItem>
           <MenuItem onClick={handleDeselectAll}>Deselect All</MenuItem>
           <MenuItem onClick={handleDeleteAllClose}>Delete All</MenuItem>
-        </Menu>
+        </Menu></>}
       </Toolbar>
     </AppBar>
   );
