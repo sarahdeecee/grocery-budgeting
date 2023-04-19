@@ -4,8 +4,8 @@ import { blankItem, formatPrice } from "../Types";
 import { Add, CheckCircleOutline, Edit, RadioButtonUnchecked, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
-  const {listedItem, items, setSelectedItem, handleToggle, checked, handleQuantityUp, handleQuantityDown, handleItemDelete, handleItemEdit} = props;
-  const {name, quantity, priceCents, hasTax, notes} = listedItem ?? blankItem;
+  const {listedItem, items, setSelectedItem, handleToggle, handleQuantityUp, handleQuantityDown, handleItemDelete, handleItemEdit} = props;
+  const {name, quantity, priceCents, hasTax, checked, notes} = listedItem ?? blankItem;
 
   const price = formatPrice(priceCents);
   const quantityPrice = `(${formatPrice(priceCents*quantity)})`;
@@ -39,7 +39,7 @@ function Item(props: any) {
     >
       <ListItemIcon key={`listicon-${name}`}>
         <IconButton onClick={handleToggle(name)}>
-          {(checked.indexOf(name) === -1) ? <RadioButtonUnchecked key={`uncheck-${name}`} fontSize="large" /> : <CheckCircleOutline key={`check-${name}`} fontSize="large" />}
+          {checked ? <CheckCircleOutline key={`check-${name}`} fontSize="large" /> : <RadioButtonUnchecked key={`uncheck-${name}`} fontSize="large" />}
         </IconButton>
       </ListItemIcon>
       <Grid key={`grid1-${name}`} container spacing={0} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>

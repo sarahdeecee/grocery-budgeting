@@ -19,8 +19,8 @@ function App() {
     content: '',
     open: false
   })
-  const [checked, setChecked] = useState([0]);
-
+  // const [checked, setChecked] = useState([0]);
+  console.log(items);
   const handleDialogClose = (): void => setDialog({...dialog, open: false});
   const handleDialogOpen = (content: string): void => setDialog({...dialog, content, open: true});
 
@@ -31,14 +31,25 @@ function App() {
   const handleDialogConfirmDeleteAll = (): void => {
     handleDialogOpen('deleteall')
   };
+  const handleToggle = (name: string) => () => {
+    const itemToCheck = items.find((item: ItemType) => item.name === name);
+    console.log('toggle ',itemToCheck);
+    const index = items.findIndex((item: ItemType) => item.name === name);
+    const newItems = [...items];
+    if (itemToCheck) {
+      itemToCheck.checked = (itemToCheck.checked) ? false : true;
+      newItems[index] = itemToCheck;
+      setItems(newItems);
+    }
+  };
 
   return (<Stack className="App" sx={{top: 0}}>
-    <Header items={items} setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} checked={checked} setChecked={setChecked} />
+    <Header items={items} setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} handleToggle={handleToggle} />
       {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 60px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
       <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1, height: 'calc(100vh - 56px - 60px)'}}>
-        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} handleDialogConfirmDelete={handleDialogConfirmDelete} editItem={editItem} setEditItem={setEditItem} checked={checked} setChecked={setChecked} />
+        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} handleDialogConfirmDelete={handleDialogConfirmDelete} handleToggle={handleToggle} editItem={editItem} setEditItem={setEditItem} />
       </Stack>}
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
       <Dialog fullWidth open={dialog.open}>

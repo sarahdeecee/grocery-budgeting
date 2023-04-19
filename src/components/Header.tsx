@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ItemType } from "../Types";
 
 function Header(props: any) {
-  const {items, setItems, handleDeleteAll, checked, setChecked} = props;
+  const {items, setItems, handleDeleteAll, handleToggle} = props;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -17,13 +17,14 @@ function Header(props: any) {
   };
 
   const handleSelectAll = () => {
-    const blankArr = (new Array(items.length)).fill(0);
-    const itemNamesArr = items.map((item: ItemType) => item.name);
-    setChecked([...blankArr, ...itemNamesArr]);
+    const newItems = [...items].forEach((item: ItemType) => handleToggle(item.name));
+    console.log(newItems);
+    // setItems(newItems);
     setAnchorEl(null);
   }
   const handleDeselectAll = () => {
-    setChecked([0])
+    // const newItems = items.map((item: ItemType) => item.checked = false);
+    // setItems(newItems);
     setAnchorEl(null);
   }
   const handleDeleteAllClose = () => {

@@ -32,7 +32,8 @@ function NewItem(props: any) {
       quantity: 1,
       priceCents: (item.price) ? Number.parseFloat(item.price) * 100 : 0,
       hasTax: true,
-      notes: item.notes
+      notes: item.notes,
+      checked: false
     }
     setItems((prev: ItemType[] = []) => [...prev, fullItem]);
     handleDialogClose();

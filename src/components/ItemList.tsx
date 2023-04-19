@@ -4,20 +4,7 @@ import Item from "./Item";
 import { ItemType } from './../Types';
 
 function ItemList(props: any) {
-  const {checked, setChecked} = props;
-  const {items, setItems, handleDialogOpen, setSelectedItem, editItem, setEditItem} = props;
-
-  const handleToggle = (value: number) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    setChecked(newChecked);
-  };
+  const {items, setItems, handleDialogOpen, handleToggle, setSelectedItem, editItem, setEditItem} = props;
 
   const handleQuantityUp = (selectedItem: ItemType): void => {
     const newItems = items.map((item: ItemType) => {
@@ -54,7 +41,7 @@ function ItemList(props: any) {
   return (
     <List sx={{ width: '100%', maxWidth: '600px', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column-reverse'}}>
       {Array.isArray(items) && items.map((listedItem: ItemType) => 
-        <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} checked={checked} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
+        <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
       )}
     </List>
   );
