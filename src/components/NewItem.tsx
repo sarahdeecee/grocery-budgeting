@@ -107,7 +107,7 @@ function NewItem(props: any) {
     </DialogContent>
     <DialogActions>
       <Button onClick={handleDialogClose}>Cancel</Button>
-      <Button
+      {addType === 'single' ? <Button
         autoFocus
         onClick={(e: React.MouseEvent<HTMLElement>) => {
           e.preventDefault();
@@ -116,14 +116,14 @@ function NewItem(props: any) {
       >
         Add
       </Button>
-      <Button
+      : <Button
         onClick={(e: React.MouseEvent<HTMLElement>) => {
           e.preventDefault();
           handleAddItems(newItems);
         }}
       >
-        Add Multiple
-      </Button>
+        Add All
+      </Button>}
     </DialogActions>
     </>
   );
