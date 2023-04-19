@@ -39,8 +39,8 @@ function NewItem(props: any) {
   }
 
   const handleAddItems = (items: string): void => {
-    const itemsArr = items.split(/\n/g);
-    itemsArr.forEach(item => handleAddItem({name: item}));
+    const itemsArr = items.split(/[,\n]/g);
+    itemsArr.filter(item => item !== '').forEach(item => handleAddItem({name: item}));
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
@@ -94,7 +94,7 @@ function NewItem(props: any) {
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setNewItems(e.target.value)
       }}
-      placeholder="Paste item names separated by new lines"
+      placeholder="Paste item names separated by new lines or commas"
     />
   </Stack>;
 
