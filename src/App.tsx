@@ -22,12 +22,12 @@ function App() {
   const handleDialogClose = (): void => setDialog({...dialog, open: false});
   const handleDialogOpen = (content: string): void => setDialog({...dialog, content, open: true});
 
-  return (<Stack className="App">
+  return (<Stack className="App" sx={{top: 0}}>
     <Header />
-      {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 56px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
+      {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 60px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
-      <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1}}>
+      <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1, height: 'calc(100vh - 56px - 60px)'}}>
         <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} editItem={editItem} setEditItem={setEditItem} />
       </Stack>}
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
