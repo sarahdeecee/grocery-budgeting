@@ -2,7 +2,7 @@ import { Button, DialogActions, DialogContent, DialogContentText, DialogTitle } 
 import React from "react";
 
 function ConfirmDeleteAll(props: any) {
-  const {handleDialogClose, items, setItems, selectedItem} = props;
+  const {handleDialogClose, setItems} = props;
 
   const handleItemDelete = (): void => {
     setItems([]);
@@ -11,7 +11,7 @@ function ConfirmDeleteAll(props: any) {
 
   return (<>
     <DialogTitle id="alert-dialog-title">
-      {"Remove item?"}
+      {"Remove items?"}
     </DialogTitle>
     <DialogContent>
       <DialogContentText id="alert-dialog-description">
