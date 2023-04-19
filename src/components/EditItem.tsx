@@ -14,7 +14,7 @@ function EditItem(props: any) {
     const fullItem = {
       name: editItemForm.name,
       quantity: 1,
-      priceCents: Number.parseFloat(editItemForm.price) * 100,
+      priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
       hasTax: true,
       notes: editItemForm.notes
     }

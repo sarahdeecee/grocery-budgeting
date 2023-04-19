@@ -23,18 +23,24 @@ function NewItem(props: any) {
     price: '',
     notes: ''
   });
+  const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
 
-  const handleAddItem = (item: ItemForm) => {
+  const handleAddItem = (item: ItemForm): void => {
     const fullItem = {
       name: item.name,
       quantity: 1,
-      priceCents: Number.parseFloat(item.price) * 100,
+      priceCents: (item.price) ? Number.parseFloat(item.price) * 100 : 0,
       hasTax: true,
       notes: item.notes
     }
     setItems((prev: ItemType[] = []) => [...prev, fullItem]);
     handleDialogClose();
+  }
+
+  const handleAddItems = (items: string): void => {
+    const itemsArr = items.split(/\n/g);
+    itemsArr.forEach(item => handleAddItem({name: item}));
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
@@ -53,37 +59,51 @@ function NewItem(props: any) {
     <ToggleButton value="single">Single</ToggleButton>
   </ToggleButtonGroup>
 
+  const singleAdd = <Stack component="form" noValidate autoComplete="off" spacing={3}>
+    <Input
+      value={newItem.name}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewItem({...newItem, name: e.target.value})
+      }}
+      placeholder="Item name"
+    />
+    <Input
+      value={newItem.price}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewItem({...newItem, price: e.target.value})
+      }}
+      inputProps={{ inputMode: 'decimal' }}
+      placeholder="Price"
+      startAdornment={<InputAdornment position="start">$</InputAdornment>}
+    />
+    <Input
+      value={newItem.notes}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewItem({...newItem, notes: e.target.value})
+      }}
+      placeholder="Notes"
+    />
+    <MyFormHelperText />
+  </Stack>
+
+  const multiAdd = <Stack component="form" noValidate autoComplete="off" spacing={3}>
+    <Input
+      value={newItems}
+      multiline
+      rows={10}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewItems(e.target.value)
+      }}
+      placeholder="Paste item names separated by new lines"
+    />
+  </Stack>;
+
   return (<>
     <DialogTitle id="alert-dialog-title" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
       {"Add an item"}{addTypeToggle}
     </DialogTitle>
     <DialogContent>
-      <Stack component="form" noValidate autoComplete="off" spacing={3}>
-        <Input
-          value={newItem.name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, name: e.target.value})
-          }}
-          placeholder="Item name"
-        />
-        <Input
-          value={newItem.price}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, price: e.target.value})
-          }}
-          inputProps={{ inputMode: 'decimal' }}
-          placeholder="Price"
-          startAdornment={<InputAdornment position="start">$</InputAdornment>}
-        />
-        <Input
-          value={newItem.notes}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, notes: e.target.value})
-          }}
-          placeholder="Notes"
-        />
-        <MyFormHelperText />
-      </Stack>
+      {addType === 'single' ? singleAdd : multiAdd}
     </DialogContent>
     <DialogActions>
       <Button onClick={handleDialogClose}>Cancel</Button>
@@ -95,6 +115,14 @@ function NewItem(props: any) {
         }}
       >
         Add
+      </Button>
+      <Button
+        onClick={(e: React.MouseEvent<HTMLElement>) => {
+          e.preventDefault();
+          handleAddItems(newItems);
+        }}
+      >
+        Add Multiple
       </Button>
     </DialogActions>
     </>
