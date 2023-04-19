@@ -26,7 +26,6 @@ function NewItem(props: any) {
   const [addType, setAddType] = useState<String>('single');
 
   const handleAddItem = (item: ItemForm) => {
-    console.log('add');
     const fullItem = {
       name: item.name,
       quantity: 1,
@@ -48,13 +47,14 @@ function NewItem(props: any) {
     exclusive
     onChange={handleToggleChange}
     aria-label="Platform"
+    size="small"
   >
-    <ToggleButton value="multi">Multi</ToggleButton>
+    <ToggleButton value="multi">Multiple</ToggleButton>
     <ToggleButton value="single">Single</ToggleButton>
   </ToggleButtonGroup>
 
   return (<>
-    <DialogTitle id="alert-dialog-title">
+    <DialogTitle id="alert-dialog-title" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
       {"Add an item"}{addTypeToggle}
     </DialogTitle>
     <DialogContent>
