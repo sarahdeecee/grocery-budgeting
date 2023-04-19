@@ -11,7 +11,7 @@ import EditItem from './components/EditItem';
 import { itemsDefault } from './data/DevData';
 
 function App() {
-  const [items, setItems] = useState<ItemType[] | []>(itemsDefault);
+  const [items, setItems] = useState<ItemType[] | []>([]);
   const [selectedItem, setSelectedItem] = useState<ItemType>(blankItem);
   const [editItem, setEditItem] = useState<Number | null>(null);
   const [dialog, setDialog] = useState<DialogType>({
@@ -24,7 +24,7 @@ function App() {
 
   return (<Stack className="App">
     <Header />
-      {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 56px)', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 56px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
       <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1}}>
