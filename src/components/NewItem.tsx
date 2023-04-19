@@ -1,6 +1,6 @@
-import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack, ToggleButtonGroup, ToggleButton } from "@mui/material";
+import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton } from "@mui/material";
 import { useMemo, useState } from "react";
-import { ItemForm, ItemType, blankItem } from "../Types";
+import { ItemForm, ItemType } from "../Types";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -69,23 +69,12 @@ function NewItem(props: any) {
         <Input
           value={newItem.price}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            // const priceRegex = /\d+.\d\d/
-            // if (priceRegex.test(e.target.value)) {
-              setNewItem({...newItem, price: e.target.value})
-            // }
+            setNewItem({...newItem, price: e.target.value})
           }}
-          // type="number"
           inputProps={{ inputMode: 'decimal' }}
           placeholder="Price"
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
         />
-        {/* <Input
-          value={newItem.quantity}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, quantity: e.target.value})
-          }}
-          placeholder="How many"
-        /> */}
         <Input
           value={newItem.notes}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
