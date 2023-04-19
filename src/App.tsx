@@ -19,6 +19,7 @@ function App() {
     content: '',
     open: false
   })
+  const [checked, setChecked] = useState([0]);
 
   const handleDialogClose = (): void => setDialog({...dialog, open: false});
   const handleDialogOpen = (content: string): void => setDialog({...dialog, content, open: true});
@@ -32,12 +33,12 @@ function App() {
   };
 
   return (<Stack className="App" sx={{top: 0}}>
-    <Header items={items} setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} />
+    <Header items={items} setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} checked={checked} setChecked={setChecked} />
       {items.length === 0 ? <Box sx={{height: 'calc(100vh - 56px - 60px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
       <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1, height: 'calc(100vh - 56px - 60px)'}}>
-        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} handleDialogConfirmDelete={handleDialogConfirmDelete} editItem={editItem} setEditItem={setEditItem} />
+        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} handleDialogConfirmDelete={handleDialogConfirmDelete} editItem={editItem} setEditItem={setEditItem} checked={checked} setChecked={setChecked} />
       </Stack>}
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
       <Dialog fullWidth open={dialog.open}>

@@ -3,7 +3,7 @@ import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/ma
 import { useState } from "react";
 
 function Header(props: any) {
-  const {items, setItems, handleDeleteAll} = props;
+  const {items, setItems, handleDeleteAll, checked, setChecked} = props;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -23,6 +23,7 @@ function Header(props: any) {
     setAnchorEl(null);
   }
   const handleDeselectAll = () => {
+    setChecked([0])
     setAnchorEl(null);
   }
   const handleDeleteAllClose = () => {

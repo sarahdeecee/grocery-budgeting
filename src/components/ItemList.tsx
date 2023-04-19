@@ -4,7 +4,7 @@ import Item from "./Item";
 import { ItemType } from './../Types';
 
 function ItemList(props: any) {
-  const [checked, setChecked] = useState([0]);
+  const {checked, setChecked} = props;
   const {items, setItems, handleDialogOpen, setSelectedItem, editItem, setEditItem} = props;
 
   const handleToggle = (value: number) => () => {
