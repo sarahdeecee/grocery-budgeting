@@ -4,31 +4,30 @@ import { useState } from "react";
 import { ItemType } from "../Types";
 
 function Header(props: any) {
-  const {items, setItems, handleDeleteAll, handleToggle} = props;
-
+  const {items, setItems, handleDeleteAll} = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleMenu = (e: React.MouseEvent<HTMLElement>) => {
+  const handleMenu = (e: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(e.currentTarget);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (): void => {
     setAnchorEl(null);
   };
 
-  const handleSelectAll = () => {
+  const handleSelectAll = (): void => {
     const itemsToCheck = [...items].filter((item: ItemType) => item.checked === false);
     const newItems = [...items].map((item: ItemType) => (itemsToCheck.includes(item)) ? {...item, checked: true} : item)
     setItems(newItems);
     setAnchorEl(null);
   }
-  const handleDeselectAll = () => {
+  const handleDeselectAll = (): void => {
     const itemsToCheck = [...items].filter((item: ItemType) => item.checked === true);
     const newItems = [...items].map((item: ItemType) => (itemsToCheck.includes(item)) ? {...item, checked: false} : item)
     setItems(newItems);
     setAnchorEl(null);
   }
-  const handleDeleteAllClose = () => {
+  const handleDeleteAllClose = (): void => {
     handleDeleteAll();
     setAnchorEl(null);
   }
