@@ -110,7 +110,7 @@ function NewItem(props: any) {
 
   return (<>
     <DialogTitle id="alert-dialog-title" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-      {"Add an item"}{addTypeToggle}
+      {addType === 'single' ? "Add an item" : "Add items"}{addTypeToggle}
     </DialogTitle>
     <DialogContent>
       {addType === 'single' ? singleAdd : multiAdd}
