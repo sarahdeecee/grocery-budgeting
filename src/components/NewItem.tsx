@@ -34,7 +34,7 @@ function NewItem(props: any) {
         quantity: 1,
         priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
         hasTax: true,
-        notes: newItem.notes,
+        notes: newItem.notes ?? '',
         checked: false
       }
       setItems((prev: ItemType[] = []) => [...prev, fullItem]);

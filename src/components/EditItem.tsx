@@ -14,12 +14,10 @@ function EditItem(props: any) {
   const handleItemEdit = (index: number): void => {
     const duplicateIndex = items.findIndex((item: ItemType) => (item.name).toLowerCase() === (editItemForm.name).toLowerCase());
     if (duplicateIndex === -1 || duplicateIndex === index) {
-      const fullItem = {
+      const fullItem = {...items[index], 
         name: editItemForm.name,
-        quantity: 1,
         priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
-        hasTax: true,
-        notes: editItemForm.notes
+        notes: editItemForm.notes,
       }
       const newItems = [...items];
       newItems[index] = fullItem;
