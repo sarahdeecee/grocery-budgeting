@@ -26,14 +26,14 @@ function NewItem(props: any) {
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
 
-  const handleAddItem = (item: ItemForm): void => {
-    if (item.name) {
+  const handleAddItem = (newItem: ItemForm): void => {
+    if (newItem.name && items.findIndex((item: ItemType) => item.name === newItem.name) === -1) {
       const fullItem = {
-        name: item.name,
+        name: newItem.name,
         quantity: 1,
-        priceCents: (item.price) ? Number.parseFloat(item.price) * 100 : 0,
+        priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
         hasTax: true,
-        notes: item.notes,
+        notes: newItem.notes,
         checked: false
       }
       setItems((prev: ItemType[] = []) => [...prev, fullItem]);
@@ -43,7 +43,15 @@ function NewItem(props: any) {
 
   const handleAddItems = (items: string): void => {
     const itemsArr = items.split(/[,\n]/g);
-    itemsArr.filter(item => item !== '').forEach(item => handleAddItem({name: item}));
+    const filteredArr: string[] = [];
+    for (let item of itemsArr) {
+      console.log(item, ' ', filteredArr)
+      if (!(item === '' || filteredArr.includes(item))) {
+
+        filteredArr.push(item);
+      }
+    }
+    filteredArr.forEach((item: string) => handleAddItem({name: item}));
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
