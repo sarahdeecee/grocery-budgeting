@@ -16,6 +16,19 @@ function MyFormHelperText() {
   return <FormHelperText>{helperText}</FormHelperText>;
 }
 
+const camelCase = (string: string) => {
+  let result = '';
+  const wordArr = string.split(' ');
+  const exceptions = ['of', 'de'];
+
+  for (let word of wordArr) {
+      result += (exceptions.includes(word)) ? word : word[0].toUpperCase() + word.slice(1);
+      result += (wordArr.indexOf(word) !== wordArr.length - 1) ? ' ' : '';
+  }
+  console.log(result);
+  return result;
+}
+
 function NewItem(props: any) {
   const {items, setItems, handleDialogClose} = props;
   const [newItem, setNewItem] = useState<ItemForm>({
@@ -29,7 +42,7 @@ function NewItem(props: any) {
   const handleAddItem = (newItem: ItemForm): void => {
     if (newItem.name && items.findIndex((item: ItemType) => item.name === newItem.name) === -1) {
       const fullItem = {
-        name: newItem.name,
+        name: camelCase(newItem.name),
         quantity: 1,
         priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
         hasTax: true,
