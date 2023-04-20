@@ -11,11 +11,11 @@ function ConfirmDeleteAll(props: any) {
 
   return (<>
     <DialogTitle id="alert-dialog-title">
-      {"Remove items?"}
+      {'Remove items?'}
     </DialogTitle>
     <DialogContent>
       <DialogContentText id="alert-dialog-description">
-        Are you sure you want to remove all items?
+        Are you sure you want to remove all items? This cannot be undone.
       </DialogContentText>
     </DialogContent>
     <DialogActions>

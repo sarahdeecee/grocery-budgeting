@@ -16,7 +16,7 @@ function ConfirmDelete(props: any) {
     </DialogTitle>
     <DialogContent>
       <DialogContentText id="alert-dialog-description">
-        Are you sure you want to remove this item?
+        Are you sure you want to remove this item? This cannot be undone.
       </DialogContentText>
     </DialogContent>
     <DialogActions>
