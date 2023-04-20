@@ -27,16 +27,18 @@ function NewItem(props: any) {
   const [addType, setAddType] = useState<String>('single');
 
   const handleAddItem = (item: ItemForm): void => {
-    const fullItem = {
-      name: item.name,
-      quantity: 1,
-      priceCents: (item.price) ? Number.parseFloat(item.price) * 100 : 0,
-      hasTax: true,
-      notes: item.notes,
-      checked: false
+    if (item.name) {
+      const fullItem = {
+        name: item.name,
+        quantity: 1,
+        priceCents: (item.price) ? Number.parseFloat(item.price) * 100 : 0,
+        hasTax: true,
+        notes: item.notes,
+        checked: false
+      }
+      setItems((prev: ItemType[] = []) => [...prev, fullItem]);
+      handleDialogClose();
     }
-    setItems((prev: ItemType[] = []) => [...prev, fullItem]);
-    handleDialogClose();
   }
 
   const handleAddItems = (items: string): void => {

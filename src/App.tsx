@@ -1,6 +1,6 @@
 import './App.css';
 import { Box, Dialog, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DialogType, ItemType, blankItem } from './Types';
 import ItemList from './components/ItemList';
 import NewItem from './components/NewItem';
@@ -19,8 +19,12 @@ function App() {
     content: '',
     open: false
   })
+
+  useEffect(() => {
+    
+  }, [items]);
+
   // const [checked, setChecked] = useState([0]);
-  console.log(items);
   const handleDialogClose = (): void => setDialog({...dialog, open: false});
   const handleDialogOpen = (content: string): void => setDialog({...dialog, content, open: true});
 
@@ -31,16 +35,15 @@ function App() {
   const handleDialogConfirmDeleteAll = (): void => {
     handleDialogOpen('deleteall')
   };
-  const handleToggle = (name: string) => () => {
-    const itemToCheck = items.find((item: ItemType) => item.name === name);
-    console.log('toggle ',itemToCheck);
-    const index = items.findIndex((item: ItemType) => item.name === name);
+  const handleToggle = (currentItem: ItemType) => {
+    const itemToCheck = items.find((item: ItemType) => item.name === currentItem.name) ?? blankItem;
+    const index = items.findIndex((item: ItemType) => item.name === currentItem.name);
     const newItems = [...items];
-    if (itemToCheck) {
+    // if (itemToCheck) {
       itemToCheck.checked = (itemToCheck.checked) ? false : true;
       newItems[index] = itemToCheck;
-      setItems(newItems);
-    }
+      setItems([]);
+    // }
   };
 
   return (<Stack className="App" sx={{top: 0}}>

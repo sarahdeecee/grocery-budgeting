@@ -17,7 +17,7 @@ function Header(props: any) {
   };
 
   const handleSelectAll = () => {
-    const newItems = [...items].forEach((item: ItemType) => handleToggle(item.name));
+    const newItems = [...items].forEach((item: ItemType) => handleToggle(item));
     console.log(newItems);
     // setItems(newItems);
     setAnchorEl(null);
