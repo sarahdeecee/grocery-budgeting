@@ -42,10 +42,10 @@ function NewItem(props: any) {
   }
   console.log(items);
   const handleAddItems = (items: string): void => {
-    const itemsArr = items.split(/[,\n]|(,(\n|\s)*)/g);
+    const itemsArr = items.split(/(,(\n|\s)*)|(^(\s+)\w)/g);
     const filteredArr: string[] = [];
     for (let item of itemsArr) {
-      if (!((/^\s+$/).test(item) || filteredArr.includes(item))) {
+      if (!((/^\W+$/).test(item) || filteredArr.includes(item))) {
         filteredArr.push(item);
       }
     }
