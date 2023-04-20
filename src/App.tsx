@@ -20,11 +20,6 @@ function App() {
     open: false
   })
 
-  useEffect(() => {
-    
-  }, [items]);
-
-  // const [checked, setChecked] = useState([0]);
   const handleDialogClose = (): void => setDialog({...dialog, open: false});
   const handleDialogOpen = (content: string): void => setDialog({...dialog, content, open: true});
 
@@ -37,15 +32,12 @@ function App() {
   };
   const handleToggle = (currentItem: ItemType) => {
     const itemToCheck = items.find((item: ItemType) => item.name === currentItem.name) ?? blankItem;
-    console.log('item: ',itemToCheck);
     const index = items.findIndex((item: ItemType) => item.name === currentItem.name);
-    console.log('index: ',index);
+
     const newItems = [...items];
-    // if (itemToCheck) {
-      itemToCheck.checked = (itemToCheck.checked) ? false : true;
-      newItems[index] = itemToCheck;
-      setItems(newItems);
-    // }
+    itemToCheck.checked = (itemToCheck.checked) ? false : true;
+    newItems[index] = itemToCheck;
+    setItems(newItems);
   };
 
   return (<Stack className="App" sx={{top: 0}}>
