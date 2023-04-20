@@ -40,14 +40,12 @@ function NewItem(props: any) {
       handleDialogClose();
     }
   }
-
+  
   const handleAddItems = (items: string): void => {
     const itemsArr = items.split(/[,\n]/g);
     const filteredArr: string[] = [];
     for (let item of itemsArr) {
-      console.log(item, ' ', filteredArr)
       if (!(item === '' || filteredArr.includes(item))) {
-
         filteredArr.push(item);
       }
     }
