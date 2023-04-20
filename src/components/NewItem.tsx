@@ -42,7 +42,7 @@ function NewItem(props: any) {
   }
   
   const handleAddItems = (items: string): void => {
-    const itemsArr = items.split(/[,\n]/g);
+    const itemsArr = items.split(/[\s*,\n]/g);
     const filteredArr: string[] = [];
     for (let item of itemsArr) {
       if (!(item === '' || filteredArr.includes(item))) {
