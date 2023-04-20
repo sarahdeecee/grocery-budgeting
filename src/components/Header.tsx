@@ -23,6 +23,9 @@ function Header(props: any) {
     setAnchorEl(null);
   }
   const handleDeselectAll = () => {
+    const itemsToCheck = [...items].filter((item: ItemType) => item.checked === true);
+    const newItems = [...items].map((item: ItemType) => (itemsToCheck.includes(item)) ? {...item, checked: false} : item)
+    setItems(newItems);
     setAnchorEl(null);
   }
   const handleDeleteAllClose = () => {
