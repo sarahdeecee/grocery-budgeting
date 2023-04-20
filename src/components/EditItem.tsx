@@ -1,6 +1,7 @@
 import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack, ButtonGroup } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType, blankItem, formatPrice } from "../Types";
+import { camelCaseTrim } from "../helpers/Helpers";
 
 function EditItem(props: any) {
   const {handleDialogClose, items, setItems, editItem, setSelectedItem, handleDialogOpen, handleDelete} = props;
@@ -11,17 +12,20 @@ function EditItem(props: any) {
   });
 
   const handleItemEdit = (index: number): void => {
-    const fullItem = {
-      name: editItemForm.name,
-      quantity: 1,
-      priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
-      hasTax: true,
-      notes: editItemForm.notes
+    const duplicateIndex = items.findIndex((item: ItemType) => (item.name).toLowerCase() === (editItemForm.name).toLowerCase());
+    if (duplicateIndex === -1 || duplicateIndex === index) {
+      const fullItem = {
+        name: editItemForm.name,
+        quantity: 1,
+        priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
+        hasTax: true,
+        notes: editItemForm.notes
+      }
+      const newItems = [...items];
+      newItems[index] = fullItem;
+      setItems(newItems);
+      handleDialogClose();
     }
-    const newItems = [...items];
-    newItems[index] = fullItem;
-    setItems(newItems);
-    handleDialogClose();
   }
 
   return (<>
