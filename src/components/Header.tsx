@@ -17,14 +17,19 @@ function Header(props: any) {
   };
 
   const handleSelectAll = () => {
-    const newItems = [...items].forEach((item: ItemType) => handleToggle(item));
-    console.log(newItems);
-    // setItems(newItems);
+    const itemsToCheck = [...items].filter((item: ItemType) => item.checked === false);
+    const newItems = [];
+    for (let item of items) {
+      if (itemsToCheck.includes(item)) {
+        newItems.push({...item, checked: true});
+      } else {
+        newItems.push(item);
+      }
+    }
+    setItems(newItems);
     setAnchorEl(null);
   }
   const handleDeselectAll = () => {
-    // const newItems = items.map((item: ItemType) => item.checked = false);
-    // setItems(newItems);
     setAnchorEl(null);
   }
   const handleDeleteAllClose = () => {

@@ -37,12 +37,14 @@ function App() {
   };
   const handleToggle = (currentItem: ItemType) => {
     const itemToCheck = items.find((item: ItemType) => item.name === currentItem.name) ?? blankItem;
+    console.log('item: ',itemToCheck);
     const index = items.findIndex((item: ItemType) => item.name === currentItem.name);
+    console.log('index: ',index);
     const newItems = [...items];
     // if (itemToCheck) {
       itemToCheck.checked = (itemToCheck.checked) ? false : true;
       newItems[index] = itemToCheck;
-      setItems([]);
+      setItems(newItems);
     // }
   };
 

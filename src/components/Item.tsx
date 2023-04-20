@@ -40,6 +40,7 @@ function Item(props: any) {
       <ListItemIcon key={`listicon-${name}`}>
         <IconButton onClick={(e: React.MouseEvent)=> {
           e.preventDefault();
+          console.log('toggle');
           handleToggle(listedItem)}
         }>
           {checked ? <CheckCircleOutline key={`check-${name}`} fontSize="large" /> : <RadioButtonUnchecked key={`uncheck-${name}`} fontSize="large" />}
