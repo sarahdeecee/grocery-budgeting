@@ -18,14 +18,7 @@ function Header(props: any) {
 
   const handleSelectAll = () => {
     const itemsToCheck = [...items].filter((item: ItemType) => item.checked === false);
-    const newItems = [];
-    for (let item of items) {
-      if (itemsToCheck.includes(item)) {
-        newItems.push({...item, checked: true});
-      } else {
-        newItems.push(item);
-      }
-    }
+    const newItems = [...items].map((item: ItemType) => (itemsToCheck.includes(item)) ? {...item, checked: true} : item)
     setItems(newItems);
     setAnchorEl(null);
   }
