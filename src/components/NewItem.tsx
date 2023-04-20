@@ -16,16 +16,20 @@ function MyFormHelperText() {
   return <FormHelperText>{helperText}</FormHelperText>;
 }
 
-const camelCase = (string: string) => {
+const camelCaseTrim = (string: string) => {
   let result = '';
-  const wordArr = string.split(' ');
-  const exceptions = ['of', 'de'];
+  const wordArr = string.split(/\s+/);
+  const exceptions = ['of', 'de', 'and'];
 
   for (let word of wordArr) {
+    if (word) {
+      // Remove exceptions
       result += (exceptions.includes(word)) ? word : word[0].toUpperCase() + word.slice(1);
+      // Add space unless word at end of string
       result += (wordArr.indexOf(word) !== wordArr.length - 1) ? ' ' : '';
+    }
   }
-  console.log(result);
+
   return result;
 }
 
@@ -40,9 +44,9 @@ function NewItem(props: any) {
   const [addType, setAddType] = useState<String>('single');
 
   const handleAddItem = (newItem: ItemForm): void => {
-    if (newItem.name && items.findIndex((item: ItemType) => item.name === newItem.name) === -1) {
+    if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
       const fullItem = {
-        name: camelCase(newItem.name),
+        name: camelCaseTrim(newItem.name),
         quantity: 1,
         priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
         hasTax: true,
