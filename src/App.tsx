@@ -40,7 +40,7 @@ function App() {
     setItems(newItems);
   };
 
-  return (<Stack className="App" sx={{top: 0}}>
+  return (<Stack className="App" sx={{top: 0, minHeight: '100vh', p: 0}}>
     <Header items={items} setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} handleToggle={handleToggle} />
       {items.length === 0 ? <Box sx={{height: 'calc(100vh - 60px - 56px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
         <Typography variant="h5">No items added.</Typography>
