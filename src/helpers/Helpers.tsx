@@ -16,11 +16,12 @@ export const camelCaseTrim = (string: string) => {
 }
 
 export const formatPrice = (price: number): string => {
-  if (price % 100 === 0) {
-    return `$${price/100}.00`;
-  } else if (price % 10 === 0) {
-    return `$${price/100}0`
+  const roundedPrice = Math.round(price)
+  if (roundedPrice % 100 === 0) {
+    return `$${roundedPrice/100}.00`;
+  } else if (roundedPrice % 10 === 0) {
+    return `$${roundedPrice/100}0`
   } else {
-    return `$${Math.round(price)/100}`
+    return `$${roundedPrice/100}`
   }
 }
