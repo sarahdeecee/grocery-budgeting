@@ -2,7 +2,7 @@ export type ItemType = {
   name: string,
   quantity: number,
   priceCents: number,
-  tax?: 0 | 5 | 13,
+  tax: number,
   notes?: string,
   checked: boolean
 }
@@ -11,7 +11,7 @@ export const blankItem = {
   name: '',
   quantity: 1,
   priceCents: 0,
-  hasTax: true,
+  tax: 13,
   notes: '',
   checked: false
 }

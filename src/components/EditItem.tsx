@@ -19,7 +19,7 @@ function EditItem(props: any) {
         name: editItemForm.name,
         priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
         notes: editItemForm.notes,
-        tax: editItemForm.tax ? Number.parseInt(editItemForm.tax) : 13
+        tax: Number.parseInt(editItemForm.tax)
       }
       const newItems = [...items];
       newItems[index] = fullItem;
@@ -85,6 +85,9 @@ function EditItem(props: any) {
                 id: 'item-tax-box',
               }}
               value={editItemForm.tax}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                setEditItemForm({...editItemForm, tax: e.target.value})
+              }}
             >
               <option value='0'>None</option>
               <option value='5'>5%</option>
