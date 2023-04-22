@@ -19,7 +19,7 @@ function Footer(props: any) {
   }
 
   return (
-    <AppBar id="footer" position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, width: '100vw', height: '56px', maxWidth: '800px'}}>
+    <AppBar id="footer" position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, right: 'auto', width: '100vw', height: '56px', maxWidth: '800px'}}>
       <Toolbar sx={{justifyContent: 'space-between'}}>
         <Typography
           width="fit-content"
