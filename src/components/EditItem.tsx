@@ -1,10 +1,10 @@
-import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect } from "@mui/material";
-import { useMemo, useState } from "react";
-import { ItemForm, ItemType, blankItem } from "../Types";
-import { camelCaseTrim, formatPrice } from "../helpers/Helpers";
+import { FormControl, InputAdornment, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect } from "@mui/material";
+import { useState } from "react";
+import { ItemForm, ItemType } from "../Types";
+import { formatPrice } from "../helpers/Helpers";
 
 function EditItem(props: any) {
-  const {handleDialogClose, items, setItems, editItem, setSelectedItem, handleDialogOpen, handleDelete} = props;
+  const {handleDialogClose, items, setItems, editItem, handleDelete} = props;
   const [editItemForm, setEditItemForm] = useState<ItemForm>({
     name: items[editItem].name ?? '',
     price: formatPrice(items[editItem].priceCents).replace('$','') ?? '',

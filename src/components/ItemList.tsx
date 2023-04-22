@@ -1,10 +1,9 @@
 import { List } from "@mui/material";
-import { useState } from "react";
 import Item from "./Item";
 import { ItemType } from './../Types';
 
 function ItemList(props: any) {
-  const {items, setItems, handleDialogOpen, handleToggle, setSelectedItem, editItem, setEditItem} = props;
+  const {items, setItems, handleDialogOpen, handleToggle, setSelectedItem, setEditItem} = props;
 
   const handleQuantityUp = (selectedItem: ItemType): void => {
     const newItems = items.map((item: ItemType) => {
