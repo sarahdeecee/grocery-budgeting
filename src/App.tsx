@@ -12,7 +12,7 @@ import { itemsDefault } from './data/DevData';
 import ConfirmDeleteAll from './components/ConfirmDeleteAll';
 
 function App() {
-  const [items, setItems] = useState<ItemType[] | []>([]);
+  const [items, setItems] = useState<ItemType[] | []>(itemsDefault);
   const [selectedItem, setSelectedItem] = useState<ItemType>(blankItem);
   const [editItem, setEditItem] = useState<Number | null>(null);
   const [dialog, setDialog] = useState<DialogType>({

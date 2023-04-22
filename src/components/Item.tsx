@@ -12,27 +12,31 @@ function Item(props: any) {
   const taxPrice = formatPrice(priceCents * quantity * tax / 100);
   const labelId = `checkbox-list-label-${name}`;
 
-  const itemFormatted = <Grid key={`grid7-${name}`} container>
-    <Grid key={`grid8-${name}`} item container xs={8} sx={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'center'}}>
-      <Typography key={`name-${name}`}>{name}</Typography>
+  const itemFormatted = <Grid key={`grid7-${name}`} container  sx={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'center'}}>
+    <Grid key={`grid8-${name}`} item container sx ={{alignItems: 'flex-end'}}>
+      <Typography key={`name-${name}`} variant="body1" fontWeight="bold" sx={{pr: 1}}>{name}</Typography>
       <Typography key={`notes-${name}`} variant="caption">{notes}</Typography>
     </Grid>
-    <Grid key={`grid-9${name}`} item container xs>
-      <Stack key={`stack-${name}`}>
+    <Grid key={`price-container-${name}`} item container sx={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+      <Grid item key={`grid9-${name}`}>
         <Typography key={`price-${name}`}>{price}</Typography>
+      </Grid>
+      <Grid item key={`grid10-${name}`} sx={{ml: 1}}>
         <Typography key={`qprice-${name}`} variant="caption">{`(${quantityPrice} + ${taxPrice})`}</Typography>
-      </Stack>
+      </Grid>
     </Grid>
   </Grid>
 
   return (
     <ListItem
       key={name}
+      disableGutters
       secondaryAction={<>
         <IconButton key={`editbutton-${name}`} aria-label="edit" onClick={(e: React.MouseEvent)=> {
           e.preventDefault();
           handleItemEdit(items.indexOf(listedItem));
-        }}>
+          }}
+        >
           <Edit key={`edit-${name}`} />
         </IconButton>
         </>
@@ -42,8 +46,9 @@ function Item(props: any) {
         <IconButton onClick={(e: React.MouseEvent)=> {
           e.preventDefault();
           console.log('toggle');
-          handleToggle(listedItem)}
-        }>
+          handleToggle(listedItem)}}
+          edge="end"
+        >
           {checked ? <CheckCircleOutline key={`check-${name}`} fontSize="large" /> : <RadioButtonUnchecked key={`uncheck-${name}`} fontSize="large" />}
         </IconButton>
       </ListItemIcon>
