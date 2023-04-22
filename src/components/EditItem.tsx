@@ -8,7 +8,8 @@ function EditItem(props: any) {
   const [editItemForm, setEditItemForm] = useState<ItemForm>({
     name: items[editItem].name ?? '',
     price: formatPrice(items[editItem].priceCents).replace('$','') ?? '',
-    notes: items[editItem].notes ?? ''
+    notes: items[editItem].notes ?? '',
+    tax: items[editItem].tax ?? '13'
   });
 
   const handleItemEdit = (index: number): void => {

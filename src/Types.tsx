@@ -2,7 +2,7 @@ export type ItemType = {
   name: string,
   quantity: number,
   priceCents: number,
-  hasTax?: boolean,
+  tax?: number,
   notes?: string,
   checked: boolean
 }
@@ -34,5 +34,6 @@ export type DialogType = {
 export type ItemForm = {
   name: string,
   price?: string,
-  notes?: string
+  notes?: string,
+  tax: string
 }

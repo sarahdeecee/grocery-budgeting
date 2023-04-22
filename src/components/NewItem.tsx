@@ -1,4 +1,4 @@
-import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton } from "@mui/material";
+import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { camelCaseTrim } from "../helpers/Helpers";
@@ -22,7 +22,8 @@ function NewItem(props: any) {
   const [newItem, setNewItem] = useState<ItemForm>({
     name: '',
     price: '',
-    notes: ''
+    notes: '',
+    tax: '13'
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
@@ -33,7 +34,7 @@ function NewItem(props: any) {
         name: camelCaseTrim(newItem.name),
         quantity: 1,
         priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
-        hasTax: true,
+        tax: Number.parseInt(newItem.tax),
         notes: newItem.notes ?? '',
         checked: false
       }
@@ -50,7 +51,7 @@ function NewItem(props: any) {
         filteredArr.push(item);
       }
     }
-    filteredArr.forEach((item: string) => handleAddItem({name: item}));
+    filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13'}));
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
@@ -70,29 +71,69 @@ function NewItem(props: any) {
   </ToggleButtonGroup>
 
   const singleAdd = <Stack component="form" noValidate autoComplete="off" spacing={3}>
-    <Input
+    <FormControl variant="standard">
+      <InputLabel variant="standard" shrink htmlFor="name-box">
+          Item:
+        </InputLabel>
+      <Input
       value={newItem.name}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setNewItem({...newItem, name: e.target.value})
       }}
-      placeholder="Item name"
-    />
-    <Input
-      value={newItem.price}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewItem({...newItem, price: e.target.value})
+      inputProps={{
+        id: 'name-box',
       }}
-      inputProps={{ inputMode: 'decimal' }}
-      placeholder="Price"
-      startAdornment={<InputAdornment position="start">$</InputAdornment>}
     />
-    <Input
+    </FormControl>
+    <FormControl variant="standard">
+      <InputLabel variant="standard" shrink htmlFor="notes-box">
+          Notes:
+        </InputLabel>
+      <Input
       value={newItem.notes}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setNewItem({...newItem, notes: e.target.value})
       }}
-      placeholder="Notes"
+      inputProps={{
+        id: 'notes-box',
+      }}
     />
+    </FormControl>
+    <Grid container>
+      <Grid item xs={6}>
+        <FormControl variant="standard">
+        <InputLabel variant="standard" shrink htmlFor="price-box">
+          Price:
+        </InputLabel>
+        <Input
+          value={newItem.price}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setNewItem({...newItem, price: e.target.value})
+          }}
+          inputProps={{ inputMode: 'decimal', id: 'price-box' }}
+          startAdornment={<InputAdornment position="start">$</InputAdornment>}
+        />
+        </FormControl>
+      </Grid>
+      <Grid item xs={6} sx={{flexDirection: 'row'}}>
+      <FormControl variant="standard">
+        <InputLabel variant="standard" shrink htmlFor="item-tax-box">
+          Tax: 
+        </InputLabel>
+        <NativeSelect
+          inputProps={{
+            name: 'tax-box',
+            id: 'item-tax-box',
+          }}
+          value={newItem.tax}
+        >
+          <option value='0'>None</option>
+          <option value='5'>5%</option>
+          <option value='13'>13%</option>
+        </NativeSelect>
+        </FormControl>
+      </Grid>
+    </Grid>
     <MyFormHelperText />
   </Stack>
 
