@@ -1,4 +1,4 @@
-import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack, ButtonGroup } from "@mui/material";
+import { Box, Divider, FormControl, FormHelperText, InputAdornment, List, ListItem, useFormControl, Input, Button, DialogTitle, DialogContent, DialogContentText, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType, blankItem, formatPrice } from "../Types";
 import { camelCaseTrim } from "../helpers/Helpers";
@@ -19,6 +19,7 @@ function EditItem(props: any) {
         name: editItemForm.name,
         priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
         notes: editItemForm.notes,
+        tax: editItemForm.tax ? Number.parseInt(editItemForm.tax) : 13
       }
       const newItems = [...items];
       newItems[index] = fullItem;
@@ -33,29 +34,65 @@ function EditItem(props: any) {
     </DialogTitle>
     <DialogContent>
       <Stack component="form" noValidate autoComplete="off" spacing={3}>
-        <Input
-          value={editItemForm.name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setEditItemForm({...editItemForm, name: e.target.value})
-          }}
-          placeholder="Item name"
-        />
-        <Input
-          value={editItemForm.price}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setEditItemForm({...editItemForm, price: e.target.value})
-          }}
-          inputProps={{ inputMode: 'decimal' }}
-          placeholder="Price"
-          startAdornment={<InputAdornment position="start">$</InputAdornment>}
-        />
-        <Input
-          value={editItemForm.notes}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setEditItemForm({...editItemForm, notes: e.target.value})
-          }}
-          placeholder="Notes"
-        />
+        <FormControl variant="standard">
+          <InputLabel variant="standard" shrink htmlFor="name-box">
+            Item:
+          </InputLabel>
+          <Input
+            value={editItemForm.name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setEditItemForm({...editItemForm, name: e.target.value})
+            }}
+            inputProps={{ id: 'name-box' }}
+          />
+        </FormControl>
+        <FormControl variant="standard">
+          <InputLabel variant="standard" shrink htmlFor="notes-box">
+            Notes:
+          </InputLabel>
+          <Input
+            value={editItemForm.notes}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setEditItemForm({...editItemForm, notes: e.target.value})
+            }}
+            inputProps={{ id: 'notes-box' }}
+          />
+        </FormControl>
+        <Grid container>
+          <Grid item xs={6}>
+            <FormControl variant="standard">
+            <InputLabel variant="standard" shrink htmlFor="price-box">
+              Price:
+            </InputLabel>
+              <Input
+                value={editItemForm.price}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setEditItemForm({...editItemForm, price: e.target.value})
+                }}
+                inputProps={{ inputMode: 'decimal', id: 'price-box' }}
+                startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={6} sx={{flexDirection: 'row'}}>
+          <FormControl variant="standard">
+            <InputLabel variant="standard" shrink htmlFor="item-tax-box">
+              Tax: 
+            </InputLabel>
+            <NativeSelect
+              inputProps={{
+                name: 'tax-box',
+                id: 'item-tax-box',
+              }}
+              value={editItemForm.tax}
+            >
+              <option value='0'>None</option>
+              <option value='5'>5%</option>
+              <option value='13'>13%</option>
+            </NativeSelect>
+            </FormControl>
+          </Grid>
+        </Grid>
       </Stack>
     </DialogContent>
     <DialogActions sx={{justifyContent: 'space-between'}}>

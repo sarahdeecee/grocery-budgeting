@@ -2,7 +2,7 @@ export type ItemType = {
   name: string,
   quantity: number,
   priceCents: number,
-  tax?: number,
+  tax?: 0 | 5 | 13,
   notes?: string,
   checked: boolean
 }
