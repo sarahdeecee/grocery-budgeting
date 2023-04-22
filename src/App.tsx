@@ -40,12 +40,12 @@ function App() {
     setItems(newItems);
   };
 
-  return (<Stack className="App" sx={{top: 0, minHeight: '100vh', p: 0}}>
+  return (<Stack className="App" sx={{top: 0, p: 0}}>
     <Header items={items} setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} handleToggle={handleToggle} />
-      {items.length === 0 ? <Box sx={{height: 'calc(100vh - 60px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
+      {items.length === 0 ? <Box sx={{minHeight: 'calc(100vh - 60px - 56px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
-      <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1, minHeight: 'calc(100vh - 60px)'}}>
+      <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1, minHeight: 'calc(100vh - 60px - 56px)'}}>
         <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} handleDialogConfirmDelete={handleDialogConfirmDelete} handleToggle={handleToggle} editItem={editItem} setEditItem={setEditItem} />
       </Stack>}
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
