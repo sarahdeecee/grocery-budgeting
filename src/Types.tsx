@@ -16,16 +16,6 @@ export const blankItem = {
   checked: false
 }
 
-export const formatPrice = (price: number): string => {
-  if (price % 100 === 0) {
-    return `$${price/100}.00`;
-  } else if (price % 10 === 0) {
-    return `$${price/100}0`
-  } else {
-    return `$${price/100}`
-  }
-}
-
 export type DialogType = {
   content: string,
   open: boolean

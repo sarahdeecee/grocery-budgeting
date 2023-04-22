@@ -1,7 +1,8 @@
 import { Grid, IconButton, ListItem, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
 import React from "react";
-import { blankItem, formatPrice } from "../Types";
+import { blankItem } from "../Types";
 import { Add, CheckCircleOutline, Edit, RadioButtonUnchecked, Remove } from "@mui/icons-material";
+import { formatPrice } from "../helpers/Helpers";
 
 function Item(props: any) {
   const {listedItem, items, handleToggle, handleQuantityUp, handleQuantityDown, handleItemDelete, handleItemEdit} = props;
