@@ -4,11 +4,12 @@ import { blankItem, formatPrice } from "../Types";
 import { Add, CheckCircleOutline, Edit, RadioButtonUnchecked, Remove } from "@mui/icons-material";
 
 function Item(props: any) {
-  const {listedItem, items, setSelectedItem, handleToggle, handleQuantityUp, handleQuantityDown, handleItemDelete, handleItemEdit} = props;
-  const {name, quantity, priceCents, hasTax, checked, notes} = listedItem ?? blankItem;
+  const {listedItem, items, handleToggle, handleQuantityUp, handleQuantityDown, handleItemDelete, handleItemEdit} = props;
+  const {name, quantity, priceCents, tax, checked, notes} = listedItem ?? blankItem;
 
   const price = formatPrice(priceCents);
-  const quantityPrice = `(${formatPrice(priceCents*quantity)})`;
+  const quantityPrice = formatPrice(priceCents * quantity);
+  const taxPrice = formatPrice(priceCents * quantity * tax / 100);
   const labelId = `checkbox-list-label-${name}`;
 
   const itemFormatted = <Grid key={`grid7-${name}`} container>
@@ -18,8 +19,8 @@ function Item(props: any) {
     </Grid>
     <Grid key={`grid-9${name}`} item container xs>
       <Stack key={`stack-${name}`}>
-        <Typography key={`price-${name}`} >{price}</Typography>
-        <Typography key={`qprice-${name}`} variant="caption">{quantityPrice}</Typography>
+        <Typography key={`price-${name}`}>{price}</Typography>
+        <Typography key={`qprice-${name}`} variant="caption">{`(${quantityPrice} + ${taxPrice})`}</Typography>
       </Stack>
     </Grid>
   </Grid>
