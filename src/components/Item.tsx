@@ -18,7 +18,7 @@ function Item(props: any) {
       <Typography key={`name-${name}`} variant="body1" fontWeight="bold" sx={{pr: 1}}>{name}</Typography>
       <Typography key={`notes-${name}`} variant="caption">{notes}</Typography>
     </Grid>
-    <Grid key={`price-container-${name}`} item container sx={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+    <Grid key={`price-container-${name}`} item container sx={{flexDirection: 'row', justifyContent: 'flex-start'}}>
       <Grid item key={`grid9-${name}`}>
         <Typography key={`price-${name}`}>{price}</Typography>
       </Grid>
@@ -46,7 +46,6 @@ function Item(props: any) {
       <ListItemIcon key={`listicon-${name}`}>
         <IconButton onClick={(e: React.MouseEvent)=> {
           e.preventDefault();
-          console.log('toggle');
           handleToggle(listedItem)}}
           edge="end"
         >
@@ -71,7 +70,7 @@ function Item(props: any) {
             </IconButton>
           </Grid>
           <Grid key={`grid5-${name}`} container item xs sx={{justifyContent: 'center'}}>
-            <Typography key={`amount-${name}`}>{quantity}</Typography>
+            <Typography key={`amount-${name}`} variant="h6">{quantity}</Typography>
           </Grid>
           <Grid key={`grid6-${name}`} container item xs sx={{justifyContent: 'center'}}>
             <IconButton key={`up-${name}`} aria-label="increase" onClick={(e: React.MouseEvent)=> {

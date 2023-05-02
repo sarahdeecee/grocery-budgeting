@@ -2,6 +2,7 @@ import { Settings } from "@mui/icons-material";
 import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { ItemType } from "../Types";
+import { sortAZ, sortZA } from "../helpers/Helpers";
 
 function Header(props: any) {
   const {items, setItems, handleDeleteAll} = props;
@@ -29,6 +30,17 @@ function Header(props: any) {
   }
   const handleDeleteAllClose = (): void => {
     handleDeleteAll();
+    setAnchorEl(null);
+  }
+  
+  const handleSortAZ = (): void => {
+    const newItems = [...items].sort((a, b) => sortAZ(a, b)).reverse();
+    setItems(newItems);
+    setAnchorEl(null);
+  }
+  const handleSortZA = (): void => {
+    const newItems = [...items].sort((a, b) => sortZA(a, b)).reverse();
+    setItems(newItems);
     setAnchorEl(null);
   }
 
@@ -65,6 +77,8 @@ function Header(props: any) {
           <MenuItem onClick={handleSelectAll}>Select All</MenuItem>
           <MenuItem onClick={handleDeselectAll}>Deselect All</MenuItem>
           <MenuItem onClick={handleDeleteAllClose}>Delete All</MenuItem>
+          <MenuItem onClick={handleSortAZ}>Sort Items A to Z</MenuItem>
+          <MenuItem onClick={handleSortZA}>Sort Items Z to A</MenuItem>
         </Menu></>}
       </Toolbar>
     </AppBar>
