@@ -1,6 +1,7 @@
 import { List } from "@mui/material";
 import Item from "./Item";
 import { ItemType } from './../Types';
+import CategoryBar from "./CategoryBar";
 
 function ItemList(props: any) {
   const {items, setItems, handleDialogOpen, handleToggle, setSelectedItem, setEditItem} = props;
@@ -39,6 +40,7 @@ function ItemList(props: any) {
 
   return (
     <List sx={{ width: '100%', maxWidth: '600px', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column-reverse'}}>
+      <CategoryBar />
       {Array.isArray(items) && items.map((listedItem: ItemType) => 
         <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
       )}
