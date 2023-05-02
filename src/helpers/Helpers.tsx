@@ -1,3 +1,5 @@
+import { ItemType } from "../Types";
+
 export const camelCaseTrim = (string: string) => {
   let result = '';
   const wordArr = string.split(/\s+/);
@@ -24,4 +26,15 @@ export const formatPrice = (price: number): string => {
   } else {
     return `$${roundedPrice/100}`
   }
+}
+
+export const sortAZ = (a: ItemType, b: ItemType) => {
+  const nameA = a.name.toLowerCase();
+  const nameB = a.name.toLowerCase();
+  return (nameA < nameB) ? -1 : 1;
+}
+export const sortZA = (a: ItemType, b: ItemType) => {
+  const nameA = a.name.toLowerCase();
+  const nameB = a.name.toLowerCase();
+  return (nameA < nameB) ? 1 : -1;
 }
