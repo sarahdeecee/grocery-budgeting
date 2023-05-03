@@ -26,7 +26,7 @@ function NewItem(props: any) {
     notes: '',
     tax: '13',
     category: 'Other',
-    quantity: 1
+    quantity: '1'
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
@@ -43,7 +43,7 @@ function NewItem(props: any) {
     if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
       const fullItem = {
         name: camelCaseTrim(newItem.name),
-        quantity: newItem.quantity ?? 1,
+        quantity: Number.parseInt(newItem.quantity) ?? 1,
         priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
         tax: Number.parseInt(newItem.tax),
         notes: newItem.notes ?? '',
@@ -63,7 +63,7 @@ function NewItem(props: any) {
         filteredArr.push(item);
       }
     }
-    filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13', quantity: 1, category: 'Other'}));
+    filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13', quantity: '1', category: 'Other'}));
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
@@ -112,7 +112,7 @@ function NewItem(props: any) {
     />
     </FormControl>
     <Grid container>
-      <Grid item xs={6}>
+      <Grid item xs={8}>
         <FormControl variant="standard">
         <InputLabel variant="standard" shrink htmlFor="price-box">
           Price:
@@ -127,7 +127,7 @@ function NewItem(props: any) {
         />
         </FormControl>
       </Grid>
-      <Grid item xs={6} sx={{flexDirection: 'row'}}>
+      <Grid item xs={4} sx={{flexDirection: 'row'}}>
         <FormControl variant="standard">
           <InputLabel variant="standard" shrink htmlFor="item-tax-box">
             Tax: 
@@ -148,7 +148,9 @@ function NewItem(props: any) {
           </NativeSelect>
         </FormControl>
       </Grid>
-      <Grid item xs={6} sx={{flexDirection: 'row'}}>
+    </Grid>
+    <Grid container>
+      <Grid item xs={8} sx={{flexDirection: 'row'}}>
         <InputLabel variant="standard" shrink htmlFor="item-category-box">
           Category
         </InputLabel>
@@ -158,15 +160,29 @@ function NewItem(props: any) {
               id: 'item-category-box',
             }}
             value={newItem.category}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setNewItem({...newItem, category: e.target.value})
+            }}
           >
             {categoryOptions}
           </NativeSelect>
       </Grid>
-      <Grid item xs={6} sx={{flexDirection: 'row'}}>
+      <Grid item xs={4} sx={{flexDirection: 'row'}}>
         <InputLabel variant="standard" shrink htmlFor="item-quantity-box">
           Quantity
         </InputLabel>
-        
+        <NativeSelect
+            inputProps={{
+              name: 'quantity-box',
+              id: 'item-quantity-box',
+            }}
+            value={newItem.quantity}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setNewItem({...newItem, quantity: e.target.value})
+            }}
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option value={n}>{n}</option>)}
+          </NativeSelect>
       </Grid>
     </Grid>
     <MyFormHelperText />
