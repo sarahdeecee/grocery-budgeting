@@ -2,6 +2,7 @@ import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTi
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { camelCaseTrim } from "../helpers/Helpers";
+import { commonItems } from "../data/Categories";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -23,19 +24,30 @@ function NewItem(props: any) {
     name: '',
     price: '',
     notes: '',
-    tax: '13'
+    tax: '13',
+    category: 'Other',
+    quantity: 1
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
+
+  const categories = commonItems.reduce((acc: string[], item: {name: string, category: string}) => {
+    if (!acc.includes(item.category)) {
+      acc.push(item.category);
+    }
+    return acc;
+  }, [])
+  const categoryOptions = [...categories, 'Other'].map(category => <option value={category}>{category}</option>)
 
   const handleAddItem = (newItem: ItemForm): void => {
     if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
       const fullItem = {
         name: camelCaseTrim(newItem.name),
-        quantity: 1,
+        quantity: newItem.quantity ?? 1,
         priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
         tax: Number.parseInt(newItem.tax),
         notes: newItem.notes ?? '',
+        category: newItem.category ?? 'Other',
         checked: false
       }
       setItems((prev: ItemType[] = []) => [...prev, fullItem]);
@@ -51,7 +63,7 @@ function NewItem(props: any) {
         filteredArr.push(item);
       }
     }
-    filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13'}));
+    filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13', quantity: 1, category: 'Other'}));
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
@@ -116,22 +128,45 @@ function NewItem(props: any) {
         </FormControl>
       </Grid>
       <Grid item xs={6} sx={{flexDirection: 'row'}}>
-      <FormControl variant="standard">
-        <InputLabel variant="standard" shrink htmlFor="item-tax-box">
-          Tax: 
-        </InputLabel>
-        <NativeSelect
-          inputProps={{
-            name: 'tax-box',
-            id: 'item-tax-box',
-          }}
-          value={newItem.tax}
-        >
-          <option value='0'>None</option>
-          <option value='5'>5%</option>
-          <option value='13'>13%</option>
-        </NativeSelect>
+        <FormControl variant="standard">
+          <InputLabel variant="standard" shrink htmlFor="item-tax-box">
+            Tax: 
+          </InputLabel>
+          <NativeSelect
+            inputProps={{
+              name: 'tax-box',
+              id: 'item-tax-box',
+            }}
+            value={newItem.tax}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setNewItem({...newItem, tax: e.target.value})
+            }}
+          >
+            <option value={0}>None</option>
+            <option value={5}>5%</option>
+            <option value={13}>13%</option>
+          </NativeSelect>
         </FormControl>
+      </Grid>
+      <Grid item xs={6} sx={{flexDirection: 'row'}}>
+        <InputLabel variant="standard" shrink htmlFor="item-category-box">
+          Category
+        </InputLabel>
+          <NativeSelect
+            inputProps={{
+              name: 'category-box',
+              id: 'item-category-box',
+            }}
+            value={newItem.category}
+          >
+            {categoryOptions}
+          </NativeSelect>
+      </Grid>
+      <Grid item xs={6} sx={{flexDirection: 'row'}}>
+        <InputLabel variant="standard" shrink htmlFor="item-quantity-box">
+          Quantity
+        </InputLabel>
+        
       </Grid>
     </Grid>
     <MyFormHelperText />
