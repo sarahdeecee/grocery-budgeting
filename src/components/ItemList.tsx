@@ -45,7 +45,7 @@ function ItemList(props: any) {
     categoriesOpen[category] ? setCategoriesOpen({...categoriesOpen, [category]: false}) : setCategoriesOpen({...categoriesOpen, [category]: true})
   }
 
-  const itemsByCategories = categoriesAll.map(category => <Box>
+  const itemsByCategories = categoriesAll.map(category => <Box key={`${category}-box`}>
     {items.filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} open={categoriesOpen[category]} handleCategory={handleCategory} />}
     {categoriesOpen[category] && items.filter((item: ItemType) => item.category === category)
       .reverse()

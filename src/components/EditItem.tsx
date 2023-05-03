@@ -28,7 +28,6 @@ function EditItem(props: any) {
       }
       const newItems = [...items];
       newItems[index] = fullItem;
-      console.log(fullItem);
       setItems(newItems);
       handleDialogClose();
     }
@@ -81,7 +80,7 @@ function EditItem(props: any) {
             </FormControl>
           </Grid>
           <Grid item xs={4} sx={{flexDirection: 'row'}}>
-          <FormControl variant="standard">
+          <FormControl variant="standard" sx={{width: '7ch'}}>
             <InputLabel variant="standard" shrink htmlFor="item-tax-box">
               Tax: 
             </InputLabel>
@@ -123,7 +122,7 @@ function EditItem(props: any) {
             </FormControl>
           </Grid>
           <Grid item xs={4} sx={{flexDirection: 'row'}}>
-            <FormControl variant="standard">
+            <FormControl variant="standard" sx={{width: '7ch'}}>
               <InputLabel variant="standard" shrink htmlFor="item-quantity-box">
                 Quantity: 
               </InputLabel>
