@@ -1,7 +1,8 @@
-import { List } from "@mui/material";
+import { Box, List } from "@mui/material";
 import Item from "./Item";
 import { ItemType } from './../Types';
 import CategoryBar from "./CategoryBar";
+import { categoriesAll } from "../data/Categories";
 
 function ItemList(props: any) {
   const {items, setItems, handleDialogOpen, handleToggle, setSelectedItem, setEditItem} = props;
@@ -28,24 +29,23 @@ function ItemList(props: any) {
     setItems(newItems);
   }
 
-  // const handleDialogConfirmDelete = (selectedItem: ItemType): void => {
-  //   setSelectedItem(selectedItem);
-  //   handleDialogOpen('delete')
-  // };
-
   const handleDialogEdit = (index: number): void => {
     setEditItem(index);
     handleDialogOpen('edit')
   };
 
-  const category = "Produce";
+  const itemsByCategories = categoriesAll.map(category => <Box>
+    {items.filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} />}
+    {Array.isArray(items) && items.filter((item: ItemType) => item.category === category)
+      .reverse()
+      .map((listedItem: ItemType) => 
+        <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
+      )}
+  </Box>)
 
   return (
     <List sx={{ width: '100%', maxWidth: '600px', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column'}}>
-      <CategoryBar category={category} />
-      {Array.isArray(items) && [...items].reverse().map((listedItem: ItemType) => 
-        <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
-      )}
+      {itemsByCategories}
     </List>
   );
 }

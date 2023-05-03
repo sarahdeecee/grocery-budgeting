@@ -543,6 +543,10 @@ export const commonItems = [
     name: 'salsa',
     category: 'Pantry'
   },
+  {
+    name: 'coupons',
+    category: 'Other'
+  },
 ];
 
 export const categoriesAll = commonItems.reduce((acc: string[], item: {name: string, category: string}) => {
@@ -550,4 +554,4 @@ export const categoriesAll = commonItems.reduce((acc: string[], item: {name: str
     acc.push(item.category);
   }
   return acc;
-}, ['Other']);
+}, []);
