@@ -3,16 +3,15 @@ import { Box, ListItemButton, ListItemText } from "@mui/material";
 import { useState } from "react";
 
 function CategoryBar(props: any) {
-  const {category} = props;
-  const [categoryOpen, setCategoryOpen] = useState<boolean>(true);
-  console.log('open? ',categoryOpen);
+  const {category, open, handleCategory} = props;
+  
   return (
     <Box
       sx={{
-        bgcolor: 'green'
+        bgcolor: '#81c784'
       }}>
       <ListItemButton
-        onClick={() => setCategoryOpen(!categoryOpen)}
+        onClick={() => handleCategory(category)}
         sx={{
           height: '2rem'
         }}
@@ -26,14 +25,14 @@ function CategoryBar(props: any) {
             color: 'white'
           }}
         />
-        {categoryOpen && 
+        {open && 
           <KeyboardArrowUp
             sx={{
               // mr: -1,
             }}
           />
         }
-        {!categoryOpen && 
+        {!open && 
           <KeyboardArrowDown />}
       </ListItemButton>
     </Box>

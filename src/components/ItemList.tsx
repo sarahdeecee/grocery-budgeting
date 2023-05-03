@@ -3,9 +3,16 @@ import Item from "./Item";
 import { ItemType } from './../Types';
 import CategoryBar from "./CategoryBar";
 import { categoriesAll } from "../data/Categories";
+import { useState } from "react";
+
+interface CategoryOpenInterface {
+  [key: string]: boolean, 
+}
+const categoriesAllOpen: CategoryOpenInterface = categoriesAll.reduce((acc: CategoryOpenInterface, category: string) => (acc[category] = true, acc), {});
 
 function ItemList(props: any) {
   const {items, setItems, handleDialogOpen, handleToggle, setSelectedItem, setEditItem} = props;
+  const [categoriesOpen, setCategoriesOpen] = useState<CategoryOpenInterface>(categoriesAllOpen);
 
   const handleQuantityUp = (selectedItem: ItemType): void => {
     const newItems = items.map((item: ItemType) => {
@@ -34,9 +41,13 @@ function ItemList(props: any) {
     handleDialogOpen('edit')
   };
 
+  const handleCategory = (category: string): void => {
+    categoriesOpen[category] ? setCategoriesOpen({...categoriesOpen, [category]: false}) : setCategoriesOpen({...categoriesOpen, [category]: true})
+  }
+
   const itemsByCategories = categoriesAll.map(category => <Box>
-    {items.filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} />}
-    {Array.isArray(items) && items.filter((item: ItemType) => item.category === category)
+    {items.filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} open={categoriesOpen[category]} handleCategory={handleCategory} />}
+    {categoriesOpen[category] && items.filter((item: ItemType) => item.category === category)
       .reverse()
       .map((listedItem: ItemType) => 
         <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
