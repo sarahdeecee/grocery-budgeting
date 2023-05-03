@@ -2,6 +2,7 @@ import { FormControl, InputAdornment, Input, Button, DialogTitle, DialogContent,
 import { useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { formatPrice } from "../helpers/Helpers";
+import { categoriesAll } from "../data/Categories";
 
 function EditItem(props: any) {
   const {handleDialogClose, items, setItems, editItem, handleDelete} = props;
@@ -9,7 +10,9 @@ function EditItem(props: any) {
     name: items[editItem].name ?? '',
     price: formatPrice(items[editItem].priceCents).replace('$','') ?? '',
     notes: items[editItem].notes ?? '',
-    tax: items[editItem].tax ?? '13'
+    tax: items[editItem].tax ?? '13',
+    quantity: items[editItem].quantity ?? '1',
+    category: items[editItem].category ?? 'Other',
   });
 
   const handleItemEdit = (index: number): void => {
@@ -19,10 +22,13 @@ function EditItem(props: any) {
         name: editItemForm.name,
         priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
         notes: editItemForm.notes,
-        tax: Number.parseInt(editItemForm.tax)
+        tax: Number.parseInt(editItemForm.tax),
+        quantity: Number.parseInt(editItemForm.quantity),
+        category: editItemForm.category,
       }
       const newItems = [...items];
       newItems[index] = fullItem;
+      console.log(fullItem);
       setItems(newItems);
       handleDialogClose();
     }
@@ -59,7 +65,7 @@ function EditItem(props: any) {
           />
         </FormControl>
         <Grid container>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <FormControl variant="standard">
             <InputLabel variant="standard" shrink htmlFor="price-box">
               Price:
@@ -74,7 +80,7 @@ function EditItem(props: any) {
               />
             </FormControl>
           </Grid>
-          <Grid item xs={6} sx={{flexDirection: 'row'}}>
+          <Grid item xs={4} sx={{flexDirection: 'row'}}>
           <FormControl variant="standard">
             <InputLabel variant="standard" shrink htmlFor="item-tax-box">
               Tax: 
@@ -89,10 +95,50 @@ function EditItem(props: any) {
                 setEditItemForm({...editItemForm, tax: e.target.value})
               }}
             >
-              <option value='0'>None</option>
-              <option value='5'>5%</option>
-              <option value='13'>13%</option>
+              <option value={0}>None</option>
+              <option value={5}>5%</option>
+              <option value={13}>13%</option>
             </NativeSelect>
+            </FormControl>
+          </Grid>
+        </Grid>
+        <Grid container>
+          <Grid item xs={8}>
+            <FormControl variant="standard">
+            <InputLabel variant="standard" shrink htmlFor="category-box">
+              Category:
+            </InputLabel>
+            <NativeSelect
+              inputProps={{
+                name: 'category-box',
+                id: 'item-category-box',
+              }}
+              value={editItemForm.category}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                setEditItemForm({...editItemForm, category: e.target.value})
+              }}
+            >
+              {categoriesAll.map(category => <option key={category} value={category}>{category}</option>)}
+            </NativeSelect>
+            </FormControl>
+          </Grid>
+          <Grid item xs={4} sx={{flexDirection: 'row'}}>
+            <FormControl variant="standard">
+              <InputLabel variant="standard" shrink htmlFor="item-quantity-box">
+                Quantity: 
+              </InputLabel>
+              <NativeSelect
+                inputProps={{
+                  name: 'quantity-box',
+                  id: 'item-quantity-box',
+                }}
+                value={editItemForm.quantity}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                  setEditItemForm({...editItemForm, quantity: e.target.value})
+                }}
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>{n}</option>)}
+              </NativeSelect>
             </FormControl>
           </Grid>
         </Grid>

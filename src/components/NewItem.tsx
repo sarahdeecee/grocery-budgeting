@@ -2,7 +2,7 @@ import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTi
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { camelCaseTrim } from "../helpers/Helpers";
-import { commonItems } from "../data/Categories";
+import { categoriesAll, commonItems } from "../data/Categories";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -31,13 +31,8 @@ function NewItem(props: any) {
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
 
-  const categories = commonItems.reduce((acc: string[], item: {name: string, category: string}) => {
-    if (!acc.includes(item.category)) {
-      acc.push(item.category);
-    }
-    return acc;
-  }, [])
-  const categoryOptions = [...categories, 'Other'].map(category => <option value={category}>{category}</option>)
+  
+  const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
 
   const handleAddItem = (newItem: ItemForm): void => {
     if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
@@ -181,7 +176,7 @@ function NewItem(props: any) {
               setNewItem({...newItem, quantity: e.target.value})
             }}
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option value={n}>{n}</option>)}
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>{n}</option>)}
           </NativeSelect>
       </Grid>
     </Grid>

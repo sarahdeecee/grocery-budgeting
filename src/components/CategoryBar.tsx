@@ -1,32 +1,42 @@
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
-import { ListItemButton, ListItemText } from "@mui/material";
+import { Box, ListItemButton, ListItemText } from "@mui/material";
+import { useState } from "react";
 
 function CategoryBar(props: any) {
-
+  const {category} = props;
+  const [categoryOpen, setCategoryOpen] = useState<boolean>(true);
+  console.log('open? ',categoryOpen);
   return (
-    <ListItemButton
+    <Box
       sx={{
-        bgcolor: 'green',
-        height: '2rem'
-    }}>
-      <ListItemText
-        primary="Produce"
-        primaryTypographyProps={{
-          fontSize: 'medium',
-          fontWeight: 'bold',
-          mb: '2px',
-          color: 'white'
-        }}
-      />
-      <KeyboardArrowUp
+        bgcolor: 'green'
+      }}>
+      <ListItemButton
+        onClick={() => setCategoryOpen(!categoryOpen)}
         sx={{
-          mr: -1,
-          // opacity: 0,
-          // transform: open ? 'rotate(-180deg)' : 'rotate(0)',
-          // transition: '0.2s',
+          height: '2rem'
         }}
-      />
-    </ListItemButton>
+      >
+        <ListItemText
+          primary={category}
+          primaryTypographyProps={{
+            fontSize: 'medium',
+            fontWeight: 'bold',
+            // mb: '2px',
+            color: 'white'
+          }}
+        />
+        {categoryOpen && 
+          <KeyboardArrowUp
+            sx={{
+              // mr: -1,
+            }}
+          />
+        }
+        {!categoryOpen && 
+          <KeyboardArrowDown />}
+      </ListItemButton>
+    </Box>
   );
 }
 

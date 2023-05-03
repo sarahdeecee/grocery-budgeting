@@ -543,8 +543,11 @@ export const commonItems = [
     name: 'salsa',
     category: 'Pantry'
   },
-  {
-    name: '',
-    category: ''
-  },
 ];
+
+export const categoriesAll = commonItems.reduce((acc: string[], item: {name: string, category: string}) => {
+  if (!acc.includes(item.category)) {
+    acc.push(item.category);
+  }
+  return acc;
+}, ['Other']);

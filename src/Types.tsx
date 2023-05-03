@@ -4,6 +4,7 @@ export type ItemType = {
   priceCents: number,
   tax: number,
   notes?: string,
+  category?: string,
   checked: boolean
 }
 
@@ -25,5 +26,7 @@ export type ItemForm = {
   name: string,
   price?: string,
   notes?: string,
-  tax: string
+  tax: string,
+  category: string,
+  quantity: string
 }
