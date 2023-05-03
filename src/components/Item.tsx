@@ -61,25 +61,25 @@ function Item(props: any) {
           />
         </Grid>
         <Grid key={`grid3-${name}`} container item xs='auto' sx={{alignItems: 'center', justifyContent: 'center'}}>
-          <Grid key={`grid4-${name}`} item xs sx={{justifyContent: 'center'}}>
+          {/* <Grid key={`grid4-${name}`} item xs sx={{justifyContent: 'center'}}>
             <IconButton key={`down-${name}`} aria-label="decrease" onClick={(e: React.MouseEvent)=> {
               e.preventDefault();
               handleQuantityDown(listedItem)
             }}>
               <Remove key={`downicon-${name}`} />
             </IconButton>
-          </Grid>
+          </Grid> */}
           <Grid key={`grid5-${name}`} container item xs sx={{justifyContent: 'center'}}>
             <Typography key={`amount-${name}`} variant="h6">{quantity}</Typography>
           </Grid>
-          <Grid key={`grid6-${name}`} container item xs sx={{justifyContent: 'center'}}>
+          {/* <Grid key={`grid6-${name}`} container item xs sx={{justifyContent: 'center'}}>
             <IconButton key={`up-${name}`} aria-label="increase" onClick={(e: React.MouseEvent)=> {
               e.preventDefault();
               handleQuantityUp(listedItem);
             }}>
               <Add key={`addicon-${name}`} />
             </IconButton>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     </ListItem>
