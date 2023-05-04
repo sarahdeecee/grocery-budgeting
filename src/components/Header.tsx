@@ -77,8 +77,6 @@ function Header(props: any) {
           <MenuItem onClick={handleSelectAll}>Select All</MenuItem>
           <MenuItem onClick={handleDeselectAll}>Deselect All</MenuItem>
           <MenuItem onClick={handleDeleteAllClose}>Delete All</MenuItem>
-          {/* <MenuItem onClick={handleSortAZ}>Sort Items A to Z</MenuItem>
-          <MenuItem onClick={handleSortZA}>Sort Items Z to A</MenuItem> */}
         </Menu></>}
       </Toolbar>
     </AppBar>

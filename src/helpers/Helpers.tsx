@@ -30,8 +30,8 @@ export const formatPrice = (price: number): string => {
 
 export const sortAZ = (a: ItemType, b: ItemType): number => {
   const nameA = a.name.toLowerCase();
-  const nameB = a.name.toLowerCase();
-  return (nameA < nameB) ? -1 : 1;
+  const nameB = b.name.toLowerCase();
+  return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
 }
 export const sortZA = (a: ItemType, b: ItemType): number => {
   const nameA = a.name.toLowerCase();

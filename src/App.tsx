@@ -19,7 +19,7 @@ function App() {
     content: '',
     open: false
   })
-
+  
   const handleDialogClose = (): void => setDialog({...dialog, open: false});
   const handleDialogOpen = (content: string): void => setDialog({...dialog, content, open: true});
 

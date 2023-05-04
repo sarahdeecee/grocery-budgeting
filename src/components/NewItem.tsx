@@ -1,7 +1,7 @@
 import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
-import { camelCaseTrim } from "../helpers/Helpers";
+import { camelCaseTrim, sortAZ } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
 
 function MyFormHelperText() {
@@ -45,7 +45,10 @@ function NewItem(props: any) {
         category: newItem.category ?? 'Other',
         checked: false
       }
-      setItems((prev: ItemType[] = []) => [...prev, fullItem]);
+      // sort new items alphabetically
+      // reverse items due to flex-direction
+      const newItems = [...items, fullItem].sort((a, b) => sortAZ(a, b)).reverse();
+      setItems(newItems);
       handleDialogClose();
     }
   }
