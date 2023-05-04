@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { camelCaseTrim, sortAZ } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
+import { ContactSupportOutlined } from "@mui/icons-material";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -34,21 +35,28 @@ function NewItem(props: any) {
   
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
 
+  const addItem = (newItem: ItemForm): void => {
+    const fullItem = {
+      name: camelCaseTrim(newItem.name),
+      priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
+      tax: Number.parseInt(newItem.tax),
+      notes: newItem.notes ?? '',
+      category: newItem.category ?? 'Other',
+      quantity: Number.parseInt(newItem.quantity) ?? 1,
+      checked: false
+    }
+    // sort new items alphabetically
+    // reverse items due to flex-direction
+    console.log('add ', fullItem);
+    console.log('items ', items);
+    // const newItems = [...items, fullItem].sort((a, b) => sortAZ(a, b)).reverse();
+    // console.log('new items ',newItems);
+    setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
+  }
+
   const handleAddItem = (newItem: ItemForm): void => {
     if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
-      const fullItem = {
-        name: camelCaseTrim(newItem.name),
-        quantity: Number.parseInt(newItem.quantity) ?? 1,
-        priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
-        tax: Number.parseInt(newItem.tax),
-        notes: newItem.notes ?? '',
-        category: newItem.category ?? 'Other',
-        checked: false
-      }
-      // sort new items alphabetically
-      // reverse items due to flex-direction
-      const newItems = [...items, fullItem].sort((a, b) => sortAZ(a, b)).reverse();
-      setItems(newItems);
+      addItem(newItem);
       handleDialogClose();
     }
   }
@@ -61,6 +69,7 @@ function NewItem(props: any) {
         filteredArr.push(item);
       }
     }
+    console.log('add multi ',filteredArr);
     filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13', quantity: '1', category: 'Other'}));
   }
 

@@ -1,6 +1,6 @@
 import './App.css';
 import { Box, Dialog, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DialogType, ItemType, blankItem } from './Types';
 import ItemList from './components/ItemList';
 import NewItem from './components/NewItem';
@@ -20,6 +20,10 @@ function App() {
     open: false
   })
   
+  useEffect(() => {
+  
+  }, [items]);
+
   const handleDialogClose = (): void => setDialog({...dialog, open: false});
   const handleDialogOpen = (content: string): void => setDialog({...dialog, content, open: true});
 
