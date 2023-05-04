@@ -47,10 +47,6 @@ function NewItem(props: any) {
     }
     // sort new items alphabetically
     // reverse items due to flex-direction
-    console.log('add ', fullItem);
-    console.log('items ', items);
-    // const newItems = [...items, fullItem].sort((a, b) => sortAZ(a, b)).reverse();
-    // console.log('new items ',newItems);
     setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
   }
 

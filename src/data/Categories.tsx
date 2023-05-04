@@ -44,7 +44,7 @@ export const commonItems = [
     category: 'Produce'
   },
   {
-    name: 'salad mix',
+    name: 'Salad mix',
     category: 'Produce'
   },
   {
@@ -260,291 +260,291 @@ export const commonItems = [
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'almond milk',
+    name: 'Almond Milk',
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'soy milk',
+    name: 'Soy Milk',
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'cheese',
+    name: 'Cheese',
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'butter',
+    name: 'Butter',
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'margarine',
+    name: 'Margarine',
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'yogurt',
+    name: 'Yogurt',
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'sour cream',
+    name: 'Sour Cream',
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'ice cream',
+    name: 'Ice Cream',
     category: 'Dairy & Alternatives'
   },
   {
-    name: 'bread',
+    name: 'Bread',
     category: 'Grains & Bakery'
   },
   {
-    name: 'bagels',
+    name: 'Bagels',
     category: 'Grains & Bakery'
   },
   {
-    name: 'muffins',
+    name: 'Muffins',
     category: 'Grains & Bakery'
   },
   {
-    name: 'buns',
+    name: 'Buns',
     category: 'Grains & Bakery'
   },
   {
-    name: 'rice',
+    name: 'Rice',
     category: 'Grains & Bakery'
   },
   {
-    name: 'pasta',
+    name: 'Pasta',
     category: 'Grains & Bakery'
   },
   {
-    name: 'cereal',
+    name: 'Cereal',
     category: 'Grains & Bakery'
   },
   {
-    name: 'tortillas',
+    name: 'Tortillas',
     category: 'Grains & Bakery'
   },
   {
-    name: 'hamburger buns',
+    name: 'Hamburger Buns',
     category: 'Grains & Bakery'
   },
   {
-    name: 'hotdog buns',
+    name: 'Hotdog Buns',
     category: 'Grains & Bakery'
   },
   {
-    name: 'pie',
+    name: 'Pie',
     category: 'Grains & Bakery'
   },
   {
-    name: 'cookies',
+    name: 'Cookies',
     category: 'Grains & Bakery'
   },
   {
-    name: 'paper towels',
+    name: 'Paper towels',
     category: 'Household'
   },
   {
-    name: 'dish soap',
+    name: 'Dish soap',
     category: 'Household'
   },
   {
-    name: 'laundry detergent',
+    name: 'Laundry detergent',
     category: 'Household'
   },
   {
-    name: 'toilet paper',
+    name: 'Toilet paper',
     category: 'Household'
   },
   {
-    name: 'tissues',
+    name: 'Tissues',
     category: 'Household'
   },
   {
-    name: 'aluminum foil',
+    name: 'Aluminum foil',
     category: 'Household'
   },
   {
-    name: 'sponges',
+    name: 'Sponges',
     category: 'Household'
   },
   {
-    name: 'plastic bags',
+    name: 'Plastic bags',
     category: 'Household'
   },
   {
-    name: 'trash bags',
+    name: 'Trash bags',
     category: 'Household'
   },
   {
-    name: 'soap',
+    name: 'Soap',
     category: 'Health & Beauty'
   },
   {
-    name: 'shampoo',
+    name: 'Shampoo',
     category: 'Health & Beauty'
   },
   {
-    name: 'conditioner',
+    name: 'Conditioner',
     category: 'Health & Beauty'
   },
   {
-    name: 'deodorant',
+    name: 'Deodorant',
     category: 'Health & Beauty'
   },
   {
-    name: 'body wash',
+    name: 'Body wash',
     category: 'Health & Beauty'
   },
   {
-    name: 'face wash',
+    name: 'Face wash',
     category: 'Health & Beauty'
   },
   {
-    name: 'moisturizer',
+    name: 'Moisturizer',
     category: 'Health & Beauty'
   },
   {
-    name: 'lotion',
+    name: 'Lotion',
     category: 'Health & Beauty'
   },
   {
-    name: 'toothpaste',
+    name: 'Toothpaste',
     category: 'Health & Beauty'
   },
   {
-    name: 'mouthwash',
+    name: 'Mouthwash',
     category: 'Health & Beauty'
   },
   {
-    name: 'medicine',
+    name: 'Medicine',
     category: 'Health & Beauty'
   },
   {
-    name: 'shaving cream',
+    name: 'Shaving cream',
     category: 'Health & Beauty'
   },
   {
-    name: 'vitamins',
+    name: 'Vitamins',
     category: 'Health & Beauty'
   },
   {
-    name: 'protein powder',
+    name: 'Protein Powder',
     category: 'Health & Beauty'
   },
   {
-    name: 'cat food',
+    name: 'Cat Food',
     category: 'Pet Supplies'
   },
   {
-    name: 'dog food',
+    name: 'Dog Food',
     category: 'Pet Supplies'
   },
   {
-    name: 'cat litter',
+    name: 'Cat Litter',
     category: 'Pet Supplies'
   },
   {
-    name: 'cat treats',
+    name: 'Cat Treats',
     category: 'Pet Supplies'
   },
   {
-    name: 'dog treats',
+    name: 'Dog Treats',
     category: 'Pet Supplies'
   },
   {
-    name: 'salt',
+    name: 'Salt',
     category: 'Pantry'
   },
   {
-    name: 'sugar',
+    name: 'Sugar',
     category: 'Pantry'
   },
   {
-    name: 'flour',
+    name: 'Flour',
     category: 'Pantry'
   },
   {
-    name: 'cake mix',
+    name: 'Cake Mix',
     category: 'Pantry'
   },
   {
-    name: 'frosting',
+    name: 'Frosting',
     category: 'Pantry'
   },
   {
-    name: 'hot sauce',
+    name: 'Hot Sauce',
     category: 'Pantry'
   },
   {
-    name: 'ketchup',
+    name: 'Ketchup',
     category: 'Pantry'
   },
   {
-    name: 'mustard',
+    name: 'Mustard',
     category: 'Pantry'
   },
   {
-    name: 'mayonnaise',
+    name: 'Mayonnaise',
     category: 'Pantry'
   },
   {
-    name: 'pickles',
+    name: 'Pickles',
     category: 'Pantry'
   },
   {
-    name: 'barbecue sauce',
+    name: 'Barbecue Sauce',
     category: 'Pantry'
   },
   {
-    name: 'peanut butter',
+    name: 'Peanut Butter',
     category: 'Pantry'
   },
   {
-    name: 'soy sauce',
+    name: 'Soy Sauce',
     category: 'Pantry'
   },
   {
-    name: 'salad dressing',
+    name: 'Salad Dressing',
     category: 'Pantry'
   },
   {
-    name: 'oil',
+    name: 'Oil',
     category: 'Pantry'
   },
   {
-    name: 'olive oil',
+    name: 'Olive Oil',
     category: 'Pantry'
   },
   {
-    name: 'vegetable oil',
+    name: 'Vegetable Oil',
     category: 'Pantry'
   },
   {
-    name: 'honey',
+    name: 'Honey',
     category: 'Pantry'
   },
   {
-    name: 'vanilla',
+    name: 'Vanilla',
     category: 'Pantry'
   },
   {
-    name: 'jam',
+    name: 'Jam',
     category: 'Pantry'
   },
   {
-    name: 'jelly',
+    name: 'Jelly',
     category: 'Pantry'
   },
   {
-    name: 'maple syrup',
+    name: 'Maple Syrup',
     category: 'Pantry'
   },
   {
-    name: 'salsa',
+    name: 'Salsa',
     category: 'Pantry'
   },
   {
-    name: 'coupons',
+    name: 'Coupons',
     category: 'Other'
   },
 ];
