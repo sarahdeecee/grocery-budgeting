@@ -65,7 +65,6 @@ function NewItem(props: any) {
         filteredArr.push(item);
       }
     }
-    console.log('add multi ',filteredArr);
     filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13', quantity: '1', category: 'Other'}));
   }
 
