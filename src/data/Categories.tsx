@@ -1,4 +1,6 @@
-export const commonItems = [
+import { CommonItem } from "../Types";
+
+export const commonItems: CommonItem[] = [
   {
     name: 'Broccoli',
     category: 'Produce'
