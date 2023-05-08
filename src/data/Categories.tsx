@@ -551,9 +551,11 @@ export const commonItems: CommonItem[] = [
   },
 ];
 
-export const categoriesAll = commonItems.reduce((acc: string[], item: {name: string, category: string}) => {
-  if (!acc.includes(item.category)) {
-    acc.push(item.category);
-  }
-  return acc;
-}, []);
+// export const categoriesAll = commonItems.reduce((acc: string[], item: {name: string, category: string}) => {
+//   if (!acc.includes(item.category)) {
+//     acc.push(item.category);
+//   }
+//   return acc;
+// }, []);
+
+export const categoriesAll = ['Produce', 'Meat', 'Fish & Seafood','Snacks', 'Beverages', 'Dairy & Alternatives', 'Grains & Bakery', 'Pet Supplies', 'Health & Beauty', 'Pantry', 'Other'];
