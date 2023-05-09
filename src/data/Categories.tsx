@@ -1,6 +1,7 @@
 import { CommonItem } from "../Types";
+import { sortAZ, sortByCategory } from "../helpers/Helpers";
 
-export const commonItems: CommonItem[] = [
+const commonItemsRaw: CommonItem[] = [
   {
     name: 'Broccoli',
     category: 'Produce'
@@ -571,6 +572,10 @@ export const commonItems: CommonItem[] = [
   },
 ];
 
+export const commonItems: CommonItem[] = commonItemsRaw.sort((a, b) => sortAZ(a, b)) // Sort alphabetically
+  // Sort by category
+  .sort((a, b) => sortByCategory(a, b));
+  
 // export const categoriesAll = commonItems.reduce((acc: string[], item: {name: string, category: string}) => {
 //   if (!acc.includes(item.category)) {
 //     acc.push(item.category);

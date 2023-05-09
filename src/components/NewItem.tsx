@@ -46,7 +46,7 @@ function NewItem(props: any) {
         category: newItem.category ?? 'Other',
         checked: false
       }
-      setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)));
+      setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
       handleDialogClose();
     }
   }

@@ -1,4 +1,12 @@
-export type ItemType = {
+export interface hasName {
+  name: string;
+}
+
+export interface hasCategory {
+  category: string;
+}
+
+export interface ItemType extends hasName {
   name: string,
   quantity: number,
   priceCents: number,
