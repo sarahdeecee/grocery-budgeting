@@ -11,7 +11,7 @@ export default function AutoCompleteName(props: any) {
   return (
     <Autocomplete
       value={newItem.name}
-      onChange={(e, newValue) => {
+      onChange={(e: React.SyntheticEvent, newValue) => {
         if (newValue && newValue.inputValue) {
           // Create a new value from the user input
           setNewItem({...newItem, name: newValue.inputValue, category: 'Other'});
