@@ -1,7 +1,7 @@
 import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, Autocomplete, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
 import { CommonItem, ItemForm, ItemType } from "../Types";
-import { camelCaseTrim } from "../helpers/Helpers";
+import { camelCaseTrim, sortAZ } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
 import AutoCompleteName from "./AutoCompleteName";
 
@@ -45,7 +45,7 @@ function NewItem(props: any) {
         category: newItem.category ?? 'Other',
         checked: false
       }
-      setItems((prev: ItemType[] = []) => [...prev, fullItem]);
+      setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)));
       handleDialogClose();
     }
   }
