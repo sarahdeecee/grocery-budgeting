@@ -1,4 +1,5 @@
 # Grocery Budgeting
+
 ## About
 The goal of this app is to help people shopping to stick to their budget.
 
