@@ -8,7 +8,7 @@ import { useState } from "react";
 interface CategoryOpenInterface {
   [key: string]: boolean, 
 }
-const categoriesAllOpen: CategoryOpenInterface = categoriesAll.reduce((acc: CategoryOpenInterface, category: string) => (acc[category] = true, acc), {});
+const categoriesAllOpen: CategoryOpenInterface = categoriesAll.reduce((acc: CategoryOpenInterface, category: string = 'Other') => (acc[category] = true, acc), {});
 
 function ItemList(props: any) {
   const {items, setItems, handleDialogOpen, handleToggle, setSelectedItem, setEditItem} = props;
@@ -45,7 +45,7 @@ function ItemList(props: any) {
     categoriesOpen[category] ? setCategoriesOpen({...categoriesOpen, [category]: false}) : setCategoriesOpen({...categoriesOpen, [category]: true})
   }
 
-  const itemsByCategories = categoriesAll.map(category => <Box key={`${category}-box`}>
+  const itemsByCategories = Array.isArray(categoriesAll) && categoriesAll.map(category => <Box key={`${category}-box`}>
     {items.filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} open={categoriesOpen[category]} handleCategory={handleCategory} />}
     {categoriesOpen[category] && items.filter((item: ItemType) => item.category === category)
       .reverse()

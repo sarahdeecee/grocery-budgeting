@@ -1,9 +1,9 @@
-import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl } from "@mui/material";
+import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, Autocomplete, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
-import { ItemForm, ItemType } from "../Types";
-import { camelCaseTrim, sortAZ } from "../helpers/Helpers";
+import { CommonItem, ItemForm, ItemType } from "../Types";
+import { camelCaseTrim } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
-import { ContactSupportOutlined } from "@mui/icons-material";
+import AutoCompleteName from "./AutoCompleteName";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -30,29 +30,24 @@ function NewItem(props: any) {
     quantity: '1'
   });
   const [newItems, setNewItems] = useState<string>('');
+  const [commonItem, setCommonItem] = useState<CommonItem | null>(null);
   const [addType, setAddType] = useState<String>('single');
 
   
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
 
-  const addItem = (newItem: ItemForm): void => {
-    const fullItem = {
-      name: camelCaseTrim(newItem.name),
-      priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
-      tax: Number.parseInt(newItem.tax),
-      notes: newItem.notes ?? '',
-      category: newItem.category ?? 'Other',
-      quantity: Number.parseInt(newItem.quantity) ?? 1,
-      checked: false
-    }
-    // sort new items alphabetically
-    // reverse items due to flex-direction
-    setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
-  }
-
   const handleAddItem = (newItem: ItemForm): void => {
     if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
-      addItem(newItem);
+      const fullItem = {
+        name: camelCaseTrim(newItem.name),
+        quantity: Number.parseInt(newItem.quantity) ?? 1,
+        priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
+        tax: Number.parseInt(newItem.tax),
+        notes: newItem.notes ?? '',
+        category: newItem.category ?? 'Other',
+        checked: false
+      }
+      setItems((prev: ItemType[] = []) => [...prev, fullItem]);
       handleDialogClose();
     }
   }
@@ -84,21 +79,23 @@ function NewItem(props: any) {
     <ToggleButton value="single">Single</ToggleButton>
   </ToggleButtonGroup>
 
-  const singleAdd = <Stack component="form" noValidate autoComplete="off" spacing={3}>
-    <FormControl variant="standard">
-      <InputLabel variant="standard" shrink htmlFor="name-box">
-          Item:
-        </InputLabel>
+  const singleAdd = <Stack component="form" noValidate autoComplete="on" spacing={3}>
+    <AutoCompleteName newItem={newItem} setNewItem={setNewItem} />
+    {/* <FormControl variant="standard"> */}
+      {/* <InputLabel variant="standard" shrink htmlFor="name-box">
+        Item:
+      </InputLabel>
       <Input
-      value={newItem.name}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewItem({...newItem, name: e.target.value})
-      }}
-      inputProps={{
-        id: 'name-box',
-      }}
-    />
-    </FormControl>
+        value={newItem.name}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setNewItem({...newItem, name: e.target.value})
+        }}
+        inputProps={{
+          id: 'name-box',
+          type: 'search'
+        }}
+      /> */}
+    {/* </FormControl> */}
     <FormControl variant="standard">
       <InputLabel variant="standard" shrink htmlFor="notes-box">
           Notes:

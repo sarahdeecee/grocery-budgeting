@@ -30,3 +30,9 @@ export type ItemForm = {
   category: string,
   quantity: string
 }
+
+export type CommonItem = {
+  inputValue?: string,
+  name: string,
+  category?: string
+}

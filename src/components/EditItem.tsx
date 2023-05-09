@@ -117,7 +117,7 @@ function EditItem(props: any) {
                 setEditItemForm({...editItemForm, category: e.target.value})
               }}
             >
-              {categoriesAll.map(category => <option key={category} value={category}>{category}</option>)}
+              {Array.isArray(categoriesAll) && categoriesAll.map(category => <option key={category} value={category}>{category}</option>)}
             </NativeSelect>
             </FormControl>
           </Grid>
