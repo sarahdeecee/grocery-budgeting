@@ -22,10 +22,12 @@ Users can input prices and quantities of items and see if they are within budget
 | :white_check_mark: | User can choose how much tax is applied to item |
 | :white_check_mark: | User can edit how much tax is applied to item |
 | :white_check_mark: | User can see their total with tax included|
-| :black_square_button: | Users can categorize/tag items |
-| :black_square_button: | Users can have items automatically categorized |
+| :white_check_mark: | Users can categorize/tag items |
+| :white_check_mark: | Users can have items automatically categorized |
+| :white_check_mark: | User lists are automatically sorted alphabetically |
+| :white_check_mark: | User lists are automatically sorted by category |
 | :black_square_button: | Users can colour-code items |
-| :black_square_button: | Users can choose items from categories |
+| :white_check_mark: | Users can choose items from categories |
 | :black_square_button: | Users can change the order of their items |
 | :black_square_button: | Users can sort their items in various ways |
 | :black_square_button: | Users can save templates with items |
