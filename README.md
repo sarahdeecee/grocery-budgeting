@@ -17,14 +17,14 @@ Users can input prices and quantities of items and see if they are within budget
 
 ## Screenshots
 ### List of groceries with prices, tax, quantity
-![List of grocery items](/public/screenshots/screenshot-list.png)
+![List of grocery items](./screenshots/screenshot-list.png)
 ### Add single item or multiple items
-![Add an item](/public/screenshots/screenshot-addsingle.png)
-![Add multiple items](/public/screenshots/screenshot-addmulti.png)
+![Add an item](./screenshots/screenshot-addsingle.png)
+![Add multiple items](./screenshots/screenshot-addmulti.png)
 ### Edit item
-![Edit an item](/public/screenshots/screenshot-edit.png)
+![Edit an item](./screenshots/screenshot-edit.png)
 ### Delete items
-![Delete all item](/public/screenshots/screenshot-deleteall.png)
+![Delete all item](./screenshots/screenshot-deleteall.png)
 
 ## User Stories
 ### MVP
