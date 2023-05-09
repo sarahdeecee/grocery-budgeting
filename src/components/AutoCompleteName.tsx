@@ -1,38 +1,25 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { commonItems } from '../data/Categories';
-import { useState } from 'react';
 import { CommonItem } from '../Types';
 
 const filter = createFilterOptions<CommonItem>();
 
 export default function AutoCompleteName(props: any) {
   const {newItem, setNewItem} = props;
-  // const [value, setValue] = useState<CommonItem | null>(null);
+
   return (
     <Autocomplete
       value={newItem.name}
       onChange={(e, newValue) => {
-        console.log('newValue ', newValue);
-        if (typeof newValue === 'string') {
-          console.log('type is string', newValue);
-          // setValue({
-          //   name: newValue,
-          // });
-          // setNewItem({...newItem, name: new})
-        } else if (newValue && newValue.inputValue) {
-          console.log('create new', newValue);
+        if (newValue && newValue.inputValue) {
           // Create a new value from the user input
-          // setValue({
-          //   name: newValue.inputValue,
-          // });
           setNewItem({...newItem, name: newValue.inputValue, category: 'Other'});
         } else if (newValue === null) {
-          // setValue(newValue);
+          // Clear form if null
           setNewItem({...newItem, name: '', category: 'Other'});
         } else if (typeof newValue.category === 'string') {
-          console.log('else', newValue);
-          // setValue(newValue);
+          // Add category if common item
           setNewItem({...newItem, name: newValue.name, category: newValue.category});
         }
       }}
