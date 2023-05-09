@@ -21,7 +21,7 @@ Users can input prices and quantities of items and see if they are within budget
 
 ### Add single item or multiple items
 ![Add an item](./public/screenshots/screenshot-addsingle.png)
-![Add multiple items](./public/screenshots/screenshot-addmulti.png)
+![Add multiple items](public/Screenshots/screenshot-addmulti.png)
 
 ### Edit item
 ![Edit an item](./public/screenshots/screenshot-edit.png)
