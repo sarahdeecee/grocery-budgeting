@@ -1,27 +1,25 @@
-import { useState } from "react";
-import { CommonItem } from "../Types";
-import { Autocomplete, Input, createFilterOptions } from "@mui/material";
-import { commonItems } from "../data/Categories";
+import TextField from '@mui/material/TextField';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import { commonItems } from '../data/Categories';
+import { useState } from 'react';
 
 const filter = createFilterOptions<CommonItem>();
 
-function AutoCompleteName(props: any) {
+export default function FreeSoloCreateOption() {
   const [value, setValue] = useState<CommonItem | null>(null);
-
+  console.log(value);
   return (
     <Autocomplete
       value={value}
       onChange={(event, newValue) => {
         if (typeof newValue === 'string') {
-          const foundCategoryItem = commonItems.find(item => item.name === newValue);
-          const autoCategory = foundCategoryItem ? foundCategoryItem.category : 'Other';
           setValue({
-            name: newValue, category: autoCategory
+            name: newValue,
           });
         } else if (newValue && newValue.inputValue) {
           // Create a new value from the user input
           setValue({
-            name: newValue.inputValue, category: 'Other'
+            name: newValue.inputValue,
           });
         } else {
           setValue(newValue);
@@ -37,7 +35,6 @@ function AutoCompleteName(props: any) {
           filtered.push({
             inputValue,
             name: `Add "${inputValue}"`,
-            category: 'Other'
           });
         }
 
@@ -46,8 +43,9 @@ function AutoCompleteName(props: any) {
       selectOnFocus
       clearOnBlur
       handleHomeEndKeys
-      id="free-solo-with-text-demo"
+      id="item-name-box"
       options={commonItems}
+      groupBy={(option) => option.category ? option.category : 'Other'}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
         if (typeof option === 'string') {
@@ -61,13 +59,16 @@ function AutoCompleteName(props: any) {
         return option.name;
       }}
       renderOption={(props, option) => <li {...props}>{option.name}</li>}
-      sx={{ width: 300 }}
       freeSolo
       renderInput={(params) => (
-        <Input {...params} />
+        <TextField {...params} label="Item" variant="standard" />
       )}
     />
   );
 }
 
-export default AutoCompleteName;
+interface CommonItem {
+  inputValue?: string;
+  name: string;
+  category?: string;
+}
