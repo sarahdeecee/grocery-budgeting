@@ -1,7 +1,7 @@
 import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, Autocomplete, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
 import { CommonItem, ItemForm, ItemType } from "../Types";
-import { camelCaseTrim } from "../helpers/Helpers";
+import { camelCaseTrim, sortAZ } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
 import AutoCompleteName from "./AutoCompleteName";
 
@@ -30,7 +30,6 @@ function NewItem(props: any) {
     quantity: '1'
   });
   const [newItems, setNewItems] = useState<string>('');
-  const [commonItem, setCommonItem] = useState<CommonItem | null>(null);
   const [addType, setAddType] = useState<String>('single');
 
   
@@ -47,7 +46,7 @@ function NewItem(props: any) {
         category: newItem.category ?? 'Other',
         checked: false
       }
-      setItems((prev: ItemType[] = []) => [...prev, fullItem]);
+      setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)));
       handleDialogClose();
     }
   }
@@ -56,11 +55,19 @@ function NewItem(props: any) {
     const itemsArr = items.split(/(,(\n|\s)*)|(^(\s+)\w)|\n+/g);
     const filteredArr: string[] = [];
     for (let item of itemsArr) {
-      if (!((/^\W+$/).test(item) || filteredArr.includes(item))) {
+      if (!((/^\W+$/).test(item) || filteredArr.includes(item) || !item)) {
         filteredArr.push(item);
       }
     }
-    filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13', quantity: '1', category: 'Other'}));
+    filteredArr.forEach((item: string) => {
+      if (commonItems.some(commonItem => commonItem.name.toLowerCase() === item.toLowerCase())) {
+        const foundItem = commonItems.find(commonItem => commonItem.name.toLowerCase() === item.toLowerCase());
+        const category = (foundItem && typeof foundItem.category === 'string') ? foundItem.category : 'Other';
+        handleAddItem({name: item, tax: '13', quantity: '1', category: category});
+      } else {
+        handleAddItem({name: item, tax: '13', quantity: '1', category: 'Other'});
+      }
+    });
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {

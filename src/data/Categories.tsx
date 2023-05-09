@@ -126,11 +126,31 @@ export const commonItems: CommonItem[] = [
     category: 'Meat'
   },
   {
+    name: 'Ground Meat',
+    category: 'Meat'
+  },
+  {
     name: 'Sausage',
     category: 'Meat'
   },
   {
     name: 'Bacon',
+    category: 'Meat'
+  },
+  {
+    name: 'Beef',
+    category: 'Meat'
+  },
+  {
+    name: 'Lamb',
+    category: 'Meat'
+  },
+  {
+    name: 'Turkey',
+    category: 'Meat'
+  },
+  {
+    name: 'Chicken',
     category: 'Meat'
   },
   {
