@@ -165,6 +165,7 @@ function NewItem(props: any) {
           inputProps={{
             name: 'quantity-box',
             id: 'item-quantity-box',
+            inputMode: 'numeric',
             min: 0, max: 100
           }}
           value={newItem.quantity}
