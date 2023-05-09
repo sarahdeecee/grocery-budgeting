@@ -79,7 +79,7 @@ function NewItem(props: any) {
   </ToggleButtonGroup>
 
   const singleAdd = <Stack component="form" noValidate autoComplete="on" spacing={3}>
-    <AutoCompleteName />
+    <AutoCompleteName newItem={newItem} setNewItem={setNewItem} />
     {/* <FormControl variant="standard"> */}
       {/* <InputLabel variant="standard" shrink htmlFor="name-box">
         Item:
