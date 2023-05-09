@@ -54,11 +54,19 @@ function NewItem(props: any) {
     const itemsArr = items.split(/(,(\n|\s)*)|(^(\s+)\w)|\n+/g);
     const filteredArr: string[] = [];
     for (let item of itemsArr) {
-      if (!((/^\W+$/).test(item) || filteredArr.includes(item))) {
+      if (!((/^\W+$/).test(item) || filteredArr.includes(item) || !item)) {
         filteredArr.push(item);
       }
     }
-    filteredArr.forEach((item: string) => handleAddItem({name: item, tax: '13', quantity: '1', category: 'Other'}));
+    filteredArr.forEach((item: string) => {
+      if (commonItems.some(commonItem => commonItem.name.toLowerCase() === item.toLowerCase())) {
+        const foundItem = commonItems.find(commonItem => commonItem.name.toLowerCase() === item.toLowerCase());
+        const category = (foundItem && typeof foundItem.category === 'string') ? foundItem.category : 'Other';
+        handleAddItem({name: item, tax: '13', quantity: '1', category: category});
+      } else {
+        handleAddItem({name: item, tax: '13', quantity: '1', category: 'Other'});
+      }
+    });
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
