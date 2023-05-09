@@ -1,4 +1,4 @@
-import { Box, List } from "@mui/material";
+import { Box, Collapse, List } from "@mui/material";
 import Item from "./Item";
 import { ItemType } from './../Types';
 import CategoryBar from "./CategoryBar";
@@ -47,11 +47,13 @@ function ItemList(props: any) {
 
   const itemsByCategories = Array.isArray(categoriesAll) && categoriesAll.map(category => <Box key={`${category}-box`}>
     {items.filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} open={categoriesOpen[category]} handleCategory={handleCategory} />}
-    {categoriesOpen[category] && items.filter((item: ItemType) => item.category === category)
-      .reverse()
-      .map((listedItem: ItemType) => 
-        <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
-      )}
+      <Collapse in={categoriesOpen[category]}>
+        {items.filter((item: ItemType) => item.category === category)
+          .reverse()
+          .map((listedItem: ItemType) => 
+            <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
+          )}
+      </Collapse>
   </Box>)
 
   return (
