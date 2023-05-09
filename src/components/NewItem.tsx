@@ -30,7 +30,6 @@ function NewItem(props: any) {
     quantity: '1'
   });
   const [newItems, setNewItems] = useState<string>('');
-  const [commonItem, setCommonItem] = useState<CommonItem | null>(null);
   const [addType, setAddType] = useState<String>('single');
 
   const categoryOptions = Array.isArray(categoriesAll) ? [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>) : ['Other'];
