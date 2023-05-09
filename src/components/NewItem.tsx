@@ -1,6 +1,6 @@
-import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, Autocomplete, TextField } from "@mui/material";
+import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
-import { CommonItem, ItemForm, ItemType } from "../Types";
+import { ItemForm, ItemType } from "../Types";
 import { camelCaseTrim, sortAZ } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
 import AutoCompleteName from "./AutoCompleteName";
@@ -31,7 +31,6 @@ function NewItem(props: any) {
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
-
   
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
 
@@ -88,21 +87,6 @@ function NewItem(props: any) {
 
   const singleAdd = <Stack component="form" noValidate autoComplete="on" spacing={3}>
     <AutoCompleteName newItem={newItem} setNewItem={setNewItem} />
-    {/* <FormControl variant="standard"> */}
-      {/* <InputLabel variant="standard" shrink htmlFor="name-box">
-        Item:
-      </InputLabel>
-      <Input
-        value={newItem.name}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setNewItem({...newItem, name: e.target.value})
-        }}
-        inputProps={{
-          id: 'name-box',
-          type: 'search'
-        }}
-      /> */}
-    {/* </FormControl> */}
     <FormControl variant="standard">
       <InputLabel variant="standard" shrink htmlFor="notes-box">
           Notes:
@@ -177,18 +161,19 @@ function NewItem(props: any) {
         <InputLabel variant="standard" shrink htmlFor="item-quantity-box">
           Quantity
         </InputLabel>
-        <NativeSelect
-            inputProps={{
-              name: 'quantity-box',
-              id: 'item-quantity-box',
-            }}
-            value={newItem.quantity}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              setNewItem({...newItem, quantity: e.target.value})
-            }}
-          >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>{n}</option>)}
-          </NativeSelect>
+        <TextField
+          inputProps={{
+            name: 'quantity-box',
+            id: 'item-quantity-box',
+            min: 0, max: 100
+          }}
+          value={newItem.quantity}
+          type='number'
+          variant='standard'
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setNewItem({...newItem, quantity: e.target.value})
+          }}
+        />
       </Grid>
     </Grid>
     <MyFormHelperText />

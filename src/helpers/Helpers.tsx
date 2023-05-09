@@ -1,4 +1,4 @@
-import { CommonItem, ItemType, hasCategory, hasName } from "../Types";
+import { CommonItem, hasName } from "../Types";
 
 export const camelCaseTrim = (string: string) => {
   let result = '';

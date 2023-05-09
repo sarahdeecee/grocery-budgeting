@@ -1,11 +1,11 @@
 import { Grid, IconButton, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import React from "react";
 import { blankItem } from "../Types";
-import { Add, CheckCircleOutline, Edit, RadioButtonUnchecked, Remove } from "@mui/icons-material";
+import { CheckCircleOutline, Edit, RadioButtonUnchecked } from "@mui/icons-material";
 import { formatPrice } from "../helpers/Helpers";
 
 function Item(props: any) {
-  const {listedItem, items, handleToggle, handleQuantityUp, handleQuantityDown, handleItemEdit} = props;
+  const {listedItem, items, handleToggle, handleItemEdit} = props;
   const {name, quantity, priceCents, tax, checked, notes} = listedItem ?? blankItem;
 
   const price = formatPrice(priceCents);
