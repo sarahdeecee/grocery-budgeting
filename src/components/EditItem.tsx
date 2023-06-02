@@ -6,9 +6,10 @@ import { categoriesAll } from "../data/Categories";
 
 function EditItem(props: any) {
   const {handleDialogClose, items, setItems, editItem, handleDelete} = props;
+  const itemPrice = items[editItem].priceCents === 0 ? '' : formatPrice(items[editItem].priceCents).replace('$','');
   const [editItemForm, setEditItemForm] = useState<ItemForm>({
     name: items[editItem].name ?? '',
-    price: formatPrice(items[editItem].priceCents).replace('$','') ?? '',
+    price: itemPrice ?? '',
     notes: items[editItem].notes ?? '',
     tax: items[editItem].tax ?? '13',
     quantity: items[editItem].quantity ?? '1',
