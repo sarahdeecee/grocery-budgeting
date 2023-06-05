@@ -32,8 +32,8 @@ export type DialogType = {
 
 export type ItemForm = {
   name: string,
-  price?: string,
-  notes?: string,
+  price: string,
+  notes: string,
   tax: string,
   category: string,
   quantity: string

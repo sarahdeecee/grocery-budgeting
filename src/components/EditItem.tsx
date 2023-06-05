@@ -1,8 +1,11 @@
-import { FormControl, InputAdornment, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect } from "@mui/material";
+import { FormControl, InputAdornment, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect, TextField } from "@mui/material";
 import { useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { formatPrice } from "../helpers/Helpers";
 import { categoriesAll } from "../data/Categories";
+import { validationSchema } from "../validation/Validators";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function EditItem(props: any) {
   const {handleDialogClose, items, setItems, editItem, handleDelete} = props;
@@ -16,21 +19,36 @@ function EditItem(props: any) {
     category: items[editItem].category ?? 'Other',
   });
 
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(validationSchema)
+  });
+
+  const isPriceInvalid = (price: string): boolean => {
+    return price.match(/^(\d*\.{0,1}\d{0,2})$/) ? false : true;
+  }
+
   const handleItemEdit = (index: number): void => {
-    const duplicateIndex = items.findIndex((item: ItemType) => (item.name).toLowerCase() === (editItemForm.name).toLowerCase());
-    if (duplicateIndex === -1 || duplicateIndex === index) {
-      const fullItem = {...items[index], 
-        name: editItemForm.name,
-        priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
-        notes: editItemForm.notes,
-        tax: Number.parseInt(editItemForm.tax),
-        quantity: Number.parseInt(editItemForm.quantity),
-        category: editItemForm.category,
+    if (isPriceInvalid(editItemForm.price)) {
+      const duplicateIndex = items.findIndex((item: ItemType) => (item.name).toLowerCase() === (editItemForm.name).toLowerCase());
+      if (duplicateIndex === -1 || duplicateIndex === index) {
+        const fullItem = {...items[index], 
+          name: editItemForm.name,
+          priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
+          notes: editItemForm.notes,
+          tax: Number.parseInt(editItemForm.tax),
+          quantity: Number.parseInt(editItemForm.quantity),
+          category: editItemForm.category,
+        }
+        const newItems = [...items];
+        newItems[index] = fullItem;
+        setItems(newItems);
+        handleDialogClose();
       }
-      const newItems = [...items];
-      newItems[index] = fullItem;
-      setItems(newItems);
-      handleDialogClose();
     }
   }
 
@@ -41,42 +59,44 @@ function EditItem(props: any) {
     <DialogContent>
       <Stack component="form" noValidate autoComplete="off" spacing={3}>
         <FormControl variant="standard">
-          <InputLabel variant="standard" shrink htmlFor="name-box">
-            Item:
-          </InputLabel>
-          <Input
+          <TextField
             value={editItemForm.name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEditItemForm({...editItemForm, name: e.target.value})
             }}
             inputProps={{ id: 'name-box' }}
+            variant="standard"
+            label="Item:"
           />
         </FormControl>
         <FormControl variant="standard">
-          <InputLabel variant="standard" shrink htmlFor="notes-box">
-            Notes:
-          </InputLabel>
-          <Input
+          <TextField
             value={editItemForm.notes}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEditItemForm({...editItemForm, notes: e.target.value})
             }}
             inputProps={{ id: 'notes-box' }}
+            variant="standard"
+            label="Notes:"
           />
         </FormControl>
         <Grid container>
           <Grid item xs={8}>
             <FormControl variant="standard">
-            <InputLabel variant="standard" shrink htmlFor="price-box">
-              Price:
-            </InputLabel>
-              <Input
+              <TextField
                 value={editItemForm.price}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setEditItemForm({...editItemForm, price: e.target.value})
                 }}
-                inputProps={{ inputMode: 'decimal', id: 'price-box' }}
-                startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                InputProps={{
+                  inputMode: 'decimal',
+                  id: 'price-box',
+                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                }}
+                variant="standard"
+                label="Price:"
+                helperText={isPriceInvalid(editItemForm.price) ? "Please enter a valid price." : null}
+                error={isPriceInvalid(editItemForm.price)}
               />
             </FormControl>
           </Grid>

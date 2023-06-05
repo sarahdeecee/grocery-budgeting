@@ -59,12 +59,14 @@ function NewItem(props: any) {
       }
     }
     filteredArr.forEach((item: string) => {
+      const price = '';
+      const notes = '';
       if (commonItems.some(commonItem => commonItem.name.toLowerCase() === item.toLowerCase())) {
         const foundItem = commonItems.find(commonItem => commonItem.name.toLowerCase() === item.toLowerCase());
         const category = (foundItem && typeof foundItem.category === 'string') ? foundItem.category : 'Other';
-        handleAddItem({name: item, tax: '13', quantity: '1', category: category});
+        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: category});
       } else {
-        handleAddItem({name: item, tax: '13', quantity: '1', category: 'Other'});
+        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: 'Other'});
       }
     });
   }
