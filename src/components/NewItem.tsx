@@ -1,7 +1,7 @@
 import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
-import { camelCaseTrim, sortAZ } from "../helpers/Helpers";
+import { camelCaseTrim, isPriceEmpty, isPriceInvalid, sortAZ } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
 import AutoCompleteName from "./AutoCompleteName";
 
@@ -34,19 +34,25 @@ function NewItem(props: any) {
   
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
 
+  const priceError: boolean = false;
+
   const handleAddItem = (newItem: ItemForm): void => {
-    if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
-      const fullItem = {
-        name: camelCaseTrim(newItem.name),
-        quantity: Number.parseInt(newItem.quantity) ?? 1,
-        priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
-        tax: Number.parseInt(newItem.tax),
-        notes: newItem.notes ?? '',
-        category: newItem.category ?? 'Other',
-        checked: false
+    if (!isPriceInvalid(newItem.price) || isPriceEmpty(newItem.price)) {
+      if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
+        const fullItem = {
+          name: camelCaseTrim(newItem.name),
+          quantity: Number.parseInt(newItem.quantity) ?? 1,
+          priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
+          tax: Number.parseInt(newItem.tax),
+          notes: newItem.notes ?? '',
+          category: newItem.category ?? 'Other',
+          checked: false
+        }
+        setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
+        handleDialogClose();
       }
-      setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
-      handleDialogClose();
+    } else if (isPriceInvalid(newItem.price)) {
+
     }
   }
 
@@ -106,17 +112,21 @@ function NewItem(props: any) {
     <Grid container>
       <Grid item xs={8}>
         <FormControl variant="standard">
-        <InputLabel variant="standard" shrink htmlFor="price-box">
-          Price:
-        </InputLabel>
-        <Input
-          value={newItem.price}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, price: e.target.value})
-          }}
-          inputProps={{ inputMode: 'decimal', id: 'price-box' }}
-          startAdornment={<InputAdornment position="start">$</InputAdornment>}
-        />
+          <TextField
+            value={newItem.price}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNewItem({...newItem, price: e.target.value})
+            }}
+            InputProps={{
+              inputMode: 'decimal',
+              id: 'price-box',
+              startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            }}
+            variant="standard"
+            label="Price:"
+            helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
+            error={isPriceInvalid(newItem.price)}
+          />
         </FormControl>
       </Grid>
       <Grid item xs={4} sx={{flexDirection: 'row'}}>
