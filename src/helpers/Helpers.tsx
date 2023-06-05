@@ -45,3 +45,7 @@ export const sortByCategory = (a: CommonItem, b: CommonItem): number => {
     return 0;
   }
 }
+
+export const isPriceInvalid = (price: string): boolean => {
+  return price.match(/^(\d*\.{0,1}\d{0,2})$/) ? false : true;
+}

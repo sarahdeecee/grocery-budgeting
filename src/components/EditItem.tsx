@@ -1,7 +1,7 @@
 import { FormControl, InputAdornment, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect, TextField } from "@mui/material";
 import { useState } from "react";
 import { ItemForm, ItemType } from "../Types";
-import { formatPrice } from "../helpers/Helpers";
+import { formatPrice, isPriceInvalid } from "../helpers/Helpers";
 import { categoriesAll } from "../data/Categories";
 import { validationSchema } from "../validation/Validators";
 import { useForm } from "react-hook-form";
@@ -27,10 +27,6 @@ function EditItem(props: any) {
   } = useForm({
     resolver: yupResolver(validationSchema)
   });
-
-  const isPriceInvalid = (price: string): boolean => {
-    return price.match(/^(\d*\.{0,1}\d{0,2})$/) ? false : true;
-  }
 
   const handleItemEdit = (index: number): void => {
     if (isPriceInvalid(editItemForm.price)) {
