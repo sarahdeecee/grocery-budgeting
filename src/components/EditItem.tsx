@@ -3,9 +3,6 @@ import { useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { formatPrice, isPriceInvalid } from "../helpers/Helpers";
 import { categoriesAll } from "../data/Categories";
-import { validationSchema } from "../validation/Validators";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 function EditItem(props: any) {
   const {handleDialogClose, items, setItems, editItem, handleDelete} = props;
@@ -17,15 +14,6 @@ function EditItem(props: any) {
     tax: items[editItem].tax ?? '13',
     quantity: items[editItem].quantity ?? '1',
     category: items[editItem].category ?? 'Other',
-  });
-
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({
-    resolver: yupResolver(validationSchema)
   });
 
   const handleItemEdit = (index: number): void => {
