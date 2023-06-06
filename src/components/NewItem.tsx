@@ -98,15 +98,15 @@ function NewItem(props: any) {
     <FormControl variant="standard">
       <InputLabel variant="standard" shrink htmlFor="notes-box">
           Notes:
-        </InputLabel>
-      <Input
-      value={newItem.notes}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewItem({...newItem, notes: e.target.value})
-      }}
-      inputProps={{
-        id: 'notes-box',
-      }}
+      </InputLabel>
+        <Input
+        value={newItem.notes}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setNewItem({...newItem, notes: e.target.value})
+        }}
+        inputProps={{
+          id: 'notes-box',
+        }}
     />
     </FormControl>
     <Grid container>
