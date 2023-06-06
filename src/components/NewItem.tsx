@@ -96,10 +96,7 @@ function NewItem(props: any) {
   const singleAdd = <Stack component="form" noValidate autoComplete="on" spacing={3}>
     <AutoCompleteName newItem={newItem} setNewItem={setNewItem} />
     <FormControl variant="standard">
-      <InputLabel variant="standard" shrink htmlFor="notes-box">
-          Notes:
-      </InputLabel>
-        <Input
+      <TextField
         value={newItem.notes}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setNewItem({...newItem, notes: e.target.value})
@@ -107,7 +104,9 @@ function NewItem(props: any) {
         inputProps={{
           id: 'notes-box',
         }}
-    />
+        variant="standard"
+        label="Notes:"
+      />
     </FormControl>
     <Grid container>
       <Grid item xs={8}>
