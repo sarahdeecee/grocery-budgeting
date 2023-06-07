@@ -3,7 +3,7 @@ import { Box, Dialog, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { DialogType, ItemType, blankItem } from './Types';
 import ItemList from './components/ItemList';
-import NewItem from './components/NewItem';
+import NewItem from './pages/NewItem';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import EditItem from './components/EditItem';

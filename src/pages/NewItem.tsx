@@ -3,9 +3,8 @@ import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { camelCaseTrim, isPriceEmpty, isPriceInvalid, sortAZ } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
-import AutoCompleteName from "./AutoCompleteName";
-import SingleAdd from "./SingleAdd";
-import MultiAdd from "./MultiAdd";
+import SingleAdd from "../components/SingleAdd";
+import MultiAdd from "../components/MultiAdd";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -62,8 +61,6 @@ function NewItem(props: any) {
           setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
           handleDialogClose();
         }
-      } else if (isPriceInvalid(newItem.price)) {
-
       }
     }
   }
