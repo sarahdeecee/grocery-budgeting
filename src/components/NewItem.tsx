@@ -31,28 +31,41 @@ function NewItem(props: any) {
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
+  const [errors, setErrors] = useState({
+    name: false,
+    price: false,
+    notes: false,
+    tax: false,
+    category: false,
+    quantity: false,
+  })
   
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
 
   const priceError: boolean = false;
+  let itemIsBlank: boolean = false;
 
   const handleAddItem = (newItem: ItemForm): void => {
-    if (!isPriceInvalid(newItem.price) || isPriceEmpty(newItem.price)) {
-      if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
-        const fullItem = {
-          name: camelCaseTrim(newItem.name),
-          quantity: Number.parseInt(newItem.quantity) ?? 1,
-          priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
-          tax: Number.parseInt(newItem.tax),
-          notes: newItem.notes ?? '',
-          category: newItem.category ?? 'Other',
-          checked: false
+    if (newItem.name === '') {
+      setErrors({...errors, name: true})
+    } else {
+      if (!isPriceInvalid(newItem.price) || isPriceEmpty(newItem.price)) {
+        if (newItem.name && items.findIndex((item: ItemType) => item.name === camelCaseTrim(newItem.name)) === -1) {
+          const fullItem = {
+            name: camelCaseTrim(newItem.name),
+            quantity: Number.parseInt(newItem.quantity) ?? 1,
+            priceCents: (newItem.price) ? Number.parseFloat(newItem.price) * 100 : 0,
+            tax: Number.parseInt(newItem.tax),
+            notes: newItem.notes ?? '',
+            category: newItem.category ?? 'Other',
+            checked: false
+          }
+          setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
+          handleDialogClose();
         }
-        setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
-        handleDialogClose();
-      }
-    } else if (isPriceInvalid(newItem.price)) {
+      } else if (isPriceInvalid(newItem.price)) {
 
+      }
     }
   }
 
@@ -94,7 +107,7 @@ function NewItem(props: any) {
   </ToggleButtonGroup>
 
   const singleAdd = <Stack component="form" noValidate autoComplete="on" spacing={3}>
-    <AutoCompleteName newItem={newItem} setNewItem={setNewItem} />
+    <AutoCompleteName newItem={newItem} setNewItem={setNewItem} errors={errors} setErrors={setErrors} />
     <FormControl variant="standard">
       <TextField
         value={newItem.notes}

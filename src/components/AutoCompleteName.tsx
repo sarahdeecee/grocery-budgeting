@@ -7,12 +7,15 @@ import { camelCaseTrim } from '../helpers/Helpers';
 const filter = createFilterOptions<CommonItem>();
 
 export default function AutoCompleteName(props: any) {
-  const {newItem, setNewItem} = props;
-
+  const {newItem, setNewItem, errors, setErrors} = props;
+  
   return (
     <Autocomplete
       value={newItem.name}
       onInputChange={(e: React.SyntheticEvent, newValue) => {
+        if (errors.name) {
+          setErrors({...errors, name: false});
+        }
         const isExisting = commonItems.some((option) => newValue.toLowerCase() === option.name.toLowerCase());
         if (newValue && !isExisting) {
           // Create a new value from the user input
@@ -61,6 +64,7 @@ export default function AutoCompleteName(props: any) {
       }}
       renderOption={(props, option) => <li {...props}>{option.name}</li>}
       freeSolo
+      autoSelect
       renderInput={(params) => (
         <TextField {...params}
           label="Item"
@@ -69,6 +73,8 @@ export default function AutoCompleteName(props: any) {
             ...params.InputProps,
             // type: 'search',
           }}
+          error={errors.name}
+          helperText={errors.name && "Item name is required."}
         />
       )}
     />
