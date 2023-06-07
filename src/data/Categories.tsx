@@ -112,79 +112,95 @@ const commonItemsRaw: CommonItem[] = [
   },
   {
     name: 'Ground Beef',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Ground Chicken',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Ground Turkey',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Ground Pork',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Ground Meat',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
+  },
+  {
+    name: 'Breakfast Sausage',
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Sausage',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
+  },
+  {
+    name: 'Sausage Patties',
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Bacon',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Beef',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Lamb',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Turkey',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
+  },
+  {
+    name: 'Turkey Bacon',
+    category: 'Meat & Alternatives'
+  },
+  {
+    name: 'Sandwich Meat',
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Chicken',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
-    name: 'Chicken Breast',
-    category: 'Meat'
+    name: 'Chicken Breasts',
+    category: 'Meat & Alternatives'
   },
   {
-    name: 'Chicken Thigh',
-    category: 'Meat'
+    name: 'Chicken Thighs',
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Chicken Quarters',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Whole Chicken',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Pork',
-    category: 'Meat'
-  },
-  {
-    name: 'Beef',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Burgers',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Hot Dogs',
-    category: 'Meat'
+    category: 'Meat & Alternatives'
+  },
+  {
+    name: 'Eggs',
+    category: 'Meat & Alternatives'
   },
   {
     name: 'Frozen Fish',
@@ -192,6 +208,10 @@ const commonItemsRaw: CommonItem[] = [
   },
   {
     name: 'Fish',
+    category: 'Fish & Seafood'
+  },
+  {
+    name: 'Fish Sticks',
     category: 'Fish & Seafood'
   },
   {
@@ -583,4 +603,4 @@ export const commonItems: CommonItem[] = commonItemsRaw.sort((a, b) => sortAZ(a,
 //   return acc;
 // }, []);
 
-export const categoriesAll = ['Produce', 'Meat', 'Fish & Seafood','Snacks', 'Beverages', 'Dairy & Alternatives', 'Grains & Bakery', 'Pet Supplies', 'Health & Beauty', 'Pantry', 'Other'];
+export const categoriesAll = ['Produce', 'Meat & Alternatives', 'Fish & Seafood','Snacks', 'Beverages', 'Dairy & Alternatives', 'Grains & Bakery', 'Pet Supplies', 'Health & Beauty', 'Pantry', 'Other'];
