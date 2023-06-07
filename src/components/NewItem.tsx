@@ -4,6 +4,8 @@ import { ItemForm, ItemType } from "../Types";
 import { camelCaseTrim, isPriceEmpty, isPriceInvalid, sortAZ } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
 import AutoCompleteName from "./AutoCompleteName";
+import SingleAdd from "./SingleAdd";
+import MultiAdd from "./MultiAdd";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -103,115 +105,8 @@ function NewItem(props: any) {
     <ToggleButton value="single">Single</ToggleButton>
   </ToggleButtonGroup>
 
-  const singleAdd = <Stack component="form" noValidate autoComplete="on" spacing={3}>
-    <AutoCompleteName newItem={newItem} setNewItem={setNewItem} errors={errors} setErrors={setErrors} />
-    <FormControl variant="standard">
-      <TextField
-        value={newItem.notes}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setNewItem({...newItem, notes: e.target.value})
-        }}
-        inputProps={{
-          id: 'notes-box',
-        }}
-        variant="standard"
-        label="Notes"
-      />
-    </FormControl>
-    <Grid container>
-      <Grid item xs={8}>
-        <FormControl variant="standard">
-          <TextField
-            value={newItem.price}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setNewItem({...newItem, price: e.target.value})
-            }}
-            InputProps={{
-              inputMode: 'decimal',
-              id: 'price-box',
-              startAdornment: <InputAdornment position="start">$</InputAdornment>,
-            }}
-            variant="standard"
-            label="Price"
-            helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
-            error={isPriceInvalid(newItem.price)}
-          />
-        </FormControl>
-      </Grid>
-      <Grid item xs={4} sx={{flexDirection: 'row'}}>
-        <FormControl variant="standard">
-          <InputLabel variant="standard" shrink htmlFor="item-tax-box">
-            Tax
-          </InputLabel>
-          <NativeSelect
-            inputProps={{
-              name: 'tax-box',
-              id: 'item-tax-box',
-            }}
-            value={newItem.tax}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              setNewItem({...newItem, tax: e.target.value})
-            }}
-          >
-            <option value={0}>None</option>
-            <option value={5}>5%</option>
-            <option value={13}>13%</option>
-          </NativeSelect>
-        </FormControl>
-      </Grid>
-    </Grid>
-    <Grid container>
-      <Grid item xs={8} sx={{flexDirection: 'row'}}>
-        <InputLabel variant="standard" shrink htmlFor="item-category-box">
-          Category
-        </InputLabel>
-          <NativeSelect
-            inputProps={{
-              name: 'category-box',
-              id: 'item-category-box',
-            }}
-            value={newItem.category}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              setNewItem({...newItem, category: e.target.value})
-            }}
-          >
-            {categoryOptions}
-          </NativeSelect>
-      </Grid>
-      <Grid item xs={4} sx={{flexDirection: 'row'}}>
-        <InputLabel variant="standard" shrink htmlFor="item-quantity-box">
-          Quantity
-        </InputLabel>
-        <TextField
-          inputProps={{
-            name: 'quantity-box',
-            id: 'item-quantity-box',
-            inputMode: 'numeric',
-            min: 0, max: 100
-          }}
-          value={newItem.quantity}
-          type='number'
-          variant='standard'
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, quantity: e.target.value})
-          }}
-        />
-      </Grid>
-    </Grid>
-    <MyFormHelperText />
-  </Stack>
-
-  const multiAdd = <Stack component="form" noValidate autoComplete="off" spacing={3}>
-    <Input
-      value={newItems}
-      multiline
-      rows={10}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewItems(e.target.value)
-      }}
-      placeholder="Paste item names separated by new lines or commas"
-    />
-  </Stack>;
+  const singleAdd = <SingleAdd newItem={newItem} setNewItem={setNewItem} errors={errors} setErrors={setErrors} categoryOptions={categoryOptions} />
+  const multiAdd = <MultiAdd newItems={newItems} setNewItems={setNewItems} />
 
   return (<>
     <DialogTitle id="alert-dialog-title" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
