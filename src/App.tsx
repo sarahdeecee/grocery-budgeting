@@ -2,7 +2,7 @@ import './App.css';
 import { Box, Dialog, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { DialogType, ItemType, blankItem } from './Types';
-import ItemList from './components/ItemList';
+import ItemList from './pages/ItemList';
 import NewItem from './pages/NewItem';
 import Footer from './components/Footer';
 import Header from './components/Header';

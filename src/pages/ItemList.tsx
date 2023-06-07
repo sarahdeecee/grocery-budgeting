@@ -1,7 +1,7 @@
 import { Box, Collapse, List } from "@mui/material";
-import Item from "./Item";
-import { ItemType } from './../Types';
-import CategoryBar from "./CategoryBar";
+import Item from "../components/Item";
+import { ItemType } from '../Types';
+import CategoryBar from "../components/CategoryBar";
 import { categoriesAll } from "../data/Categories";
 import { useState } from "react";
 
