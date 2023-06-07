@@ -108,6 +108,25 @@ function NewItem(props: any) {
   const singleAdd = <SingleAdd newItem={newItem} setNewItem={setNewItem} errors={errors} setErrors={setErrors} categoryOptions={categoryOptions} />
   const multiAdd = <MultiAdd newItems={newItems} setNewItems={setNewItems} />
 
+  const singleAddButton = <Button
+    autoFocus
+    onClick={(e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+      handleAddItem(newItem);
+    }}
+  >
+    Add
+  </Button>
+
+  const multiAddButton = <Button
+    onClick={(e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+      handleAddItems(newItems);
+    }}
+  >
+    Add All
+  </Button>
+
   return (<>
     <DialogTitle id="alert-dialog-title" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
       {addType === 'single' ? "Add an item" : "Add items"}{addTypeToggle}
@@ -117,23 +136,7 @@ function NewItem(props: any) {
     </DialogContent>
     <DialogActions>
       <Button onClick={handleDialogClose}>Cancel</Button>
-      {addType === 'single' ? <Button
-        autoFocus
-        onClick={(e: React.MouseEvent<HTMLElement>) => {
-          e.preventDefault();
-          handleAddItem(newItem);
-        }}
-      >
-        Add
-      </Button>
-      : <Button
-        onClick={(e: React.MouseEvent<HTMLElement>) => {
-          e.preventDefault();
-          handleAddItems(newItems);
-        }}
-      >
-        Add All
-      </Button>}
+      {addType === 'single' ? singleAddButton : multiAddButton}
     </DialogActions>
     </>
   );
