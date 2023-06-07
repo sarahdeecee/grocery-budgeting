@@ -6,7 +6,7 @@ import ItemList from './pages/ItemList';
 import NewItem from './pages/NewItem';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import EditItem from './components/EditItem';
+import EditItem from './pages/EditItem';
 import ConfirmDelete from './components/ConfirmDelete';
 import ConfirmDeleteAll from './components/ConfirmDeleteAll';
 import { itemsDefault } from './data/DevData';
