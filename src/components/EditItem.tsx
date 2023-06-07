@@ -15,11 +15,21 @@ function EditItem(props: any) {
     quantity: items[editItem].quantity ?? '1',
     category: items[editItem].category ?? 'Other',
   });
+  const [errors, setErrors] = useState({
+    name: false, 
+    helperText: ''
+  })
 
   const handleItemEdit = (index: number): void => {
-    if (isPriceInvalid(editItemForm.price)) {
-      const duplicateIndex = items.findIndex((item: ItemType) => (item.name).toLowerCase() === (editItemForm.name).toLowerCase());
-      if (duplicateIndex === -1 || duplicateIndex === index) {
+    const duplicateIndex = items.findIndex((item: ItemType) => (item.name).toLowerCase() === (editItemForm.name).toLowerCase());
+    // If name is blank, 
+    if (editItemForm.name === '') {
+      setErrors({...errors, name: true, helperText: 'Item name is required.'});
+    } else if (duplicateIndex !== index && duplicateIndex > -1) {
+      // If item exists in list (but different index value)
+      setErrors({...errors, name: true, helperText: 'Item already exists in list.'});
+    } else {
+      if (!isPriceInvalid(editItemForm.price)) {
         const fullItem = {...items[index], 
           name: editItemForm.name,
           priceCents: editItemForm.price ? Number.parseFloat(editItemForm.price) * 100 : 0,
@@ -46,11 +56,14 @@ function EditItem(props: any) {
           <TextField
             value={editItemForm.name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setErrors({...errors, name: false});
               setEditItemForm({...editItemForm, name: e.target.value})
             }}
             inputProps={{ id: 'name-box' }}
             variant="standard"
-            label="Item:"
+            label="Item"
+            error={errors.name}
+            helperText={errors.name ? errors.helperText : ''}
           />
         </FormControl>
         <FormControl variant="standard">
@@ -61,7 +74,7 @@ function EditItem(props: any) {
             }}
             inputProps={{ id: 'notes-box' }}
             variant="standard"
-            label="Notes:"
+            label="Notes"
           />
         </FormControl>
         <Grid container>
@@ -87,7 +100,7 @@ function EditItem(props: any) {
           <Grid item xs={4} sx={{flexDirection: 'row'}}>
           <FormControl variant="standard" sx={{width: '7ch'}}>
             <InputLabel variant="standard" shrink htmlFor="item-tax-box">
-              Tax: 
+              Tax
             </InputLabel>
             <NativeSelect
               inputProps={{
@@ -110,7 +123,7 @@ function EditItem(props: any) {
           <Grid item xs={8}>
             <FormControl variant="standard">
             <InputLabel variant="standard" shrink htmlFor="category-box">
-              Category:
+              Category
             </InputLabel>
             <NativeSelect
               inputProps={{
@@ -129,7 +142,7 @@ function EditItem(props: any) {
           <Grid item xs={4} sx={{flexDirection: 'row'}}>
             <FormControl variant="standard" sx={{width: '7ch'}}>
               <InputLabel variant="standard" shrink htmlFor="item-quantity-box">
-                Quantity: 
+                Quantity
               </InputLabel>
               <NativeSelect
                 inputProps={{
