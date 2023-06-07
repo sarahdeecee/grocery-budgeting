@@ -71,7 +71,6 @@ export default function AutoCompleteName(props: any) {
           variant="standard"
           InputProps={{
             ...params.InputProps,
-            // type: 'search',
           }}
           error={errors.name}
           helperText={errors.name && "Item name is required."}

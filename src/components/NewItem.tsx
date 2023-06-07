@@ -33,17 +33,14 @@ function NewItem(props: any) {
   const [addType, setAddType] = useState<String>('single');
   const [errors, setErrors] = useState({
     name: false,
-    price: false,
-    notes: false,
-    tax: false,
-    category: false,
-    quantity: false,
+    // price: false,
+    // notes: false,
+    // tax: false,
+    // category: false,
+    // quantity: false,
   })
   
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
-
-  const priceError: boolean = false;
-  let itemIsBlank: boolean = false;
 
   const handleAddItem = (newItem: ItemForm): void => {
     if (newItem.name === '') {
@@ -118,7 +115,7 @@ function NewItem(props: any) {
           id: 'notes-box',
         }}
         variant="standard"
-        label="Notes:"
+        label="Notes"
       />
     </FormControl>
     <Grid container>
@@ -135,7 +132,7 @@ function NewItem(props: any) {
               startAdornment: <InputAdornment position="start">$</InputAdornment>,
             }}
             variant="standard"
-            label="Price:"
+            label="Price"
             helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
             error={isPriceInvalid(newItem.price)}
           />
@@ -144,7 +141,7 @@ function NewItem(props: any) {
       <Grid item xs={4} sx={{flexDirection: 'row'}}>
         <FormControl variant="standard">
           <InputLabel variant="standard" shrink htmlFor="item-tax-box">
-            Tax: 
+            Tax
           </InputLabel>
           <NativeSelect
             inputProps={{
