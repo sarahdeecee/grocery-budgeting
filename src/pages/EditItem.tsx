@@ -50,12 +50,12 @@ function EditItem(props: any) {
 
   const handleAddQuantity = (): void => {
     const MAX = 100;
-    const quantity = Number.parseInt(editItemForm.quantity);
+    const quantity = editItemForm.quantity === '' ? 0 : Number.parseInt(editItemForm.quantity);
     if (quantity < MAX) {
       setErrors({...errors, quantity: false});
       setEditItemForm({...editItemForm, quantity: (quantity + 1).toString()});
     } else {
-      setErrors({...errors, quantity: true, helperText: 'Maximum 100 items.'})
+      setErrors({...errors, quantity: true, helperText: 'Maximum 100.'})
     }
   }
   const handleMinusQuantity = (): void => {
