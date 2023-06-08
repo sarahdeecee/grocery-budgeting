@@ -1,4 +1,4 @@
-import { FormControl, InputAdornment, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect, TextField, IconButton } from "@mui/material";
+import { FormControl, InputAdornment, Button, DialogTitle, DialogContent, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect, TextField, IconButton } from "@mui/material";
 import { useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { formatPrice, isPriceInvalid } from "../helpers/Helpers";
@@ -171,7 +171,6 @@ function EditItem(props: any) {
                   id: 'item-quantity-box',
                   type: 'number',
                   inputProps: { min: 0, max: 100 },
-                    // style: { width: '100%' },
                   startAdornment: 
                     <InputAdornment position="start">
                       <IconButton onClick={handleMinusQuantity} >
