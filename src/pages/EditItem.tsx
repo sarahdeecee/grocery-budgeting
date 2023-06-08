@@ -75,53 +75,48 @@ function EditItem(props: any) {
     </DialogTitle>
     <DialogContent>
       <Stack component="form" noValidate autoComplete="off" spacing={3}>
-        <FormControl variant="standard">
-          <TextField
-            value={editItemForm.name}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setErrors({...errors, name: false});
-              setEditItemForm({...editItemForm, name: e.target.value})
-            }}
-            inputProps={{ id: 'name-box' }}
-            variant="standard"
-            label="Item"
-            error={errors.name}
-            helperText={errors.name ? errors.helperText : ''}
+        <TextField
+          value={editItemForm.name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setErrors({...errors, name: false});
+            setEditItemForm({...editItemForm, name: e.target.value})
+          }}
+          inputProps={{ id: 'name-box' }}
+          variant="standard"
+          label="Item"
+          error={errors.name}
+          helperText={errors.name ? errors.helperText : ''}
           />
-        </FormControl>
-        <FormControl variant="standard">
-          <TextField
-            value={editItemForm.notes}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setEditItemForm({...editItemForm, notes: e.target.value})
-            }}
-            inputProps={{ id: 'notes-box' }}
-            variant="standard"
-            label="Notes"
-          />
-        </FormControl>
-        <Grid container>
-          <Grid item>
+        <TextField
+          value={editItemForm.notes}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setEditItemForm({...editItemForm, notes: e.target.value})
+          }}
+          inputProps={{ id: 'notes-box'}}
+          variant="standard"
+          label="Notes"
+        />
+        <Grid container xs={12}>
+          <Grid item xs={8} sm={6}>
             <FormControl variant="standard">
-              <TextField
-                value={editItemForm.price}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setEditItemForm({...editItemForm, price: e.target.value})
+              <InputLabel variant="standard" shrink htmlFor="category-box">
+                Category
+              </InputLabel>
+              <NativeSelect
+                inputProps={{
+                  name: 'category-box',
+                  id: 'item-category-box',
                 }}
-                InputProps={{
-                  inputMode: 'decimal',
-                  id: 'price-box',
-                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                  inputProps: {style: {width: '100%'}}
+                value={editItemForm.category}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                  setEditItemForm({...editItemForm, category: e.target.value})
                 }}
-                variant="standard"
-                label="Price"
-                helperText={isPriceInvalid(editItemForm.price) ? "Please enter a valid price." : null}
-                error={isPriceInvalid(editItemForm.price)}
-              />
+              >
+                {Array.isArray(categoriesAll) && categoriesAll.map(category => <option key={category} value={category}>{category}</option>)}
+              </NativeSelect>
             </FormControl>
           </Grid>
-          <Grid item sx={{flexDirection: 'row'}}>
+          <Grid item xs={4} sm={6} sx={{flexDirection: 'row'}}>
             <FormControl variant="standard">
               <InputLabel variant="standard" shrink htmlFor="item-tax-box">
                 Tax
@@ -143,27 +138,28 @@ function EditItem(props: any) {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container>
-          <Grid item xs={7}>
+        <Grid container xs={12}>
+          <Grid item xs={6} sm={6}>
             <FormControl variant="standard">
-            <InputLabel variant="standard" shrink htmlFor="category-box">
-              Category
-            </InputLabel>
-            <NativeSelect
-              inputProps={{
-                name: 'category-box',
-                id: 'item-category-box',
-              }}
-              value={editItemForm.category}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                setEditItemForm({...editItemForm, category: e.target.value})
-              }}
-            >
-              {Array.isArray(categoriesAll) && categoriesAll.map(category => <option key={category} value={category}>{category}</option>)}
-            </NativeSelect>
+              <TextField
+                value={editItemForm.price}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setEditItemForm({...editItemForm, price: e.target.value})
+                }}
+                InputProps={{
+                  inputMode: 'decimal',
+                  id: 'price-box',
+                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  inputProps: {style: {maxWidth: '10ch'}}
+                }}
+                variant="standard"
+                label="Price"
+                helperText={isPriceInvalid(editItemForm.price) ? "Please enter a valid price." : null}
+                error={isPriceInvalid(editItemForm.price)}
+              />
             </FormControl>
           </Grid>
-          <Grid item xs={5} sx={{flexDirection: 'row'}}>
+          <Grid item xs={5} sm={6} sx={{flexDirection: 'row'}}>
             <FormControl variant="standard">
               <TextField
                 InputProps={{
