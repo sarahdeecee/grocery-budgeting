@@ -52,6 +52,7 @@ function EditItem(props: any) {
     const MAX = 100;
     const quantity = Number.parseInt(editItemForm.quantity);
     if (quantity < MAX) {
+      setErrors({...errors, quantity: false});
       setEditItemForm({...editItemForm, quantity: (quantity + 1).toString()});
     } else {
       setErrors({...errors, quantity: true, helperText: 'Maximum 100 items.'})
@@ -61,9 +62,10 @@ function EditItem(props: any) {
     const MIN = 0;
     const quantity = Number.parseInt(editItemForm.quantity);
     if (quantity > MIN) {
+      setErrors({...errors, quantity: false});
       setEditItemForm({...editItemForm, quantity: (quantity - 1).toString()});
     } else {
-      setErrors({...errors, quantity: true, helperText: 'Minimum 1 item.'})
+      setErrors({...errors, quantity: true, helperText: 'Minimum 0.'})
     }
   }
   
@@ -167,6 +169,7 @@ function EditItem(props: any) {
                   name: 'quantity-box',
                   id: 'item-quantity-box',
                   type: 'number',
+                  inputProps: { min: 0, max: 100 },
                   startAdornment: 
                     <InputAdornment position="start">
                       <Remove fontSize="small" onClick={handleMinusQuantity} />
@@ -179,8 +182,15 @@ function EditItem(props: any) {
                 variant="standard"
                 value={editItemForm.quantity}
                 label="Quantity"
+                error={errors.quantity}
+                helperText={errors.quantity ? errors.helperText : ''}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setEditItemForm({...editItemForm, quantity: e.target.value})
+                  if ((Number.parseInt(e.target.value) >= 0 && Number.parseInt(e.target.value) <= 100) || e.target.value === '') {
+                    setErrors({...errors, quantity: false});
+                    setEditItemForm({...editItemForm, quantity: e.target.value})
+                  } else {
+                    setErrors({...errors, quantity: true, helperText: 'Out of range.'});
+                  }
                 }}
               />
             </FormControl>
