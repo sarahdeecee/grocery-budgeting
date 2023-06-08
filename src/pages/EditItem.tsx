@@ -1,4 +1,4 @@
-import { FormControl, InputAdornment, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect, TextField } from "@mui/material";
+import { FormControl, InputAdornment, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ButtonGroup, InputLabel, Grid, NativeSelect, TextField, IconButton } from "@mui/material";
 import { useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { formatPrice, isPriceInvalid } from "../helpers/Helpers";
@@ -163,22 +163,28 @@ function EditItem(props: any) {
             </FormControl>
           </Grid>
           <Grid item xs={4} sx={{flexDirection: 'row'}}>
-            <FormControl variant="standard" sx={{width: '8ch'}}>
+            <FormControl variant="standard">
               <TextField
                 InputProps={{
                   name: 'quantity-box',
                   id: 'item-quantity-box',
                   type: 'number',
                   inputProps: { min: 0, max: 100 },
+                    // style: { textAlign: 'right' },
                   startAdornment: 
                     <InputAdornment position="start">
-                      <Remove fontSize="small" onClick={handleMinusQuantity} />
+                      <IconButton onClick={handleMinusQuantity} >
+                        <Remove fontSize="small" />
+                      </IconButton>
                     </InputAdornment>,
                   endAdornment: 
                     <InputAdornment position="end">
-                      <Add fontSize="small" onClick={handleAddQuantity} />
+                      <IconButton onClick={handleAddQuantity} >
+                        <Add fontSize="small" />
+                      </IconButton>
                     </InputAdornment>,
                 }}
+                sx={{input: {textAlign: "center"}}}
                 variant="standard"
                 value={editItemForm.quantity}
                 label="Quantity"
