@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { formatPrice, isPriceInvalid } from "../helpers/Helpers";
 import { categoriesAll } from "../data/Categories";
+import { Add, Remove } from "@mui/icons-material";
 
 function EditItem(props: any) {
   const {handleDialogClose, items, setItems, editItem, handleDelete} = props;
@@ -17,6 +18,7 @@ function EditItem(props: any) {
   });
   const [errors, setErrors] = useState({
     name: false, 
+    quantity: false,
     helperText: ''
   })
 
@@ -46,6 +48,25 @@ function EditItem(props: any) {
     }
   }
 
+  const handleAddQuantity = (): void => {
+    const MAX = 100;
+    const quantity = Number.parseInt(editItemForm.quantity);
+    if (quantity < MAX) {
+      setEditItemForm({...editItemForm, quantity: (quantity + 1).toString()});
+    } else {
+      setErrors({...errors, quantity: true, helperText: 'Maximum 100 items.'})
+    }
+  }
+  const handleMinusQuantity = (): void => {
+    const MIN = 0;
+    const quantity = Number.parseInt(editItemForm.quantity);
+    if (quantity > MIN) {
+      setEditItemForm({...editItemForm, quantity: (quantity - 1).toString()});
+    } else {
+      setErrors({...errors, quantity: true, helperText: 'Minimum 1 item.'})
+    }
+  }
+  
   return (<>
     <DialogTitle id="alert-dialog-title">
       {"Edit item"}
@@ -91,7 +112,7 @@ function EditItem(props: any) {
                   startAdornment: <InputAdornment position="start">$</InputAdornment>,
                 }}
                 variant="standard"
-                label="Price:"
+                label="Price"
                 helperText={isPriceInvalid(editItemForm.price) ? "Please enter a valid price." : null}
                 error={isPriceInvalid(editItemForm.price)}
               />
@@ -140,22 +161,28 @@ function EditItem(props: any) {
             </FormControl>
           </Grid>
           <Grid item xs={4} sx={{flexDirection: 'row'}}>
-            <FormControl variant="standard" sx={{width: '7ch'}}>
-              <InputLabel variant="standard" shrink htmlFor="item-quantity-box">
-                Quantity
-              </InputLabel>
-              <NativeSelect
-                inputProps={{
+            <FormControl variant="standard" sx={{width: '8ch'}}>
+              <TextField
+                InputProps={{
                   name: 'quantity-box',
                   id: 'item-quantity-box',
+                  type: 'number',
+                  startAdornment: 
+                    <InputAdornment position="start">
+                      <Remove fontSize="small" onClick={handleMinusQuantity} />
+                    </InputAdornment>,
+                  endAdornment: 
+                    <InputAdornment position="end">
+                      <Add fontSize="small" onClick={handleAddQuantity} />
+                    </InputAdornment>,
                 }}
+                variant="standard"
                 value={editItemForm.quantity}
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                label="Quantity"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setEditItemForm({...editItemForm, quantity: e.target.value})
                 }}
-              >
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>{n}</option>)}
-              </NativeSelect>
+              />
             </FormControl>
           </Grid>
         </Grid>
