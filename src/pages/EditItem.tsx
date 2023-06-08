@@ -101,7 +101,7 @@ function EditItem(props: any) {
           />
         </FormControl>
         <Grid container>
-          <Grid item xs={8}>
+          <Grid item>
             <FormControl variant="standard">
               <TextField
                 value={editItemForm.price}
@@ -112,6 +112,7 @@ function EditItem(props: any) {
                   inputMode: 'decimal',
                   id: 'price-box',
                   startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  inputProps: {style: {width: '100%'}}
                 }}
                 variant="standard"
                 label="Price"
@@ -120,30 +121,30 @@ function EditItem(props: any) {
               />
             </FormControl>
           </Grid>
-          <Grid item xs={4} sx={{flexDirection: 'row'}}>
-          <FormControl variant="standard" sx={{width: '7ch'}}>
-            <InputLabel variant="standard" shrink htmlFor="item-tax-box">
-              Tax
-            </InputLabel>
-            <NativeSelect
-              inputProps={{
-                name: 'tax-box',
-                id: 'item-tax-box',
-              }}
-              value={editItemForm.tax}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                setEditItemForm({...editItemForm, tax: e.target.value})
-              }}
-            >
-              <option value={0}>None</option>
-              <option value={5}>5%</option>
-              <option value={13}>13%</option>
-            </NativeSelect>
+          <Grid item sx={{flexDirection: 'row'}}>
+            <FormControl variant="standard">
+              <InputLabel variant="standard" shrink htmlFor="item-tax-box">
+                Tax
+              </InputLabel>
+              <NativeSelect
+                inputProps={{
+                  name: 'tax-box',
+                  id: 'item-tax-box',
+                }}
+                value={editItemForm.tax}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                  setEditItemForm({...editItemForm, tax: e.target.value})
+                }}
+              >
+                <option value={0}>None</option>
+                <option value={5}>5%</option>
+                <option value={13}>13%</option>
+              </NativeSelect>
             </FormControl>
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs={8}>
+          <Grid item xs={7}>
             <FormControl variant="standard">
             <InputLabel variant="standard" shrink htmlFor="category-box">
               Category
@@ -162,7 +163,7 @@ function EditItem(props: any) {
             </NativeSelect>
             </FormControl>
           </Grid>
-          <Grid item xs={4} sx={{flexDirection: 'row'}}>
+          <Grid item xs={5} sx={{flexDirection: 'row'}}>
             <FormControl variant="standard">
               <TextField
                 InputProps={{
@@ -170,17 +171,17 @@ function EditItem(props: any) {
                   id: 'item-quantity-box',
                   type: 'number',
                   inputProps: { min: 0, max: 100 },
-                    // style: { textAlign: 'right' },
+                    // style: { width: '100%' },
                   startAdornment: 
                     <InputAdornment position="start">
                       <IconButton onClick={handleMinusQuantity} >
-                        <Remove fontSize="small" />
+                        <Remove />
                       </IconButton>
                     </InputAdornment>,
                   endAdornment: 
                     <InputAdornment position="end">
                       <IconButton onClick={handleAddQuantity} >
-                        <Add fontSize="small" />
+                        <Add  />
                       </IconButton>
                     </InputAdornment>,
                 }}
