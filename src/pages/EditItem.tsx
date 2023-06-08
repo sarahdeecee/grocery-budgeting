@@ -159,7 +159,7 @@ function EditItem(props: any) {
               />
             </FormControl>
           </Grid>
-          <Grid item xs={5} sm={6} sx={{flexDirection: 'row'}}>
+          <Grid item xs={6} sm={6} sx={{flexDirection: 'row'}}>
             <FormControl variant="standard">
               <TextField
                 InputProps={{
