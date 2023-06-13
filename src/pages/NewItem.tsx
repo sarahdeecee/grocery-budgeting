@@ -44,6 +44,7 @@ function NewItem(props: any) {
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
 
   const handleAddItem = (newItem: ItemForm): void => {
+    console.log(items.length);
     if (newItem.name === '') {
       setErrors({...errors, name: true})
     } else {
@@ -56,7 +57,8 @@ function NewItem(props: any) {
             tax: Number.parseInt(newItem.tax),
             notes: newItem.notes ?? '',
             category: newItem.category ?? 'Other',
-            checked: false
+            checked: false,
+            order: [...items].length
           }
           setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
           handleDialogClose();
@@ -64,6 +66,7 @@ function NewItem(props: any) {
       }
     }
   }
+  console.log(items);
 
   const handleAddItems = (items: string): void => {
     const itemsArr = items.split(/(,(\n|\s)*)|(^(\s+)\w)|\n+/g);

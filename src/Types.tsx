@@ -13,7 +13,8 @@ export interface ItemType extends hasName {
   tax: number,
   notes?: string,
   category?: string,
-  checked: boolean
+  checked: boolean,
+  order?: number
 }
 
 export const blankItem = {
