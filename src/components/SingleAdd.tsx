@@ -19,7 +19,7 @@ function SingleAdd(props: any) {
         variant="standard"
         label="Notes"
       />
-      <Grid container xs={12}>
+      <Grid container>
         {/* category */}
         <Grid item xs={8} sm={6}>
           <InputLabel variant="standard" shrink htmlFor="item-category-box">
@@ -59,7 +59,7 @@ function SingleAdd(props: any) {
           </NativeSelect>
         </Grid>
       </Grid>
-      <Grid container xs={12}>
+      <Grid container>
         <Grid item xs={6} sm={6}>
           {/* price */}
           <TextField
