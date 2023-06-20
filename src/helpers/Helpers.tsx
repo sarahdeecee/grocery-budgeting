@@ -29,22 +29,20 @@ export const formatPrice = (price: number): string => {
 }
 
 export const sortAZ = (a: hasName, b: hasName): number => {
+  console.log('sort A -> Z');
   const nameA = a.name.toLowerCase();
   const nameB = b.name.toLowerCase();
   return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
 }
-export const sortZA = (a: hasName, b: hasName): number => {
-  const nameA = a.name.toLowerCase();
-  const nameB = a.name.toLowerCase();
-  return (nameA < nameB) ? 1 : -1;
-}
 
 export const sortNewOld = (a: ItemType, b: ItemType): number => {
+  console.log('sort New -> Old');
   const orderA = a.order ? a.order : 0;
   const orderB = b.order ? b.order : 0;
-  return (orderA < orderB) ? 1 : -1;
+  return (orderA < orderB) ? -1 : (orderA > orderB) ? 1 : 0;
 }
 export const sortOldNew = (a: ItemType, b: ItemType): number => {
+  console.log('sort Old -> New');
   const orderA = a.order ? a.order : 0;
   const orderB = b.order ? b.order : 0;
   return (orderA > orderB) ? 1 : -1;

@@ -2,7 +2,6 @@ import { Settings } from "@mui/icons-material";
 import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { ItemType } from "../Types";
-import { sortAZ, sortNewOld, sortOldNew, sortZA } from "../helpers/Helpers";
 
 function Header(props: any) {
   const {items, setItems, handleDeleteAll, sortBy, setSortBy} = props;

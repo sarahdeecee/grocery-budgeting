@@ -1,7 +1,7 @@
 import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
-import { camelCaseTrim, isPriceEmpty, isPriceInvalid, sortAZ } from "../helpers/Helpers";
+import { camelCaseTrim, isPriceEmpty, isPriceInvalid } from "../helpers/Helpers";
 import { categoriesAll, commonItems } from "../data/Categories";
 import SingleAdd from "../components/SingleAdd";
 import MultiAdd from "../components/MultiAdd";
@@ -60,7 +60,7 @@ function NewItem(props: any) {
             checked: false,
             order: newItem.order
           }
-          setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
+          setItems((prev: ItemType[] = []) => [...prev, fullItem]);
           handleDialogClose();
         }
       }

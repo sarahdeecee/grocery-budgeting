@@ -4,7 +4,7 @@ import { ItemType } from '../Types';
 import CategoryBar from "../components/CategoryBar";
 import { categoriesAll } from "../data/Categories";
 import { useState } from "react";
-import { sortAZ, sortNewOld, sortOldNew, sortZA } from "../helpers/Helpers";
+import { sortAZ, sortNewOld, sortOldNew } from "../helpers/Helpers";
 
 interface CategoryOpenInterface {
   [key: string]: boolean, 
@@ -47,9 +47,9 @@ function ItemList(props: any) {
   }
 
   const itemsByCategories = Array.isArray(categoriesAll) && categoriesAll.map(category => <Box key={`${category}-box`}>
-    {items.filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} open={categoriesOpen[category]} handleCategory={handleCategory} />}
+    {[...items].filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} open={categoriesOpen[category]} handleCategory={handleCategory} />}
       <Collapse in={categoriesOpen[category]}>
-        {items.filter((item: ItemType) => item.category === category)
+        {[...items].filter((item: ItemType) => item.category === category)
           .reverse()
           // sort alphabetically
           .sort((itemA: ItemType, itemB: ItemType) => sortAZ(itemA, itemB))
@@ -62,20 +62,21 @@ function ItemList(props: any) {
   const itemsBySortType = (order: string) => {
     const sortedItems = [...items];
     if (order === 'new') {
-      sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortNewOld(itemA, itemB));
     } else if (order === 'old') {
-      sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortOldNew(itemA, itemB));
+      sortedItems.reverse();
     } else if (order === 'AZ') {
       sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortAZ(itemA, itemB));
     } else if (order === 'ZA') {
-      sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortZA(itemA, itemB));
+      sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortAZ(itemA, itemB)).reverse();
     }
+    console.log('sorted',sortedItems);
     
     return sortedItems.map((listedItem: ItemType) => 
       <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
     )
   }
   console.log('sort by: ', sortBy);
+  console.log(items);
 
   return (
     <List sx={{ p: 0, width: '100%', maxWidth: '600px', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column'}}>
