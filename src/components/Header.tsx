@@ -68,6 +68,8 @@ function Header(props: any) {
           onClose={handleMenuClose}
         >
           <MenuItem onClick={() => handleSortBy('category')}>Sort by Category</MenuItem>
+          <MenuItem onClick={() => handleSortBy('priceHigh')}>Sort Price High to Low</MenuItem>
+          <MenuItem onClick={() => handleSortBy('priceLow')}>Sort Price Low to High</MenuItem>
           <MenuItem onClick={() => handleSortBy('AZ')}>Sort A to Z</MenuItem>
           <MenuItem onClick={() => handleSortBy('ZA')}>Sort Z to A</MenuItem>
           <MenuItem onClick={() => handleSortBy('new')}>Sort New to Old</MenuItem>

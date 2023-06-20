@@ -9,8 +9,8 @@ function Item(props: any) {
   const {name, quantity, priceCents, tax, checked, notes} = listedItem ?? blankItem;
 
   const price = formatPrice(priceCents);
-  const quantityPrice = formatPrice(priceCents * quantity);
   const taxPrice = formatPrice(priceCents * quantity * (tax / 100));
+  const itemFullPrice = formatPrice((priceCents * quantity) + (priceCents * quantity * (tax / 100)));
   const labelId = `checkbox-list-label-${name}`;
 
   const itemFormatted = <Grid key={`grid7-${name}`} container  sx={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'center'}}>
@@ -20,10 +20,10 @@ function Item(props: any) {
     </Grid>
     <Grid key={`price-container-${name}`} item container sx={{flexDirection: 'row', justifyContent: 'flex-start'}}>
       <Grid item key={`grid9-${name}`}>
-        <Typography key={`price-${name}`}>{price}</Typography>
+        <Typography key={`price-${name}`}>{itemFullPrice}</Typography>
       </Grid>
       <Grid item key={`grid10-${name}`} sx={{ml: 1}}>
-        <Typography key={`qprice-${name}`} variant="caption">{`(${quantityPrice} + ${taxPrice})`}</Typography>
+        <Typography key={`qprice-${name}`} variant="caption">{`(${price} + ${taxPrice}) ${quantity === 1 ? '' : `* ${quantity}`}`}</Typography>
       </Grid>
     </Grid>
   </Grid>

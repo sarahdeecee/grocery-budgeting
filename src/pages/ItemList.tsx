@@ -4,7 +4,7 @@ import { ItemType } from '../Types';
 import CategoryBar from "../components/CategoryBar";
 import { categoriesAll } from "../data/Categories";
 import { useState } from "react";
-import { sortAZ } from "../helpers/Helpers";
+import { sortAZ, sortPrice } from "../helpers/Helpers";
 
 interface CategoryOpenInterface {
   [key: string]: boolean, 
@@ -69,6 +69,10 @@ function ItemList(props: any) {
       sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortAZ(itemA, itemB));
     } else if (order === 'ZA') {
       sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortAZ(itemA, itemB)).reverse();
+    } else if (order === 'priceHigh') {
+      sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortPrice(itemA, itemB));
+    } else if (order === 'priceLow') {
+      sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortPrice(itemA, itemB)).reverse();
     }
     
     return sortedItems
