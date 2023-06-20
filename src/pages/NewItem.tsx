@@ -28,7 +28,8 @@ function NewItem(props: any) {
     notes: '',
     tax: '13',
     category: 'Other',
-    quantity: '1'
+    quantity: '1',
+    order: 0
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
@@ -40,9 +41,8 @@ function NewItem(props: any) {
     // category: false,
     // quantity: false,
   })
-  
+  console.log(items);
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
-
   const handleAddItem = (newItem: ItemForm): void => {
     if (newItem.name === '') {
       setErrors({...errors, name: true})
@@ -57,7 +57,7 @@ function NewItem(props: any) {
             notes: newItem.notes ?? '',
             category: newItem.category ?? 'Other',
             checked: false,
-            order: [...items].length
+            order: newItem.order ?? items.length
           }
           setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
           handleDialogClose();
@@ -66,23 +66,25 @@ function NewItem(props: any) {
     }
   }
 
-  const handleAddItems = (items: string): void => {
-    const itemsArr = items.split(/(,(\n|\s)*)|(^(\s+)\w)|\n+/g);
+  const handleAddItems = (newItems: string): void => {
+    const itemsArr = newItems.split(/(,(\n|\s)*)|(^(\s+)\w)|\n+/g);
     const filteredArr: string[] = [];
     for (let item of itemsArr) {
       if (!((/^\W+$/).test(item) || filteredArr.includes(item) || !item)) {
         filteredArr.push(item);
       }
     }
+    let order = items.length;
     filteredArr.forEach((item: string) => {
       const price = '';
       const notes = '';
+      order++;
       if (commonItems.some(commonItem => commonItem.name.toLowerCase() === item.toLowerCase())) {
         const foundItem = commonItems.find(commonItem => commonItem.name.toLowerCase() === item.toLowerCase());
         const category = (foundItem && typeof foundItem.category === 'string') ? foundItem.category : 'Other';
-        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: category});
+        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: category, order});
       } else {
-        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: 'Other'});
+        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: 'Other', order});
       }
     });
   }
