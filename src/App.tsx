@@ -12,13 +12,14 @@ import ConfirmDeleteAll from './components/ConfirmDeleteAll';
 import { itemsDefault } from './data/DevData';
 
 function App() {
-  const [items, setItems] = useState<ItemType[] | []>([]);
+  const [items, setItems] = useState<ItemType[] | []>(itemsDefault);
   const [selectedItem, setSelectedItem] = useState<ItemType>(blankItem);
   const [editItem, setEditItem] = useState<Number | null>(null);
   const [dialog, setDialog] = useState<DialogType>({
     content: '',
     open: false
   })
+  const [sortBy, setSortBy] = useState<string>('category');
   
   useEffect(() => {
   
@@ -45,12 +46,12 @@ function App() {
   };
 
   return (<Stack className="App" sx={{top: 0, p: 0}}>
-    <Header items={items} setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} handleToggle={handleToggle} />
+    <Header items={items} setItems={setItems} handleDeleteAll={handleDialogConfirmDeleteAll} handleToggle={handleToggle} sortBy={sortBy} setSortBy={setSortBy} />
       {items.length === 0 ? <Box sx={{minHeight: 'calc(100vh - 60px - 56px)', width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
         <Typography variant="h5">No items added.</Typography>
       </Box> : 
       <Stack className="List" sx={{width: '100vw', maxWidth: '800px', alignItems: 'center', backgroundColor: 'white', zIndex: 1, minHeight: 'calc(100vh - 60px - 56px)'}}>
-        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} handleDialogConfirmDelete={handleDialogConfirmDelete} handleToggle={handleToggle} editItem={editItem} setEditItem={setEditItem} />
+        <ItemList setSelectedItem={setSelectedItem} items={items} setItems={setItems} handleDialogOpen={handleDialogOpen} handleDialogConfirmDelete={handleDialogConfirmDelete} handleToggle={handleToggle} editItem={editItem} setEditItem={setEditItem} sortBy={sortBy} setSortBy={setSortBy} />
       </Stack>}
       <Footer items={items} handleDialogOpen={handleDialogOpen} />
       <Dialog fullWidth open={dialog.open}>

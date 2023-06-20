@@ -5,7 +5,7 @@ import { ItemType } from "../Types";
 import { sortAZ, sortNewOld, sortOldNew, sortZA } from "../helpers/Helpers";
 
 function Header(props: any) {
-  const {items, setItems, handleDeleteAll} = props;
+  const {items, setItems, handleDeleteAll, sortBy, setSortBy} = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (e: React.MouseEvent<HTMLElement>): void => {
@@ -33,30 +33,9 @@ function Header(props: any) {
     setAnchorEl(null);
   }
   
-  const handleSortAZ = (): void => {
-    const newItems = [...items].sort((a, b) => sortAZ(a, b)).reverse();
-    setItems(newItems);
+  const handleSortBy = (order: string): void => {
+    setSortBy(order);
     setAnchorEl(null);
-  }
-  const handleSortZA = (): void => {
-    const newItems = [...items].sort((a, b) => sortZA(a, b)).reverse();
-    setItems(newItems);
-    setAnchorEl(null);
-  }
-  
-  const handleSortOrderNew = (): void => {
-    const newItems = [...items].sort((a, b) => sortNewOld(a, b)).reverse();
-    setItems(newItems);
-    setAnchorEl(null);
-  }
-  const handleSortOrderOld = (): void => {
-    const newItems = [...items].sort((a, b) => sortOldNew(a, b)).reverse();
-    setItems(newItems);
-    setAnchorEl(null);
-  }
-
-  const handleSortCategory = (): void => {
-    
   }
 
   return (
@@ -89,9 +68,11 @@ function Header(props: any) {
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleSortCategory}>Sort by Category</MenuItem>
-          <MenuItem onClick={handleSortOrderNew}>Sort New to Old</MenuItem>
-          <MenuItem onClick={handleSortOrderOld}>Sort Old to New</MenuItem>
+          <MenuItem onClick={() => handleSortBy('category')}>Sort by Category</MenuItem>
+          <MenuItem onClick={() => handleSortBy('AZ')}>Sort A to Z</MenuItem>
+          <MenuItem onClick={() => handleSortBy('ZA')}>Sort Z to A</MenuItem>
+          <MenuItem onClick={() => handleSortBy('new')}>Sort New to Old</MenuItem>
+          <MenuItem onClick={() => handleSortBy('old')}>Sort Old to New</MenuItem>
           <MenuItem onClick={handleSelectAll}>Select All</MenuItem>
           <MenuItem onClick={handleDeselectAll}>Deselect All</MenuItem>
           <MenuItem onClick={handleDeleteAllClose}>Delete All</MenuItem>
