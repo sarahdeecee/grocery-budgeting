@@ -9,8 +9,8 @@ function Item(props: any) {
   const {name, quantity, priceCents, tax, checked, notes} = listedItem ?? blankItem;
 
   const price = formatPrice(priceCents);
-  const taxPrice = formatPrice(priceCents * quantity * (tax / 100));
-  const itemFullPrice = formatPrice((priceCents * quantity) + (priceCents * quantity * (tax / 100)));
+  const taxPrice = formatPrice(priceCents * (tax / 100));
+  const itemFullPrice = formatPrice(((priceCents) + (priceCents * (tax / 100))) * quantity);
   const labelId = `checkbox-list-label-${name}`;
 
   const itemFormatted = <Grid key={`grid7-${name}`} container  sx={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'center'}}>
