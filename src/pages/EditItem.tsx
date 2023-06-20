@@ -96,7 +96,7 @@ function EditItem(props: any) {
           variant="standard"
           label="Notes"
         />
-        <Grid container xs={12}>
+        <Grid container>
           <Grid item xs={8} sm={6}>
             <FormControl variant="standard">
               <InputLabel variant="standard" shrink htmlFor="category-box">
@@ -138,7 +138,7 @@ function EditItem(props: any) {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container xs={12}>
+        <Grid container>
           <Grid item xs={6} sm={6}>
             <FormControl variant="standard">
               <TextField
