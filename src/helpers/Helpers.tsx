@@ -34,10 +34,15 @@ export const sortAZ = (a: hasName, b: hasName): number => {
   return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
 }
 
-export const sortPrice = (a: ItemType, b: ItemType): number => {
+export const sortPriceHigh = (a: ItemType, b: ItemType): number => {
   const priceA = a.priceCents * a.quantity * (a.tax / 100 + 1);
   const priceB = b.priceCents * b.quantity * (b.tax / 100 + 1);
   return (priceA < priceB) ? 1 : (priceA > priceB) ? -1 : 0;
+}
+export const sortPriceLow = (a: ItemType, b: ItemType): number => {
+  const priceA = a.priceCents * a.quantity * (a.tax / 100 + 1);
+  const priceB = b.priceCents * b.quantity * (b.tax / 100 + 1);
+  return (priceB < priceA) ? 1 : (priceB > priceA) ? -1 : 0;
 }
 
 export const sortByCategory = (a: CommonItem, b: CommonItem): number => {
