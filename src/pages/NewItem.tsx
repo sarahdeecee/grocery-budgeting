@@ -78,7 +78,6 @@ function NewItem(props: any) {
     filteredArr.forEach((item: string) => {
       const price = '';
       const notes = '';
-      order++;
       if (commonItems.some(commonItem => commonItem.name.toLowerCase() === item.toLowerCase())) {
         const foundItem = commonItems.find(commonItem => commonItem.name.toLowerCase() === item.toLowerCase());
         const category = (foundItem && typeof foundItem.category === 'string') ? foundItem.category : 'Other';
@@ -86,6 +85,7 @@ function NewItem(props: any) {
       } else {
         handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: 'Other', order});
       }
+      order++;
     });
   }
 
