@@ -62,16 +62,17 @@ function ItemList(props: any) {
   const itemsBySortType = (order: string) => {
     const sortedItems = [...items];
     if (order === 'new') {
-      // array default order
-    } else if (order === 'old') {
       sortedItems.reverse();
+    } else if (order === 'old') {
+      // array default order
     } else if (order === 'AZ') {
       sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortAZ(itemA, itemB));
     } else if (order === 'ZA') {
       sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortAZ(itemA, itemB)).reverse();
     }
     
-    return sortedItems.map((listedItem: ItemType) => 
+    return sortedItems
+      .map((listedItem: ItemType) => 
       <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
     )
   }
