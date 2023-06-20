@@ -29,7 +29,7 @@ function NewItem(props: any) {
     tax: '13',
     category: 'Other',
     quantity: '1',
-    order: 0
+    order: undefined
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
