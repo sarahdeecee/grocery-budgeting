@@ -1,5 +1,5 @@
 import { Settings } from "@mui/icons-material";
-import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
+import { AppBar, Divider, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { ItemType } from "../Types";
 
@@ -74,6 +74,7 @@ function Header(props: any) {
           <MenuItem onClick={() => handleSortBy('ZA')}>Sort Z to A</MenuItem>
           <MenuItem onClick={() => handleSortBy('new')}>Sort New to Old</MenuItem>
           <MenuItem onClick={() => handleSortBy('old')}>Sort Old to New</MenuItem>
+          <Divider />
           <MenuItem onClick={handleSelectAll}>Select All</MenuItem>
           <MenuItem onClick={handleDeselectAll}>Deselect All</MenuItem>
           <MenuItem onClick={handleDeleteAllClose}>Delete All</MenuItem>
