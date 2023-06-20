@@ -41,8 +41,9 @@ function NewItem(props: any) {
     // category: false,
     // quantity: false,
   })
-  console.log(items);
-  const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>)
+  
+  const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>);
+  
   const handleAddItem = (newItem: ItemForm): void => {
     if (newItem.name === '') {
       setErrors({...errors, name: true})
