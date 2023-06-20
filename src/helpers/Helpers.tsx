@@ -1,4 +1,4 @@
-import { CommonItem, hasName } from "../Types";
+import { CommonItem, ItemType, hasName } from "../Types";
 
 export const camelCaseTrim = (string: string) => {
   let result = '';
@@ -38,6 +38,18 @@ export const sortZA = (a: hasName, b: hasName): number => {
   const nameB = a.name.toLowerCase();
   return (nameA < nameB) ? 1 : -1;
 }
+
+export const sortNewOld = (a: ItemType, b: ItemType): number => {
+  const orderA = a.order ? a.order : 0;
+  const orderB = b.order ? b.order : 0;
+  return (orderA < orderB) ? 1 : -1;
+}
+export const sortOldNew = (a: ItemType, b: ItemType): number => {
+  const orderA = a.order ? a.order : 0;
+  const orderB = b.order ? b.order : 0;
+  return (orderA > orderB) ? 1 : -1;
+}
+
 export const sortByCategory = (a: CommonItem, b: CommonItem): number => {
   if (a.category && b.category) {
     return (a.category < b.category) ? -1 : (a.category > b.category) ? 1 : 0;

@@ -2,7 +2,7 @@ import { Settings } from "@mui/icons-material";
 import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { ItemType } from "../Types";
-import { sortAZ, sortZA } from "../helpers/Helpers";
+import { sortAZ, sortNewOld, sortOldNew, sortZA } from "../helpers/Helpers";
 
 function Header(props: any) {
   const {items, setItems, handleDeleteAll} = props;
@@ -43,12 +43,20 @@ function Header(props: any) {
     setItems(newItems);
     setAnchorEl(null);
   }
-
+  
   const handleSortOrderNew = (): void => {
-    
+    const newItems = [...items].sort((a, b) => sortNewOld(a, b)).reverse();
+    setItems(newItems);
+    setAnchorEl(null);
   }
   const handleSortOrderOld = (): void => {
+    const newItems = [...items].sort((a, b) => sortOldNew(a, b)).reverse();
+    setItems(newItems);
+    setAnchorEl(null);
+  }
 
+  const handleSortCategory = (): void => {
+    
   }
 
   return (
@@ -81,6 +89,7 @@ function Header(props: any) {
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
         >
+          <MenuItem onClick={handleSortCategory}>Sort by Category</MenuItem>
           <MenuItem onClick={handleSortOrderNew}>Sort New to Old</MenuItem>
           <MenuItem onClick={handleSortOrderOld}>Sort Old to New</MenuItem>
           <MenuItem onClick={handleSelectAll}>Select All</MenuItem>
