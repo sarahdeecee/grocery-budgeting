@@ -45,7 +45,6 @@ function NewItem(props: any) {
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>);
 
   const handleAddItem = (newItem: ItemForm): void => {
-    console.log(newItem);
     if (newItem.name === '') {
       setErrors({...errors, name: true})
     } else {
@@ -77,8 +76,6 @@ function NewItem(props: any) {
       }
     }
     let itemOrder = newItem.order === undefined ? 0 : newItem.order;
-    setNewItem({...newItem, order: itemOrder});
-    console.log('order ',itemOrder, newItem.order);
     filteredArr.forEach((item: string) => {
       const price = '';
       const notes = '';
@@ -91,8 +88,6 @@ function NewItem(props: any) {
       }
       itemOrder++;
     });
-    console.log('change order ',itemOrder);
-    console.log(newItem);
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {
