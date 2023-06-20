@@ -44,6 +44,13 @@ function Header(props: any) {
     setAnchorEl(null);
   }
 
+  const handleSortOrderNew = (): void => {
+    
+  }
+  const handleSortOrderOld = (): void => {
+
+  }
+
   return (
     <AppBar position="relative" color="primary" sx={{ bottom: 'auto', top: 0, height: '60px', width: '100vw', maxWidth: '800px'}}>
       <Toolbar sx={{justifyContent: 'space-between'}}>
@@ -74,6 +81,8 @@ function Header(props: any) {
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
         >
+          <MenuItem onClick={handleSortOrderNew}>Sort New to Old</MenuItem>
+          <MenuItem onClick={handleSortOrderOld}>Sort Old to New</MenuItem>
           <MenuItem onClick={handleSelectAll}>Select All</MenuItem>
           <MenuItem onClick={handleDeselectAll}>Deselect All</MenuItem>
           <MenuItem onClick={handleDeleteAllClose}>Delete All</MenuItem>
