@@ -13,7 +13,7 @@ function ConfirmDelete(props: any) {
     const remainingItems = [];
     for (let item of items) {
       if (item.name !== selectedItem.name) { // all items except selected
-        if (selectedItem.order && item.order > selectedItem.order) { // update order for items after selected item
+        if (selectedItem.order !== undefined && item.order > selectedItem.order) { // update order for items after selected item
           item.order--;
         }
         remainingItems.push(item);

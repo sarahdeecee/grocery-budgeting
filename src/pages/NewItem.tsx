@@ -29,7 +29,7 @@ function NewItem(props: any) {
     tax: '13',
     category: 'Other',
     quantity: '1',
-    order: undefined
+    order: items.length
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
@@ -43,8 +43,9 @@ function NewItem(props: any) {
   })
   
   const categoryOptions = [...categoriesAll].map(category => <option key={category} value={category}>{category}</option>);
-  
+
   const handleAddItem = (newItem: ItemForm): void => {
+    console.log(newItem);
     if (newItem.name === '') {
       setErrors({...errors, name: true})
     } else {
@@ -58,7 +59,7 @@ function NewItem(props: any) {
             notes: newItem.notes ?? '',
             category: newItem.category ?? 'Other',
             checked: false,
-            order: newItem.order ?? items.length
+            order: newItem.order
           }
           setItems((prev: ItemType[] = []) => [...prev, fullItem].sort((a, b) => sortAZ(a, b)).reverse());
           handleDialogClose();
@@ -75,19 +76,23 @@ function NewItem(props: any) {
         filteredArr.push(item);
       }
     }
-    let order = items.length;
+    let itemOrder = newItem.order === undefined ? 0 : newItem.order;
+    setNewItem({...newItem, order: itemOrder});
+    console.log('order ',itemOrder, newItem.order);
     filteredArr.forEach((item: string) => {
       const price = '';
       const notes = '';
       if (commonItems.some(commonItem => commonItem.name.toLowerCase() === item.toLowerCase())) {
         const foundItem = commonItems.find(commonItem => commonItem.name.toLowerCase() === item.toLowerCase());
         const category = (foundItem && typeof foundItem.category === 'string') ? foundItem.category : 'Other';
-        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: category, order});
+        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: category, order: itemOrder});
       } else {
-        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: 'Other', order});
+        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: 'Other', order: itemOrder});
       }
-      order++;
+      itemOrder++;
     });
+    console.log('change order ',itemOrder);
+    console.log(newItem);
   }
 
   const handleToggleChange = (e: React.MouseEvent<HTMLElement>, type: string): void => {

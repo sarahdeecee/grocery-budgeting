@@ -38,7 +38,7 @@ export type ItemForm = {
   tax: string,
   category: string,
   quantity: string, 
-  order?: number
+  order: number
 }
 
 export type CommonItem = {
