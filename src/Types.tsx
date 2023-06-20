@@ -14,7 +14,6 @@ export interface ItemType extends hasName {
   notes?: string,
   category?: string,
   checked: boolean,
-  order?: number
 }
 
 export const blankItem = {
@@ -38,7 +37,6 @@ export type ItemForm = {
   tax: string,
   category: string,
   quantity: string, 
-  order: number
 }
 
 export type CommonItem = {

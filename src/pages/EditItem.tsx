@@ -15,7 +15,6 @@ function EditItem(props: any) {
     tax: items[editItem].tax ?? '13',
     quantity: items[editItem].quantity ?? '1',
     category: items[editItem].category ?? 'Other',
-    order: items[editItem].order
   });
   const [errors, setErrors] = useState({
     name: false, 

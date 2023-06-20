@@ -4,7 +4,7 @@ import { ItemType } from '../Types';
 import CategoryBar from "../components/CategoryBar";
 import { categoriesAll } from "../data/Categories";
 import { useState } from "react";
-import { sortAZ, sortNewOld, sortOldNew } from "../helpers/Helpers";
+import { sortAZ } from "../helpers/Helpers";
 
 interface CategoryOpenInterface {
   [key: string]: boolean, 
@@ -62,6 +62,7 @@ function ItemList(props: any) {
   const itemsBySortType = (order: string) => {
     const sortedItems = [...items];
     if (order === 'new') {
+      // array default order
     } else if (order === 'old') {
       sortedItems.reverse();
     } else if (order === 'AZ') {
@@ -69,19 +70,15 @@ function ItemList(props: any) {
     } else if (order === 'ZA') {
       sortedItems.sort((itemA: ItemType, itemB: ItemType) => sortAZ(itemA, itemB)).reverse();
     }
-    console.log('sorted',sortedItems);
     
     return sortedItems.map((listedItem: ItemType) => 
       <Item key={`item-comp-${listedItem.name}`} listedItem={listedItem} items={items} setSelectedItem={setSelectedItem} handleToggle={handleToggle} handleQuantityUp={handleQuantityUp} handleQuantityDown={handleQuantityDown} handleItemEdit={handleDialogEdit} />
     )
   }
-  console.log('sort by: ', sortBy);
-  console.log(items);
 
   return (
     <List sx={{ p: 0, width: '100%', maxWidth: '600px', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column'}}>
-      {sortBy === 'category' ? itemsByCategories
-      : itemsBySortType(sortBy)}
+      {sortBy === 'category' ? itemsByCategories : itemsBySortType(sortBy)}
     </List>
   );
 }

@@ -6,23 +6,15 @@ function ConfirmDelete(props: any) {
   const {handleDialogClose, items, setItems, selectedItem} = props;
 
   const handleItemDelete = (selectedItem: ItemType): void => {
-    // change order
-    console.log(items);
-    
     // setItems(items: ItemType[]) => items.filter((item: ItemType) => item.name !== selectedItem.name)
     const remainingItems = [];
     for (let item of items) {
       if (item.name !== selectedItem.name) { // all items except selected
-        if (selectedItem.order !== undefined && item.order > selectedItem.order) { // update order for items after selected item
-          item.order--;
-        }
         remainingItems.push(item);
       }
     }
     setItems(remainingItems);
     handleDialogClose();
-
-    console.log(remainingItems);
   }
 
   return (<>

@@ -8,8 +8,7 @@ export const itemsDefault: ItemType[] = [
     tax: 0,
     notes: "It's super tasty",
     checked: false,
-    category: 'Produce',
-    order: 0
+    category: 'Produce'
   },
   {
     name: 'Orange',
@@ -17,8 +16,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 500,
     tax: 0,
     checked: false,
-    category: 'Produce',
-    order: 1
+    category: 'Produce'
   },
   {
     name: 'Milk',
@@ -26,8 +24,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 500,
     tax: 0,
     checked: false,
-    category: 'Dairy & Alternatives',
-    order: 2
+    category: 'Dairy & Alternatives'
   },
   {
     name: 'Bread',
@@ -35,8 +32,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 500,
     tax: 5,
     checked: false,
-    category: 'Grains & Bakery',
-    order: 3
+    category: 'Grains & Bakery'
   },
   {
     name: 'Cookies',
@@ -44,8 +40,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 500,
     tax: 13,
     checked: false,
-    category: 'Grains & Bakery',
-    order: 4
+    category: 'Grains & Bakery'
   },
   {
     name: 'Bananas',
@@ -53,8 +48,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Produce',
-    order: 5
+    category: 'Produce'
   },
   {
     name: 'Pop',
@@ -62,8 +56,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Beverages',
-    order: 6
+    category: 'Beverages'
   },
   {
     name: 'Muffins',
@@ -71,8 +64,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Grains & Bakery',
-    order: 7
+    category: 'Grains & Bakery'
   },
   {
     name: 'Sugar',
@@ -80,8 +72,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Pantry',
-    order: 8
+    category: 'Pantry'
   },
   {
     name: 'Coffee',
@@ -89,8 +80,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Beverages',
-    order: 9
+    category: 'Beverages'
   },
   {
     name: 'Creamer',
@@ -98,8 +88,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Dairy & Alternatives',
-    order: 10
+    category: 'Dairy & Alternatives'
   },
   {
     name: 'Salt',
@@ -107,8 +96,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Pantry',
-    order: 11
+    category: 'Pantry'
   },
   {
     name: 'Juice',
@@ -116,8 +104,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Beverages',
-    order: 12
+    category: 'Beverages'
   },
   {
     name: 'Cake',
@@ -125,8 +112,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Grains & Bakery',
-    order: 13
+    category: 'Grains & Bakery'
   },
   {
     name: 'Asparagus',
@@ -134,8 +120,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Produce',
-    order: 14
+    category: 'Produce'
   },
   {
     name: 'Spinach',
@@ -143,8 +128,7 @@ export const itemsDefault: ItemType[] = [
     priceCents: 100,
     tax: 13,
     checked: false,
-    category: 'Produce',
-    order: 15
+    category: 'Produce'
   },
   {
     name: 'Chips',
@@ -152,7 +136,6 @@ export const itemsDefault: ItemType[] = [
     priceCents: 199,
     tax: 13,
     checked: false,
-    category: 'Snacks',
-    order: 16
+    category: 'Snacks'
   },
 ];

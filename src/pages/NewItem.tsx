@@ -29,7 +29,6 @@ function NewItem(props: any) {
     tax: '13',
     category: 'Other',
     quantity: '1',
-    order: items.length
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
@@ -58,7 +57,6 @@ function NewItem(props: any) {
             notes: newItem.notes ?? '',
             category: newItem.category ?? 'Other',
             checked: false,
-            order: newItem.order
           }
           setItems((prev: ItemType[] = []) => [...prev, fullItem]);
           handleDialogClose();
@@ -75,18 +73,16 @@ function NewItem(props: any) {
         filteredArr.push(item);
       }
     }
-    let itemOrder = newItem.order === undefined ? 0 : newItem.order;
     filteredArr.forEach((item: string) => {
       const price = '';
       const notes = '';
       if (commonItems.some(commonItem => commonItem.name.toLowerCase() === item.toLowerCase())) {
         const foundItem = commonItems.find(commonItem => commonItem.name.toLowerCase() === item.toLowerCase());
         const category = (foundItem && typeof foundItem.category === 'string') ? foundItem.category : 'Other';
-        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: category, order: itemOrder});
+        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: category});
       } else {
-        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: 'Other', order: itemOrder});
+        handleAddItem({name: item, tax: '13', quantity: '1', price, notes, category: 'Other'});
       }
-      itemOrder++;
     });
   }
 
