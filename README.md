@@ -52,10 +52,10 @@ Users can input prices and quantities of items and see if they are within budget
 | :white_check_mark: | Users can have items automatically categorized |
 | :white_check_mark: | User lists are automatically sorted alphabetically |
 | :white_check_mark: | User lists are automatically sorted by category |
-| :black_square_button: | Users can colour-code items |
 | :white_check_mark: | Users can choose items from categories |
-| :black_square_button: | Users can change the order of their items |
 | :white_check_mark: | Users can sort their items in various ways (order added, alphabetical, by price) |
+| :black_square_button: | Users can colour-code items |
+| :black_square_button: | Users can change the order of their items |
 | :black_square_button: | Users can save templates with items |
 | :black_square_button: | Users can download `receipts` (list with items and total) |
 | :black_square_button: | Users can add priority to items |
