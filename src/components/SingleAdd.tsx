@@ -1,6 +1,7 @@
 import { FormControl, Grid, InputAdornment, InputLabel, NativeSelect, Stack, TextField } from "@mui/material"
 import AutoCompleteName from "./AutoCompleteName"
 import { isPriceInvalid } from "../helpers/Helpers";
+import PriceByWeight from "./PriceByWeight";
 
 function SingleAdd(props: any) {
   const {newItem, setNewItem, errors, setErrors, categoryOptions} = props;
@@ -59,9 +60,10 @@ function SingleAdd(props: any) {
           </NativeSelect>
         </Grid>
       </Grid>
-      <Grid container>
+      <PriceByWeight newItem={newItem} setNewItem={setNewItem} />
+      {/* <Grid container>
         <Grid item xs={6} sm={6}>
-          {/* price */}
+          // price
           <TextField
             value={newItem.price}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +82,7 @@ function SingleAdd(props: any) {
           />
         </Grid>
         <Grid item xs={6} sm={6} sx={{flexDirection: 'row'}}>
-          {/* quantity */}
+          // quantity 
           <TextField
             inputProps={{
               name: 'quantity-box',
@@ -98,7 +100,7 @@ function SingleAdd(props: any) {
           label="Quantity"
           />
         </Grid>
-      </Grid>
+      </Grid> */}
     </Stack>
   )
 }
