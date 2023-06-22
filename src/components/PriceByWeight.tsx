@@ -7,7 +7,9 @@ function PriceByWeight(props: any) {
   const [unit, setUnit] = useState<'g'|'kg'|'lb'>('g');
 
   const handleUnit = (e: React.MouseEvent<HTMLElement>, newUnit: 'g' | 'kg' | 'lb') => {
-    setUnit(newUnit);
+    if (newUnit !== null) {
+      setUnit(newUnit);
+    }
   };
 
   const unitToggle = <ToggleButtonGroup
