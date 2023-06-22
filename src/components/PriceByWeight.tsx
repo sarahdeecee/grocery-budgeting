@@ -1,6 +1,7 @@
-import { Grid, Input, InputAdornment, TextField, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Grid, Input, InputAdornment, InputLabel, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { isPriceInvalid } from "../helpers/Helpers";
 import { useState } from "react";
+import { Label } from "@mui/icons-material";
 
 function PriceByWeight(props: any) {
   const {newItem, setNewItem} = props;
@@ -17,6 +18,8 @@ function PriceByWeight(props: any) {
     exclusive
     onChange={handleUnit}
     aria-label="weight unit"
+    sx={{height: '1rem'}}
+    id="item-weight-toggle"
   >
     <ToggleButton className="unit-button" value="g" aria-label="left aligned">
       g
@@ -29,7 +32,7 @@ function PriceByWeight(props: any) {
     </ToggleButton>
   </ToggleButtonGroup>
 
-  return (
+  return (<>
     <Grid container>
       <Grid item xs={6} sm={6}>
         {/* price */}
@@ -69,9 +72,33 @@ function PriceByWeight(props: any) {
           label="Weight"
         />
       </Grid>
-      {unitToggle}
     </Grid>
-  )
+    <Grid container>
+      <Grid item xs={6}>
+        <InputLabel variant="standard" shrink htmlFor="item-weight-toggle">
+          Unit of weight:
+        </InputLabel>
+        {unitToggle}
+      </Grid>
+      <Grid item xs={6}>
+      <TextField
+        value={newItem.price * newItem.quantity}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setNewItem({...newItem, price: e.target.value})
+        }}
+        InputProps={{
+          inputMode: 'decimal',
+          id: 'price-box',
+          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+        }}
+        variant="standard"
+        label="Price"
+        helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
+        error={isPriceInvalid(newItem.price)}
+      />
+      </Grid>
+    </Grid>
+  </>)
 };
 
 export default PriceByWeight;
