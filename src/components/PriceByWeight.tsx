@@ -40,31 +40,31 @@ function PriceByWeight(props: any) {
             inputMode: 'decimal',
             id: 'price-box',
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            endAdornment: <InputAdornment position="end">{`/${unit}`}</InputAdornment>,
             inputProps: {style: {maxWidth: '10ch'}}
           }}
           variant="standard"
-          label="Price"
+          label={`Price per ${unit}`}
           helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
           error={isPriceInvalid(newItem.price)}
         />
       </Grid>
       <Grid item xs={6} sm={6} sx={{flexDirection: 'row'}}>
-        {/* quantity */}
-        <Input
-          inputProps={{
+        {/* weight */}
+        <TextField
+          InputProps={{
             name: 'weight-box',
             id: 'item-weight-box',
             inputMode: 'numeric',
-            min: 0, max: 100,
-            // style: {width: '10ch'},
+            endAdornment: <InputAdornment position="end">{unit}</InputAdornment>
           }}
-          endAdornment={<InputAdornment position="end">{unit}</InputAdornment>}
           value={newItem.quantity}
+          variant="standard"
           type='number'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewItem({...newItem, quantity: e.target.value})
           }}
-        // label="Weight"
+          label="Weight"
         />
       </Grid>
       {unitToggle}
