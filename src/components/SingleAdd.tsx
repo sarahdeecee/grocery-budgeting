@@ -48,7 +48,6 @@ function SingleAdd(props: any) {
   </Grid>
   const priceBox = byWeight ? <PriceByWeight newItem={newItem} setNewItem={setNewItem} />
     : priceAndQuantity;
-  console.log(byWeight);
 
   return (
     <Stack component="form" noValidate autoComplete="on" spacing={3}>
