@@ -5,6 +5,7 @@ import { camelCaseTrim, isPriceEmpty, isPriceInvalid } from "../helpers/Helpers"
 import { categoriesAll, commonItems } from "../data/Categories";
 import SingleAdd from "../components/SingleAdd";
 import MultiAdd from "../components/MultiAdd";
+import PriceSwitch from "../components/PriceSwitch";
 
 function MyFormHelperText() {
   const { focused } = useFormControl() || {};
@@ -32,6 +33,7 @@ function NewItem(props: any) {
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
+  const [priceByWeight, setPriceByWeight] = useState<boolean>(true);
   const [errors, setErrors] = useState({
     name: false,
     // price: false,
@@ -90,6 +92,10 @@ function NewItem(props: any) {
     setAddType(type);
   }
 
+  const handlePriceSwitch = (e: React.MouseEvent<HTMLElement>, type: string): void => {
+    priceByWeight ? setPriceByWeight(false) : setPriceByWeight(true);
+  }
+
   const addTypeToggle = <ToggleButtonGroup
     color="primary"
     value={addType}
@@ -132,6 +138,7 @@ function NewItem(props: any) {
       {addType === 'single' ? singleAdd : multiAdd}
     </DialogContent>
     <DialogActions>
+      <PriceSwitch handlePriceSwitch={handlePriceSwitch} />
       <Button onClick={handleDialogClose}>Cancel</Button>
       {addType === 'single' ? singleAddButton : multiAddButton}
     </DialogActions>

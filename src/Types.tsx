@@ -44,3 +44,15 @@ export type CommonItem = {
   name: string,
   category?: string
 }
+
+export interface WeightPriceType {
+  weight: number,
+  unit: 'kg' | 'g' | 'lb',
+  pricePerUnit: number
+}
+
+export interface WeightPriceForm {
+  weight: string,
+  unit: 'kg' | 'g' | 'lb',
+  pricePerUnit: string
+}
