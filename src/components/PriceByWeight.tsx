@@ -6,6 +6,10 @@ import { Label } from "@mui/icons-material";
 function PriceByWeight(props: any) {
   const {newItem, setNewItem} = props;
   const [unit, setUnit] = useState<'g'|'kg'|'lb'>('g');
+  const [pricePer, setPricePer] = useState<string>('');
+  const [weight, setWeight] = useState<string>('');
+
+  const price = newItem.price;
 
   const handleUnit = (e: React.MouseEvent<HTMLElement>, newUnit: 'g' | 'kg' | 'lb') => {
     if (newUnit !== null) {
@@ -35,23 +39,23 @@ function PriceByWeight(props: any) {
   return (<>
     <Grid container>
       <Grid item xs={6} sm={6}>
-        {/* price */}
+        {/* price per unit */}
         <TextField
-          value={newItem.price}
+          value={pricePer}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, price: e.target.value})
+            setPricePer(e.target.value);
           }}
           InputProps={{
             inputMode: 'decimal',
-            id: 'price-box',
+            id: 'price-per-unit-box',
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
             endAdornment: <InputAdornment position="end">{`/${unit}`}</InputAdornment>,
             inputProps: {style: {maxWidth: '10ch'}}
           }}
           variant="standard"
           label={`Price per ${unit}`}
-          helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
-          error={isPriceInvalid(newItem.price)}
+          helperText={isPriceInvalid(pricePer) ? `Please enter a valid price per ${unit}.` : null}
+          error={isPriceInvalid(pricePer)}
         />
       </Grid>
       <Grid item xs={6} sm={6} sx={{flexDirection: 'row'}}>
@@ -75,12 +79,14 @@ function PriceByWeight(props: any) {
     </Grid>
     <Grid container>
       <Grid item xs={6}>
+        {/* unit */}
         <InputLabel variant="standard" shrink htmlFor="item-weight-toggle">
           Unit of weight:
         </InputLabel>
         {unitToggle}
       </Grid>
       <Grid item xs={6}>
+        {/* price */}
       <TextField
         value={newItem.price * newItem.quantity}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
