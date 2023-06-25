@@ -4,7 +4,51 @@ import { isPriceInvalid } from "../helpers/Helpers";
 import PriceByWeight from "./PriceByWeight";
 
 function SingleAdd(props: any) {
-  const {newItem, setNewItem, errors, setErrors, categoryOptions} = props;
+  const {newItem, setNewItem, errors, setErrors, categoryOptions, byWeight} = props;
+
+  const priceAndQuantity = <Grid container>
+    <Grid item xs={6} sm={6}>
+      {/* price */}
+      <TextField
+        value={newItem.price}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setNewItem({...newItem, price: e.target.value})
+        }}
+        InputProps={{
+          inputMode: 'decimal',
+          id: 'price-box',
+          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          inputProps: {style: {maxWidth: '10ch'}}
+        }}
+        variant="standard"
+        label="Price"
+        helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
+        error={isPriceInvalid(newItem.price)}
+      />
+    </Grid>
+    <Grid item xs={6} sm={6} sx={{flexDirection: 'row'}}>
+      {/* quantity  */}
+      <TextField
+        inputProps={{
+          name: 'quantity-box',
+          id: 'item-quantity-box',
+          inputMode: 'numeric',
+          min: 0, max: 100,
+          style: {width: '10ch'}
+        }}
+        value={newItem.quantity}
+        type='number'
+        variant='standard'
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setNewItem({...newItem, quantity: e.target.value})
+        }}
+      label="Quantity"
+      />
+    </Grid>
+  </Grid>
+  const priceBox = byWeight ? <PriceByWeight newItem={newItem} setNewItem={setNewItem} />
+    : priceAndQuantity;
+  console.log(byWeight);
 
   return (
     <Stack component="form" noValidate autoComplete="on" spacing={3}>
@@ -60,47 +104,8 @@ function SingleAdd(props: any) {
           </NativeSelect>
         </Grid>
       </Grid>
-      <PriceByWeight newItem={newItem} setNewItem={setNewItem} />
-      {/* <Grid container>
-        <Grid item xs={6} sm={6}>
-          // price
-          <TextField
-            value={newItem.price}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setNewItem({...newItem, price: e.target.value})
-            }}
-            InputProps={{
-              inputMode: 'decimal',
-              id: 'price-box',
-              startAdornment: <InputAdornment position="start">$</InputAdornment>,
-              inputProps: {style: {maxWidth: '10ch'}}
-            }}
-            variant="standard"
-            label="Price"
-            helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
-            error={isPriceInvalid(newItem.price)}
-          />
-        </Grid>
-        <Grid item xs={6} sm={6} sx={{flexDirection: 'row'}}>
-          // quantity 
-          <TextField
-            inputProps={{
-              name: 'quantity-box',
-              id: 'item-quantity-box',
-              inputMode: 'numeric',
-              min: 0, max: 100,
-              style: {width: '10ch'}
-            }}
-            value={newItem.quantity}
-            type='number'
-            variant='standard'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setNewItem({...newItem, quantity: e.target.value})
-            }}
-          label="Quantity"
-          />
-        </Grid>
-      </Grid> */}
+      {priceBox}
+      
     </Stack>
   )
 }

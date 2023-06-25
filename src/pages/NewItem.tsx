@@ -33,7 +33,7 @@ function NewItem(props: any) {
   });
   const [newItems, setNewItems] = useState<string>('');
   const [addType, setAddType] = useState<String>('single');
-  const [priceByWeight, setPriceByWeight] = useState<boolean>(true);
+  const [priceByWeight, setPriceByWeight] = useState<boolean>(false);
   const [errors, setErrors] = useState({
     name: false,
     // price: false,
@@ -92,8 +92,8 @@ function NewItem(props: any) {
     setAddType(type);
   }
 
-  const handlePriceSwitch = (e: React.MouseEvent<HTMLElement>, type: string): void => {
-    priceByWeight ? setPriceByWeight(false) : setPriceByWeight(true);
+  const handlePriceSwitch = (e: React.MouseEvent<HTMLElement>): void => {
+    priceByWeight === true ? setPriceByWeight(false) : setPriceByWeight(true);
   }
 
   const addTypeToggle = <ToggleButtonGroup
@@ -108,7 +108,7 @@ function NewItem(props: any) {
     <ToggleButton value="single">Single</ToggleButton>
   </ToggleButtonGroup>
 
-  const singleAdd = <SingleAdd newItem={newItem} setNewItem={setNewItem} errors={errors} setErrors={setErrors} categoryOptions={categoryOptions} />
+  const singleAdd = <SingleAdd newItem={newItem} setNewItem={setNewItem} errors={errors} setErrors={setErrors} categoryOptions={categoryOptions} byWeight={priceByWeight} />
   const multiAdd = <MultiAdd newItems={newItems} setNewItems={setNewItems} />
 
   const singleAddButton = <Button
