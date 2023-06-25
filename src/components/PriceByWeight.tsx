@@ -67,11 +67,11 @@ function PriceByWeight(props: any) {
             inputMode: 'numeric',
             endAdornment: <InputAdornment position="end">{unit}</InputAdornment>
           }}
-          value={newItem.quantity}
+          value={weight}
           variant="standard"
           type='number'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewItem({...newItem, quantity: e.target.value})
+            setWeight(e.target.value);
           }}
           label="Weight"
         />
