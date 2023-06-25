@@ -88,7 +88,7 @@ function PriceByWeight(props: any) {
       <Grid item xs={6}>
         {/* price */}
       <TextField
-        value={newItem.price * newItem.quantity}
+        value={Number.parseInt(pricePer) * Number.parseInt(weight)}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setNewItem({...newItem, price: e.target.value})
         }}
