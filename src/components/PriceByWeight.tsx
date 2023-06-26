@@ -19,8 +19,8 @@ function PriceByWeight(props: any) {
 
   const isPriceValid = !isPriceInvalid(pricePer) && !isPriceInvalid(weight);
   
-  const price = (isPriceValid && !isPriceBoxesEmpty && !isPriceBoxesZero) ? Number.parseInt(pricePer) * Number.parseInt(weight)
-    : '';
+  // const price = (isPriceValid && !isPriceBoxesEmpty && !isPriceBoxesZero) ? setNewItem({...newItem, price: Number.parseInt(pricePer) * Number.parseInt(weight)})
+    // : '';
   
   const handleUnit = (e: React.MouseEvent<HTMLElement>, newUnit: 'g' | 'kg' | 'lb') => {
     if (newUnit !== null) {
@@ -54,7 +54,14 @@ function PriceByWeight(props: any) {
         <TextField
           value={pricePer}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const priceIsNaN = Number.isNaN(Number.parseFloat(e.target.value) * Number.parseFloat(weight));
+
             setPricePer(e.target.value);
+            if (priceIsNaN || isPriceInvalid(e.target.value)) {
+              setNewItem({...newItem, price: ''});
+            } else {
+              setNewItem({...newItem, price: (Number.parseFloat(e.target.value) * Number.parseFloat(weight)).toString()});
+            }
           }}
           InputProps={{
             inputMode: 'decimal',
@@ -82,7 +89,14 @@ function PriceByWeight(props: any) {
           variant="standard"
           type='number'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const priceIsNaN = Number.isNaN(Number.parseFloat(pricePer) * Number.parseFloat(e.target.value));
+
             setWeight(e.target.value);
+            if (priceIsNaN || isPriceInvalid(e.target.value)) {
+              setNewItem({...newItem, price: ''});
+            } else {
+              setNewItem({...newItem, price: (Number.parseFloat(pricePer) * Number.parseFloat(e.target.value)).toString()});
+            }
           }}
           label="Weight"
           helperText={isPriceInvalid(weight) ? `Please enter a valid weight.` : null}
@@ -101,11 +115,12 @@ function PriceByWeight(props: any) {
       <Grid item xs={6}>
         {/* price */}
       <TextField
-        value={price}
+        value={newItem.price}
         InputProps={{
           inputMode: 'decimal',
           id: 'price-box',
           startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          readOnly: true
         }}
         variant="standard"
         label="Price"
