@@ -10,6 +10,7 @@ function PriceSwitch(props: any) {
       label="Price by Weight"
       labelPlacement="end"
       onChange={handlePriceSwitch}
+      sx={{ml: 0}}
     />
   )
 }
