@@ -1,4 +1,4 @@
-import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, TextField } from "@mui/material";
+import { FormHelperText, InputAdornment, useFormControl, Input, Button, DialogTitle, DialogContent, DialogActions, Stack, ToggleButtonGroup, ToggleButton, InputLabel, NativeSelect, Grid, FormControl, TextField, Box } from "@mui/material";
 import { useMemo, useState } from "react";
 import { ItemForm, ItemType } from "../Types";
 import { camelCaseTrim, isPriceEmpty, isPriceInvalid } from "../helpers/Helpers";
@@ -130,6 +130,19 @@ function NewItem(props: any) {
     Add All
   </Button>
 
+  const singleActions = <DialogActions sx={{justifyContent: 'space-between'}}>
+    <PriceSwitch handlePriceSwitch={handlePriceSwitch} />
+    <Box>
+      <Button onClick={handleDialogClose}>Cancel</Button>
+      {addType === 'single' ? singleAddButton : multiAddButton}
+    </Box>
+  </DialogActions>
+
+  const multiActions = <DialogActions>
+    <Button onClick={handleDialogClose}>Cancel</Button>
+    {addType === 'single' ? singleAddButton : multiAddButton}
+  </DialogActions>
+
   return (<>
     <DialogTitle id="alert-dialog-title" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
       {addType === 'single' ? "Add an item" : "Add items"}{addTypeToggle}
@@ -137,11 +150,7 @@ function NewItem(props: any) {
     <DialogContent>
       {addType === 'single' ? singleAdd : multiAdd}
     </DialogContent>
-    <DialogActions>
-      {addType === 'single' ? <PriceSwitch handlePriceSwitch={handlePriceSwitch} /> : null}
-      <Button onClick={handleDialogClose}>Cancel</Button>
-      {addType === 'single' ? singleAddButton : multiAddButton}
-    </DialogActions>
+    {addType === 'single' ? singleActions : multiActions}
     </>
   );
 }
