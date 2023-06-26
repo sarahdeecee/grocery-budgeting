@@ -122,8 +122,9 @@ function PriceByWeight(props: any) {
           startAdornment: <InputAdornment position="start">$</InputAdornment>,
           readOnly: true
         }}
-        variant="standard"
+        variant="filled"
         label="Price"
+        size="small"
       />
       </Grid>
     </Grid>
