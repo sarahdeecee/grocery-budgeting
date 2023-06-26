@@ -138,7 +138,7 @@ function NewItem(props: any) {
       {addType === 'single' ? singleAdd : multiAdd}
     </DialogContent>
     <DialogActions>
-      <PriceSwitch handlePriceSwitch={handlePriceSwitch} />
+      {addType === 'single' ? <PriceSwitch handlePriceSwitch={handlePriceSwitch} /> : null}
       <Button onClick={handleDialogClose}>Cancel</Button>
       {addType === 'single' ? singleAddButton : multiAddButton}
     </DialogActions>
