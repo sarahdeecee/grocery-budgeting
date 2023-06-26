@@ -6,10 +6,8 @@ import { Label } from "@mui/icons-material";
 function PriceByWeight(props: any) {
   const {newItem, setNewItem} = props;
   const [unit, setUnit] = useState<'g'|'kg'|'lb'>('g');
-  const [pricePer, setPricePer] = useState<string>('0');
-  const [weight, setWeight] = useState<string>('0');
-
-  // const price = newItem.price;
+  const [pricePer, setPricePer] = useState<string>('');
+  const [weight, setWeight] = useState<string>('');
 
   const priceHelperText = isPriceInvalid(newItem.price) ? "Please enter a valid price."
     : isPriceInvalid(pricePer) ? `Please enter a valid price per ${unit}.`
@@ -104,9 +102,6 @@ function PriceByWeight(props: any) {
         {/* price */}
       <TextField
         value={price}
-        // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        //   setNewItem({...newItem, price: e.target.value})
-        // }}
         InputProps={{
           inputMode: 'decimal',
           id: 'price-box',
@@ -114,8 +109,6 @@ function PriceByWeight(props: any) {
         }}
         variant="standard"
         label="Price"
-        // helperText={}
-        // error={!isPriceValid && !isPriceBoxesEmpty}
       />
       </Grid>
     </Grid>
