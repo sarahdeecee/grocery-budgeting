@@ -6,11 +6,24 @@ import { Label } from "@mui/icons-material";
 function PriceByWeight(props: any) {
   const {newItem, setNewItem} = props;
   const [unit, setUnit] = useState<'g'|'kg'|'lb'>('g');
-  const [pricePer, setPricePer] = useState<string>('');
-  const [weight, setWeight] = useState<string>('');
+  const [pricePer, setPricePer] = useState<string>('0');
+  const [weight, setWeight] = useState<string>('0');
 
-  const price = newItem.price;
+  // const price = newItem.price;
 
+  const priceHelperText = isPriceInvalid(newItem.price) ? "Please enter a valid price."
+    : isPriceInvalid(pricePer) ? `Please enter a valid price per ${unit}.`
+    : isPriceInvalid(weight) ? "Please enter a valid weight value."
+    : null
+
+  const isPriceBoxesEmpty = pricePer === ('') || weight === ('');
+  const isPriceBoxesZero = pricePer === ('0') || weight === ('0');
+
+  const isPriceValid = !isPriceInvalid(pricePer) && !isPriceInvalid(weight);
+  
+  const price = (isPriceValid && !isPriceBoxesEmpty && !isPriceBoxesZero) ? Number.parseInt(pricePer) * Number.parseInt(weight)
+    : '';
+  
   const handleUnit = (e: React.MouseEvent<HTMLElement>, newUnit: 'g' | 'kg' | 'lb') => {
     if (newUnit !== null) {
       setUnit(newUnit);
@@ -56,7 +69,7 @@ function PriceByWeight(props: any) {
           label={`Price per ${unit}`}
           helperText={isPriceInvalid(pricePer) ? `Please enter a valid price per ${unit}.` : null}
           error={isPriceInvalid(pricePer)}
-        />
+          />
       </Grid>
       <Grid item xs={6} sm={6} sx={{flexDirection: 'row'}}>
         {/* weight */}
@@ -74,6 +87,8 @@ function PriceByWeight(props: any) {
             setWeight(e.target.value);
           }}
           label="Weight"
+          helperText={isPriceInvalid(weight) ? `Please enter a valid weight.` : null}
+          error={isPriceInvalid(weight)}
         />
       </Grid>
     </Grid>
@@ -88,10 +103,10 @@ function PriceByWeight(props: any) {
       <Grid item xs={6}>
         {/* price */}
       <TextField
-        value={Number.parseInt(pricePer) * Number.parseInt(weight)}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setNewItem({...newItem, price: e.target.value})
-        }}
+        value={price}
+        // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        //   setNewItem({...newItem, price: e.target.value})
+        // }}
         InputProps={{
           inputMode: 'decimal',
           id: 'price-box',
@@ -99,8 +114,8 @@ function PriceByWeight(props: any) {
         }}
         variant="standard"
         label="Price"
-        helperText={isPriceInvalid(newItem.price) ? "Please enter a valid price." : null}
-        error={isPriceInvalid(newItem.price)}
+        // helperText={}
+        // error={!isPriceValid && !isPriceBoxesEmpty}
       />
       </Grid>
     </Grid>
