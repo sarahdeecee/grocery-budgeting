@@ -7,7 +7,7 @@ function CategoryBar(props: any) {
   return (
     <Box
       sx={{
-        bgcolor: '#81c784'
+        bgcolor: '#FFA384'
       }}>
       <ListItemButton
         onClick={() => handleCategory(category)}

@@ -1,7 +1,7 @@
 .App {
   width: 100vw;
   margin-bottom: 56px;
-  background-color: lightgrey;
+  background-color: #E7F2F8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,4 +9,12 @@
 
 Button.unit-button {
   text-transform: none;
+}
+
+.item-box:hover {
+  background-color: #E7F2F8;
+}
+
+#header, #footer {
+  background-color: #2e8292;
 }

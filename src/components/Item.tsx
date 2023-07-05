@@ -31,6 +31,7 @@ function Item(props: any) {
   return (
     <ListItem
       key={name}
+      className="item-box"
       disableGutters
       secondaryAction={<>
         <IconButton key={`editbutton-${name}`} aria-label="edit" onClick={(e: React.MouseEvent)=> {

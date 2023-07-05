@@ -83,7 +83,7 @@ function ItemList(props: any) {
   }
 
   return (
-    <List sx={{ p: 0, width: '100%', maxWidth: '600px', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column'}}>
+    <List id="item-list" sx={{ p: 0, width: '100%', maxWidth: '600px', bgcolor: 'background.paper', display: 'flex', flexDirection: 'column'}}>
       {sortBy === 'category' ? itemsByCategories : itemsBySortType(sortBy)}
     </List>
   );

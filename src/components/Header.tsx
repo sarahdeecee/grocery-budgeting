@@ -38,7 +38,7 @@ function Header(props: any) {
   }
 
   return (
-    <AppBar position="relative" color="primary" sx={{ bottom: 'auto', top: 0, height: '60px', width: '100vw', maxWidth: '800px'}}>
+    <AppBar position="relative" id="header" sx={{ bottom: 'auto', top: 0, height: '60px', width: '100vw', maxWidth: '800px'}}>
       <Toolbar sx={{justifyContent: 'space-between'}}>
         <Typography variant="h5">My Shopping List</Typography>
         {items.length !== 0 && <><IconButton
