@@ -2,7 +2,7 @@ import { Box, Collapse, List } from "@mui/material";
 import Item from "../components/Item";
 import { ItemType } from '../Types';
 import CategoryBar from "../components/CategoryBar";
-import { categoriesAll } from "../data/Categories";
+import { categoriesAll, categoriesAllEmoji } from "../data/Categories";
 import { useState } from "react";
 import { sortAZ, sortPriceHigh, sortPriceLow } from "../helpers/Helpers";
 
@@ -47,7 +47,7 @@ function ItemList(props: any) {
   }
 
   const itemsByCategories = Array.isArray(categoriesAll) && categoriesAll.map(category => <Box key={`${category}-box`}>
-    {[...items].filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} open={categoriesOpen[category]} handleCategory={handleCategory} />}
+    {[...items].filter((item: ItemType) => item.category === category).length > 0 && <CategoryBar category={category} emoji={categoriesAllEmoji[category]} open={categoriesOpen[category]} handleCategory={handleCategory} />}
       <Collapse in={categoriesOpen[category]}>
         {[...items].filter((item: ItemType) => item.category === category)
           .reverse()

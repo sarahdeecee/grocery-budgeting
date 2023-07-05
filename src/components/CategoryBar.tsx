@@ -1,13 +1,14 @@
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Box, ListItemButton, ListItemText } from "@mui/material";
+import { categoriesAllEmoji } from "../data/Categories";
 
 function CategoryBar(props: any) {
-  const {category, open, handleCategory} = props;
+  const {category, open, handleCategory, emoji} = props;
   
   return (
     <Box
       sx={{
-        bgcolor: '#FFA384'
+        bgcolor: '#EFE7BC'
       }}>
       <ListItemButton
         onClick={() => handleCategory(category)}
@@ -17,7 +18,7 @@ function CategoryBar(props: any) {
       >
         <ListItemText
           className="category-bar-text"
-          primary={category}
+          primary={`${emoji} ${category}`}
           primaryTypographyProps={{
             fontSize: 'medium',
             fontWeight: 'normal',

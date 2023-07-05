@@ -603,4 +603,20 @@ export const commonItems: CommonItem[] = commonItemsRaw.sort((a, b) => sortAZ(a,
 //   return acc;
 // }, []);
 
-export const categoriesAll = ['Produce', 'Meat & Alternatives', 'Fish & Seafood','Snacks', 'Beverages', 'Dairy & Alternatives', 'Grains & Bakery', 'Pet Supplies', 'Health & Beauty', 'Pantry', 'Other'];
+export const categoriesAll = ['Produce', 'Meat & Alternatives', 'Fish & Seafood','Snacks', 'Beverages', 'Dairy & Alternatives', 'Grains & Bakery', 'Pet Supplies', 'Health & Beauty', 'Pantry', 'Other'] as const;
+
+export const categoriesAllEmoji: {
+	[K in typeof categoriesAll[number]]: string
+} = {
+  'Produce': '🥕',
+  'Meat & Alternatives': '🍖',
+  'Fish & Seafood': '🐟',
+  'Snacks': '🍫',
+  'Beverages': '🍵',
+  'Dairy & Alternatives': '🧀',
+  'Grains & Bakery': '🥐',
+  'Pet Supplies': '🐶',
+  'Health & Beauty': '💅',
+  'Pantry': '🧹',
+  'Other': ''
+};
