@@ -16,11 +16,11 @@ function CategoryBar(props: any) {
         }}
       >
         <ListItemText
+          className="category-bar-text"
           primary={category}
           primaryTypographyProps={{
             fontSize: 'medium',
-            fontWeight: 'bold',
-            color: 'white'
+            fontWeight: 'normal',
           }}
         />
         {open && 

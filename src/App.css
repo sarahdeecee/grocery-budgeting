@@ -5,6 +5,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #1f1a18
+}
+
+.category-bar-text {
+  /* color: black; */
 }
 
 Button.unit-button {
